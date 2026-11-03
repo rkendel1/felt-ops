@@ -1,0 +1,169 @@
+{
+  "recordedAt": "2026-11-03T22:59:55.986Z",
+  "startedAt": "2026-11-03T22:59:23.213Z",
+  "discovery": [
+    {
+      "package": "@feltdb/feltkit",
+      "installed": "0.3.13",
+      "latest": "0.3.13"
+    },
+    {
+      "package": "@feltdb/core",
+      "installed": "0.21.0",
+      "latest": "0.21.0"
+    },
+    {
+      "package": "@appport/sdk",
+      "installed": "1.4.0",
+      "latest": "1.4.1"
+    },
+    {
+      "package": "@appport/services",
+      "installed": "0.14.0",
+      "latest": "0.14.0"
+    }
+  ],
+  "oldPlatform": {
+    "ok": true,
+    "loaded": {
+      "feltkit": "0.3.12",
+      "core": "0.20.0"
+    },
+    "steps": [
+      "seeded",
+      "purchase PR-0040 approved and ordered",
+      "change CR-0001 recorded; baseline captured"
+    ],
+    "changeId": "mw1aiooe37a040d09b57",
+    "number": "CR-0001",
+    "fingerprint": {
+      "counts": {
+        "departments": 7,
+        "people": 150,
+        "authorities": 16,
+        "customers": 20,
+        "contracts": 20,
+        "suppliers": 12,
+        "purchaseRequests": 40,
+        "purchaseOrders": 37,
+        "invoices": 30,
+        "commitments": 30,
+        "policyVersions": 2,
+        "incidents": 0,
+        "agents": 5,
+        "assignments": 0,
+        "timeline": 11
+      },
+      "totals": {
+        "purchaseOrders": 358015.84,
+        "openCommitments": 231566.73,
+        "invoices": 231566.73,
+        "contracts": 5304502
+      }
+    }
+  },
+  "testRun": {
+    "exit": 0,
+    "pass": 9,
+    "fail": 0,
+    "platform": {
+      "feltkit": "0.3.13",
+      "core": "0.21.0"
+    }
+  },
+  "schemaAtStart": {
+    "status": "current",
+    "applied": null
+  },
+  "dataVerification": {
+    "passed": true,
+    "differences": []
+  },
+  "capabilitiesAfter": {
+    "reconciliationDuplicates": 0,
+    "openCommitments": 30,
+    "policyVersion": 1
+  },
+  "change": {
+    "number": "CR-0001",
+    "status": "verified",
+    "platform": {
+      "package": "@feltdb/feltkit",
+      "from": "0.3.12",
+      "to": "0.3.13"
+    }
+  },
+  "history": [
+    {
+      "at": "2026-11-03T22:59:38.990Z",
+      "actor": "eli",
+      "source": "platform",
+      "kind": "change.requested",
+      "summary": "CR-0001 (platform): Upgrade FeltKit 0.3.12 → 0.3.13 (FeltDB 0.20.0 → 0.21.0)"
+    },
+    {
+      "at": "2026-11-03T22:59:39.000Z",
+      "actor": "eli",
+      "source": "verification",
+      "kind": "baseline.captured",
+      "summary": "Data baseline: departments 7, people 150, authorities 16, customers 20, contracts 20, suppliers 12, purchaseRequests 40, purchaseOrders 37, invoices 30, commitments 30, policyVersions 2, incidents 0, agents 5, assignments 0, timeline 10."
+    },
+    {
+      "at": "2026-11-03T22:59:55.495Z",
+      "actor": "eli",
+      "source": "platform",
+      "kind": "change.assessed",
+      "summary": "discovered → assessed by Eli Novak: FeltKit pins @appport/sdk 1.4.0; FeltDB 0.21.0 required by 0.3.13. No schema change in CompanyOS.."
+    },
+    {
+      "at": "2026-11-03T22:59:55.510Z",
+      "actor": "eli",
+      "source": "assertion",
+      "kind": "evidence.reported",
+      "summary": "Eli Novak reported npm test-run feltkit 0.3.13: passed."
+    },
+    {
+      "at": "2026-11-03T22:59:55.517Z",
+      "actor": "eli",
+      "source": "platform",
+      "kind": "change.tested",
+      "summary": "assessed → tested by Eli Novak (evidence: npm test-run feltkit 0.3.13, reported)."
+    },
+    {
+      "at": "2026-11-03T22:59:55.529Z",
+      "actor": "omar",
+      "source": "platform",
+      "kind": "change.approved",
+      "summary": "tested → approved by Omar Haddad: Approved for production.."
+    },
+    {
+      "at": "2026-11-03T22:59:55.558Z",
+      "actor": "eli",
+      "source": "assertion",
+      "kind": "deployment.recorded",
+      "summary": "platform-0.3.13 deployed to local-production (receipt recorded as reported)."
+    },
+    {
+      "at": "2026-11-03T22:59:55.577Z",
+      "actor": "eli",
+      "source": "platform",
+      "kind": "change.deployed",
+      "summary": "approved → deployed by Eli Novak (evidence: local-production deployment platform-0.3.13, reported)."
+    },
+    {
+      "at": "2026-11-03T22:59:55.596Z",
+      "actor": "eli",
+      "source": "verification",
+      "kind": "data.verified",
+      "summary": "Business data matches the pre-upgrade baseline."
+    },
+    {
+      "at": "2026-11-03T22:59:55.610Z",
+      "actor": "eli",
+      "source": "platform",
+      "kind": "change.verified",
+      "summary": "deployed → verified by Eli Novak (evidence: local-production data-verification 0.3.13, observed)."
+    }
+  ],
+  "ok": true
+}

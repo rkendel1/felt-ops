@@ -27,7 +27,7 @@ export const app = feltkit({
     procurement: [...BASE, "suppliers.*", "purchasing.*", "invoices.read", "integrations.read", "supplierapi.*"],
     operations: [...BASE, "customers.*", "ops.*", "suppliers.read", "suppliers.request"],
     product: [...BASE, "changes.*", "work.*"],
-    engineering: [...BASE, "changes.read", "changes.engineer", "releases.*", "integrations.*", "supplierapi.*", "github.*", "incidents.*"],
+    engineering: [...BASE, "changes.read", "changes.engineer", "changes.evidence", "releases.*", "integrations.*", "supplierapi.*", "github.*", "incidents.*"],
     itsec: [...BASE, "org.access", "incidents.*", "agents.manage", "integrations.*", "supplierapi.*"],
     executive: [...BASE, "finance.read", "purchasing.approve", "policy.approve", "changes.approve", "releases.approve", "org.manage", "invoices.read", "commitments.read"],
     // Agent operators: assign, suspend, reassign, verify. Approving an agent's FeltKit action

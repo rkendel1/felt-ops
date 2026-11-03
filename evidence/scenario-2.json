@@ -1,12 +1,12 @@
 {
-  "recordedAt": "2026-11-03T22:57:34.755Z",
+  "recordedAt": "2026-11-03T22:59:46.223Z",
   "change": {
     "number": "CR-0001",
     "kind": "application",
     "title": "Supplier onboarding workflow",
     "problem": "Requested suppliers can never become active: there is no onboarding, so Operations cannot buy from new suppliers.",
-    "requestedBy": "mw1ag0em3d36dfdd450c",
-    "businessOwnerId": "mw1ag0em3d36dfdd450c",
+    "requestedBy": "mw1aitrw62deebe2141b",
+    "businessOwnerId": "mw1aitrw62deebe2141b",
     "status": "in-development",
     "requirements": [
       "Procurement starts onboarding for a requested supplier",
@@ -17,75 +17,75 @@
       {
         "text": "A requested supplier cannot be ordered from until onboarding is approved",
         "met": true,
-        "checkedBy": "mw1ag0em3d36dfdd450c"
+        "checkedBy": "mw1aitrw62deebe2141b"
       },
       {
         "text": "Each check records who made it and when",
         "met": true,
-        "checkedBy": "mw1ag0em3d36dfdd450c"
+        "checkedBy": "mw1aitrw62deebe2141b"
       },
       {
         "text": "The requester cannot approve their own supplier",
         "met": true,
-        "checkedBy": "mw1ag0em3d36dfdd450c"
+        "checkedBy": "mw1aitrw62deebe2141b"
       }
     ],
     "impact": "Procurement, Finance and IT & Security each own one check; Operations can order from approved suppliers.",
-    "id": "mw1ag0jl3db4414324d3",
+    "id": "mw1aitxf0352b43a7f5a",
     "__version": 7
   },
   "history": [
     {
-      "at": "2026-11-03T22:57:34.401Z",
+      "at": "2026-11-03T22:59:45.796Z",
       "actor": "priya",
       "source": "platform",
       "kind": "change.requested",
       "summary": "CR-0001 (application): Supplier onboarding workflow"
     },
     {
-      "at": "2026-11-03T22:57:34.419Z",
+      "at": "2026-11-03T22:59:45.816Z",
       "actor": "dana",
       "source": "platform",
       "kind": "change.assessed",
       "summary": "requested → assessed by Dana Kim: Blocks two Operations projects.."
     },
     {
-      "at": "2026-11-03T22:57:34.429Z",
+      "at": "2026-11-03T22:59:45.832Z",
       "actor": "dana",
       "source": "platform",
       "kind": "change.specified",
       "summary": "3 requirement(s), 3 acceptance criteria. Impact: Procurement, Finance and IT & Security each own one check; Operations can order from approved suppliers."
     },
     {
-      "at": "2026-11-03T22:57:34.441Z",
+      "at": "2026-11-03T22:59:45.860Z",
       "actor": "eli",
       "source": "platform",
       "kind": "change.in-development",
       "summary": "specified → in-development by Eli Novak."
     },
     {
-      "at": "2026-11-03T22:57:34.451Z",
+      "at": "2026-11-03T22:59:45.876Z",
       "actor": "dana",
       "source": "assertion",
       "kind": "evidence.reported",
       "summary": "Dana Kim reported github commit deadbeef: exists."
     },
     {
-      "at": "2026-11-03T22:57:34.727Z",
+      "at": "2026-11-03T22:59:46.197Z",
       "actor": "priya",
       "source": "verification",
       "kind": "acceptance.checked",
       "summary": "\"A requested supplier cannot be ordered from until onboarding is approved\": met — Checked in the test environment"
     },
     {
-      "at": "2026-11-03T22:57:34.736Z",
+      "at": "2026-11-03T22:59:46.204Z",
       "actor": "priya",
       "source": "verification",
       "kind": "acceptance.checked",
       "summary": "\"Each check records who made it and when\": met — Checked in the test environment"
     },
     {
-      "at": "2026-11-03T22:57:34.743Z",
+      "at": "2026-11-03T22:59:46.211Z",
       "actor": "priya",
       "source": "verification",
       "kind": "acceptance.checked",
@@ -101,29 +101,29 @@
     "onboarding": [
       {
         "step": "started",
-        "by": "mw1ag0em3ccabbdd38ff",
-        "at": "2026-11-03T22:57:34.585Z"
+        "by": "mw1aitrx4bf4a42e4d09",
+        "at": "2026-11-03T22:59:46.021Z"
       },
       {
         "step": "tax-id",
-        "by": "mw1ag0em3ccabbdd38ff",
-        "at": "2026-11-03T22:57:34.592Z"
+        "by": "mw1aitrx4bf4a42e4d09",
+        "at": "2026-11-03T22:59:46.033Z"
       },
       {
         "step": "bank",
-        "by": "mw1ag0emda2c4a71a91a",
-        "at": "2026-11-03T22:57:34.606Z",
+        "by": "mw1aitrw7d0c4ec8ef05",
+        "at": "2026-11-03T22:59:46.052Z",
         "note": "Micro-deposit confirmed"
       },
       {
         "step": "risk",
-        "by": "mw1ag0emc143b4e8a62f",
-        "at": "2026-11-03T22:57:34.619Z"
+        "by": "mw1aitrxa2b5db4b0a86",
+        "at": "2026-11-03T22:59:46.068Z"
       },
       {
         "step": "approved",
-        "by": "mw1ag0em3ccabbdd38ff",
-        "at": "2026-11-03T22:57:34.628Z"
+        "by": "mw1aitrx4bf4a42e4d09",
+        "at": "2026-11-03T22:59:46.077Z"
       }
     ]
   }

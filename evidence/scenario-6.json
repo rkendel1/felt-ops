@@ -1,5 +1,5 @@
 {
-  "recordedAt": "2026-11-03T22:57:43.040Z",
+  "recordedAt": "2026-11-03T22:59:54.837Z",
   "r1Commit": "171b6e3b9a9e1452f59713ef77c5d0203e4f3d07",
   "reconcileAfterRestart": {
     "examined": 0,
@@ -56,7 +56,7 @@
       "state": "failed",
       "decidedBy": "user:maria",
       "executedAs": "agent:agent-ledger-2",
-      "error": "Commitment mw1ag6ela4f9aacada48 was already reversed at 2026-11-03T22:57:42.336Z by agent-ledger. Nothing changed."
+      "error": "Commitment mw1aj0002edc5370cd9a was already reversed at 2026-11-03T22:59:54.064Z by agent-ledger. Nothing changed."
     },
     {
       "state": "succeeded",
@@ -71,30 +71,30 @@
   ],
   "reversed": [
     {
-      "id": "mw1ag6ela4f9aacada48",
+      "id": "mw1aj0002edc5370cd9a",
       "by": "agent-ledger",
       "amount": 1000
     },
     {
-      "id": "mw1ag6enac9f8fcd837f",
+      "id": "mw1aj0022d419944bb6a",
       "by": "agent-ledger",
       "amount": 1250
     },
     {
-      "id": "mw1ag6eo710dc2a01679",
+      "id": "mw1aj0032a4e9c0b3d43",
       "by": "agent-ledger-2",
       "amount": 1500
     },
     {
-      "id": "mw1ag6ep28623ba35fec",
+      "id": "mw1aj00493b38c58d98e",
       "by": "agent-ledger-2",
       "amount": 1750
     }
   ],
   "verification": {
     "ok": true,
-    "by": "mw1ag65iba42fd8713b0",
-    "at": "2026-11-03T22:57:43.021Z",
+    "by": "mw1aizo5a547810deb33",
+    "at": "2026-11-03T22:59:54.815Z",
     "method": "finance.reconciliation computed by CompanyOS",
     "detail": {
       "duplicates": 0,
@@ -153,42 +153,42 @@
   ],
   "timeline": [
     {
-      "at": "2026-11-03T22:57:42.223Z",
+      "at": "2026-11-03T22:59:53.924Z",
       "actor": "otto",
       "source": "operator",
       "kind": "assignment.created",
       "summary": "AS-0002 for Ledger Reconciler: Reverse four duplicate Northwind commitments. Permitted: finance.reconciliation, commitments.reverse. Verified by: reconciliation-clean."
     },
     {
-      "at": "2026-11-03T22:57:42.253Z",
+      "at": "2026-11-03T22:59:53.962Z",
       "actor": "agent-ledger",
       "source": "platform",
       "kind": "assignment.accepted",
-      "summary": "Ledger Reconciler accepted (FeltKit task task-b6b1c6ff-81e6-4c25-9f98-31d6a3256895)."
+      "summary": "Ledger Reconciler accepted (FeltKit task task-2c1187d9-62c4-40ce-98d1-7bb75948ec1e)."
     },
     {
-      "at": "2026-11-03T22:57:42.297Z",
+      "at": "2026-11-03T22:59:54.018Z",
       "actor": "agent-ledger",
       "source": "assertion",
       "kind": "agent.waiting-approval",
       "summary": "4 reversals proposed."
     },
     {
-      "at": "2026-11-03T22:57:42.432Z",
+      "at": "2026-11-03T22:59:54.153Z",
       "actor": "agent-ledger",
       "source": "assertion",
       "kind": "agent.progress",
       "summary": "2 of 4 reversed."
     },
     {
-      "at": "2026-11-03T22:57:42.703Z",
+      "at": "2026-11-03T22:59:54.465Z",
       "actor": "ivy",
       "source": "operator",
       "kind": "assignment.suspended",
       "summary": "Agent suspended: process lost; session revoked"
     },
     {
-      "at": "2026-11-03T22:57:42.775Z",
+      "at": "2026-11-03T22:59:54.564Z",
       "actor": "otto",
       "source": "operator",
       "kind": "operator.reassign",

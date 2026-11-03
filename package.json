@@ -10,7 +10,9 @@
     "test": "feltkit test",
     "inspect": "feltkit inspect",
     "deploy": "feltkit deploy",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "scenario:7": "tsx scripts/scenario-7-platform-upgrade.ts",
+    "supplier-api": "tsx tools/supplier-api.ts"
   },
   "dependencies": {
     "@feltdb/feltkit": "^0.3.13",

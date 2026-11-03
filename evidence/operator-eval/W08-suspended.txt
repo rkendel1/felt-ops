@@ -53,7 +53,7 @@ Zero duplicates in finance.reconciliation.
 Context
 Release R1 processed four Northwind invoices twice.
 
-[2026-11-03T23:43:22.653Z Otto Lind] Finance confirms: the NW-91xx invoices are the duplicates.
+[2026-11-03T23:45:06.966Z Otto Lind] Finance confirms: the NW-91xx invoices are the duplicates.
 Constraints
 One proposal per commitment
 Never touch a commitment that is not listed
@@ -75,18 +75,21 @@ finance.reconciliation computed by CompanyOS
   "duplicates": 3,
   "overCommitted": 3,
   "openCommitments": 37,
-  "openTotal": 241566.73
+  "openTotal": 241566.73000000007
 }
+
+Last heard from the agent just now (agent.progress).
+
 FeltKit actions
-task task-0263d747-7006…
+Open this task in Studio ↗
 
 Read live from FeltKit (FeltDB agent state). Each action records who proposed it, who approved it, whose authority it ran with, and how its outcome was established. Task status: blocked
 
 Capability	Input	State	Proposed by	Approved by	Ran as	Outcome
-commitments.reverse	commitmentId: mw1c277hed72508884ec, reason: Duplicate of mw1c271he24c2e2db36b (n	succeeded	agent:agent-ledger	user:rhea	agent:agent-ledger	ok (dispatch)
-commitments.reverse	commitmentId: mw1c277j676d23e66276, reason: Duplicate of mw1c273l0127ea5c1b85 (n	rejected	agent:agent-ledger	user:rhea	—	
-commitments.reverse	commitmentId: mw1c277k05bd417a28bb, reason: Duplicate of mw1c275g5688901f34de (n	proposed	agent:agent-ledger	—	—	
-commitments.reverse	commitmentId: mw1c277m47f31ca02e64, reason: Duplicate of mw1c27746155f0cc5a3f (n	proposed	agent:agent-ledger	—	—	
+commitments.reverse	commitmentId: mw1c4e9i2459258191f1, reason: Duplicate of mw1c4e53e7155f411bf4 (n	succeeded	agent:agent-ledger	user:rhea	agent:agent-ledger	ok (dispatch)
+commitments.reverse	commitmentId: mw1c4e9j12d0788e8756, reason: Duplicate of mw1c4e6mb8c82a8383b5 (n	rejected	agent:agent-ledger	user:rhea	—	
+commitments.reverse	commitmentId: mw1c4e9l470d3eb46d4f, reason: Duplicate of mw1c4e7xcd73669c2d8e (n	proposed	agent:agent-ledger	—	—	
+commitments.reverse	commitmentId: mw1c4e9m29aeb6e0328d, reason: Duplicate of mw1c4e9703f663b64185 (n	proposed	agent:agent-ledger	—	—	
 2 action(s) wait for approval. Approvals of agent actions happen in FeltKit Studio → Agent (development: the Dashboard link `feltkit dev` prints; production: an operator grant). CompanyOS cannot host them (gap G-07).
 Checkpoints (9) with FeltDB-verified evidence
 AGENT SAYS What the agent said
@@ -110,7 +113,7 @@ RECORDED
 assignment.accepted
 agent-ledger (agent)
 just now
-Ledger Reconciler accepted (FeltKit task task-0263d747-7006-4420-b1a2-cb540ed31f1b).
+Ledger Reconciler accepted (FeltKit task task-ea732e61-ee94-4cf9-87cb-cef41426a4d9).
 OPERATOR
 operator.context
 otto
@@ -131,7 +134,7 @@ RECORDED
 commitment.reversed
 agent-ledger (agent)
 just now
-[commitment] Reversed $1,000.00: Duplicate of mw1c271he24c2e2db36b (nw9100)
+[commitment] Reversed $1,000.00: Duplicate of mw1c4e53e7155f411bf4 (nw9100)
 Intervene
 Note (required for every intervention)
 Resume

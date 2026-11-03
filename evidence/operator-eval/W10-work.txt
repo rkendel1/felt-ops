@@ -62,13 +62,13 @@ Start
 Done
 Customer onboarding refresh
 business · Priya Nair · 2/4 done · 1 overdue
-Pilot with two accounts	todo	Sam Osei	2026-11-05	waits on 1	
+Draft new playbook	doing	Sam Osei	2026-10-27		
 Start
  
 Done
 
 Interview five customers	done	Sam Osei	2026-10-18		
-Draft new playbook	doing	Sam Osei	2026-10-27		
+Pilot with two accounts	todo	Sam Osei	2026-11-05	waits on 1	
 Start
  
 Done
@@ -82,11 +82,12 @@ Start
  
 Done
 
-Vendor statement review	done	Fiona Walsh	2026-10-18		
 Close calendar	todo	Fiona Walsh	2026-11-05	waits on 1	
 Start
  
 Done
+
+Vendor statement review	done	Fiona Walsh	2026-10-18		
 Purchasing platform hardening
 engineering · Eli Novak · 2/4 done · 1 overdue
 Supplier feed monitoring	todo	Sam Osei	2026-11-05	waits on 1	
@@ -94,13 +95,12 @@ Start
  
 Done
 
+Policy-driven approval chains	done	Eli Novak	2026-10-18		
 Add request audit view	done	Otto Lind	2026-10-09		
 Invoice matching tests	doing	Otto Lind	2026-10-27		
 Start
  
 Done
-
-Policy-driven approval chains	done	Eli Novak	2026-10-18		
 Supplier risk review
 business · Pablo Ruiz · 2/3 done · 1 overdue
 Collect certificates	done	Sam Osei	2026-10-09		

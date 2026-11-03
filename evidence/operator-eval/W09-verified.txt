@@ -53,7 +53,7 @@ Zero duplicates in finance.reconciliation.
 Context
 Release R1 processed four Northwind invoices twice.
 
-[2026-11-03T23:43:22.653Z Otto Lind] Finance confirms: the NW-91xx invoices are the duplicates.
+[2026-11-03T23:45:06.966Z Otto Lind] Finance confirms: the NW-91xx invoices are the duplicates.
 
 [Reassigned from AS-0002 (agent-ledger, suspended)] Primary crashed; standby takes over.
 Constraints
@@ -79,22 +79,24 @@ finance.reconciliation computed by CompanyOS
   "duplicates": 0,
   "overCommitted": 0,
   "openCommitments": 34,
-  "openTotal": 237066.73
+  "openTotal": 237066.73000000007
 }
 
 VERIFIED Verified just now — finance.reconciliation computed by CompanyOS
 
 AGENT SAYS Agent's claim: “No duplicates remain; this task executed 3 reversal(s).”
 
+Last heard from the agent just now (agent.claim).
+
 FeltKit actions
-task task-4a3ebc50-81e0…
+Open this task in Studio ↗
 
 Read live from FeltKit (FeltDB agent state). Each action records who proposed it, who approved it, whose authority it ran with, and how its outcome was established. Task status: completed
 
 Capability	Input	State	Proposed by	Approved by	Ran as	Outcome
-commitments.reverse	commitmentId: mw1c277j676d23e66276, reason: Duplicate of mw1c273l0127ea5c1b85 (n	succeeded	agent:agent-ledger-2	user:maria	agent:agent-ledger-2	ok (dispatch)
-commitments.reverse	commitmentId: mw1c277k05bd417a28bb, reason: Duplicate of mw1c275g5688901f34de (n	succeeded	agent:agent-ledger-2	user:maria	agent:agent-ledger-2	ok (dispatch)
-commitments.reverse	commitmentId: mw1c277m47f31ca02e64, reason: Duplicate of mw1c27746155f0cc5a3f (n	succeeded	agent:agent-ledger-2	user:maria	agent:agent-ledger-2	ok (dispatch)
+commitments.reverse	commitmentId: mw1c4e9j12d0788e8756, reason: Duplicate of mw1c4e6mb8c82a8383b5 (n	succeeded	agent:agent-ledger-2	user:maria	agent:agent-ledger-2	ok (dispatch)
+commitments.reverse	commitmentId: mw1c4e9l470d3eb46d4f, reason: Duplicate of mw1c4e7xcd73669c2d8e (n	succeeded	agent:agent-ledger-2	user:maria	agent:agent-ledger-2	ok (dispatch)
+commitments.reverse	commitmentId: mw1c4e9m29aeb6e0328d, reason: Duplicate of mw1c4e9703f663b64185 (n	succeeded	agent:agent-ledger-2	user:maria	agent:agent-ledger-2	ok (dispatch)
 Checkpoints (12) with FeltDB-verified evidence
 AGENT SAYS What the agent said
 AGENT SAYS
@@ -132,7 +134,7 @@ RECORDED
 assignment.accepted
 agent-ledger-2 (agent)
 just now
-Ledger Reconciler (standby) accepted (FeltKit task task-4a3ebc50-81e0-4867-bead-3bb1173fc8b7).
+Ledger Reconciler (standby) accepted (FeltKit task task-2419c7e5-8e4c-435b-ac5b-58d2d160c076).
 VERIFIED What was verified
 VERIFIED
 assignment.verified
@@ -147,14 +149,14 @@ RECORDED
 commitment.reversed
 agent-ledger-2 (agent)
 just now
-[commitment] Reversed $1,250.00: Duplicate of mw1c273l0127ea5c1b85 (nw9101)
+[commitment] Reversed $1,250.00: Duplicate of mw1c4e6mb8c82a8383b5 (nw9101)
 RECORDED
 commitment.reversed
 agent-ledger-2 (agent)
 just now
-[commitment] Reversed $1,500.00: Duplicate of mw1c275g5688901f34de (nw9102)
+[commitment] Reversed $1,500.00: Duplicate of mw1c4e7xcd73669c2d8e (nw9102)
 RECORDED
 commitment.reversed
 agent-ledger-2 (agent)
 just now
-[commitment] Reversed $1,750.00: Duplicate of mw1c27746155f0cc5a3f (nw9103)
+[commitment] Reversed $1,750.00: Duplicate of mw1c4e9703f663b64185 (nw9103)

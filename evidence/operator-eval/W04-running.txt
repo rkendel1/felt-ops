@@ -74,18 +74,21 @@ finance.reconciliation computed by CompanyOS
   "duplicates": 4,
   "overCommitted": 4,
   "openCommitments": 38,
-  "openTotal": 242566.73
+  "openTotal": 242566.73000000007
 }
+
+Last heard from the agent just now (agent.waiting-approval).
+
 FeltKit actions
-task task-0263d747-7006…
+Open this task in Studio ↗
 
 Read live from FeltKit (FeltDB agent state). Each action records who proposed it, who approved it, whose authority it ran with, and how its outcome was established. Task status: blocked
 
 Capability	Input	State	Proposed by	Approved by	Ran as	Outcome
-commitments.reverse	commitmentId: mw1c277hed72508884ec, reason: Duplicate of mw1c271he24c2e2db36b (n	proposed	agent:agent-ledger	—	—	
-commitments.reverse	commitmentId: mw1c277j676d23e66276, reason: Duplicate of mw1c273l0127ea5c1b85 (n	proposed	agent:agent-ledger	—	—	
-commitments.reverse	commitmentId: mw1c277k05bd417a28bb, reason: Duplicate of mw1c275g5688901f34de (n	proposed	agent:agent-ledger	—	—	
-commitments.reverse	commitmentId: mw1c277m47f31ca02e64, reason: Duplicate of mw1c27746155f0cc5a3f (n	proposed	agent:agent-ledger	—	—	
+commitments.reverse	commitmentId: mw1c4e9i2459258191f1, reason: Duplicate of mw1c4e53e7155f411bf4 (n	proposed	agent:agent-ledger	—	—	
+commitments.reverse	commitmentId: mw1c4e9j12d0788e8756, reason: Duplicate of mw1c4e6mb8c82a8383b5 (n	proposed	agent:agent-ledger	—	—	
+commitments.reverse	commitmentId: mw1c4e9l470d3eb46d4f, reason: Duplicate of mw1c4e7xcd73669c2d8e (n	proposed	agent:agent-ledger	—	—	
+commitments.reverse	commitmentId: mw1c4e9m29aeb6e0328d, reason: Duplicate of mw1c4e9703f663b64185 (n	proposed	agent:agent-ledger	—	—	
 4 action(s) wait for approval. Approvals of agent actions happen in FeltKit Studio → Agent (development: the Dashboard link `feltkit dev` prints; production: an operator grant). CompanyOS cannot host them (gap G-07).
 Checkpoints (6) with FeltDB-verified evidence
 AGENT SAYS What the agent said
@@ -104,7 +107,7 @@ RECORDED
 assignment.accepted
 agent-ledger (agent)
 just now
-Ledger Reconciler accepted (FeltKit task task-0263d747-7006-4420-b1a2-cb540ed31f1b).
+Ledger Reconciler accepted (FeltKit task task-ea732e61-ee94-4cf9-87cb-cef41426a4d9).
 VERIFIED What was verified
 Not verified yet.
 RECORDED What it changed elsewhere while assigned

@@ -1,27 +1,27 @@
 {
-  "recordedAt": "2026-11-03T23:44:15.247Z",
-  "commit": "1d45f7a960ce9a7d88cb1190e6d7e03a0f2073aa",
+  "recordedAt": "2026-11-03T23:45:59.384Z",
+  "commit": "39e27b7f1df621115015c7511902df71277e64d4",
   "consoleErrors": [],
   "results": [
     {
       "id": "W01",
       "workflow": "Register and configure an agent",
-      "outcome": "partial",
-      "seconds": 2.6,
-      "actions": 5,
+      "outcome": "completed",
+      "seconds": 4.4,
+      "actions": 10,
       "switches": 2,
       "surfaces": [
         "app",
         "terminal"
       ],
       "obstacles": [
-        "No way to register an agent in the CompanyOS UI; the page says IT & Security registers agents and sessions come from `feltkit session create`.",
-        "Registered through the API (agents:register) plus a CLI session: two systems, and nothing ties the session's roles to the registry's roles."
+        "Registration and credential issuance are two systems: CompanyOS records the agent, FeltKit's CLI issues its session, and nothing ties the session's roles to the registered role."
       ],
       "matched": true,
       "check": "agent page shows the agent: true; registry record roles: agent-finance",
       "screens": [
         "W01-operator",
+        "W01-register-done",
         "W01-registered"
       ]
     },
@@ -103,7 +103,7 @@
       "id": "W06",
       "workflow": "Review and approve a consequential action",
       "outcome": "completed",
-      "seconds": 11.5,
+      "seconds": 11.4,
       "actions": 8,
       "switches": 3,
       "surfaces": [
@@ -148,7 +148,7 @@
       "id": "W08",
       "workflow": "Intervene in a running task (context, suspend, approval while suspended, resume)",
       "outcome": "completed",
-      "seconds": 14.1,
+      "seconds": 14.2,
       "actions": 12,
       "switches": 2,
       "surfaces": [
@@ -194,7 +194,7 @@
         "app"
       ],
       "obstacles": [
-        "The incident page does not show agent work on it."
+        "The remediation assignment (made before the incident was opened) is not linked to the incident, so the incident page says no agent works on it; linking needs the assign form's related-record picker at assignment time."
       ],
       "matched": true,
       "check": "incident check shows 3 duplicates; records 3",
@@ -206,7 +206,7 @@
       "id": "W09",
       "workflow": "Recover from a failed task (suspend agent, cancel task, reassign, finish)",
       "outcome": "completed",
-      "seconds": 23.8,
+      "seconds": 23.7,
       "actions": 23,
       "switches": 6,
       "surfaces": [
@@ -227,7 +227,7 @@
       "id": "W10",
       "workflow": "Reassign work to a human",
       "outcome": "completed",
-      "seconds": 4.2,
+      "seconds": 4.1,
       "actions": 5,
       "switches": 0,
       "surfaces": [

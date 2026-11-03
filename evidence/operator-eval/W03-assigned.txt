@@ -73,8 +73,9 @@ finance.reconciliation computed by CompanyOS
   "duplicates": 4,
   "overCommitted": 4,
   "openCommitments": 38,
-  "openTotal": 242566.73
+  "openTotal": 242566.73000000007
 }
+CompanyOS has not heard from this agent yet.
 FeltKit actions
 The agent has not linked a FeltKit task yet (it does when it accepts).
 AGENT SAYS What the agent said

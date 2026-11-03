@@ -48,6 +48,7 @@ What agents are doing, what they may do, and what has actually been verified.
 Assign work
 Needs your attention (0)
 Nothing is waiting for a person.
+Register an agent
 Agents
 Effectiveness →
 Ledger Reconciler

@@ -61,6 +61,8 @@ Constraints
 One per line.
 Expected output
 Deadline
+Related record (optional)
+None
 Verified by
 reconciliation-clean
 supplier-link-healthy

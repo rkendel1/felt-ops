@@ -3,3 +3,10 @@ dist/
 .feltkit/
 .feltkit-platform/
 *.app/
+
+# Managed FeltDB credentials written by `feltdb init-managed` (never commit)
+.env.local
+.env
+.feltdb/
+feltdb.config.json
+feltdb.flow

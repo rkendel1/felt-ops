@@ -1,0 +1,208 @@
+{
+  "recordedAt": "2026-11-03T23:13:18.171Z",
+  "url": "http://127.0.0.1:3100",
+  "commit": "d73a3a552469d6e0ee493b09478d2a923bc379bb",
+  "steps": [
+    "already seeded",
+    "CR-0001 resumed (in-development)",
+    "assessed and specified by Product; in development",
+    "Scribe observed 2 GitHub record(s) through the integration",
+    "in review; CI passed (gate satisfied by observed GitHub Actions success)",
+    "release 1.0.0 approved by the CEO, deployed, verified running d73a3a552469",
+    "accepted by the business owner against production behavior"
+  ],
+  "runtimeIdentity": {
+    "environment": "production",
+    "commit": "d73a3a552469d6e0ee493b09478d2a923bc379bb",
+    "deploymentId": null,
+    "revision": null
+  },
+  "githubObservations": [
+    {
+      "system": "github-actions",
+      "kind": "workflow-run",
+      "ref": "41737040144",
+      "status": "completed/success",
+      "url": "https://github.com/rkendel1/felt-ops/actions/runs/41737040144",
+      "via": "integration:req_01M6HV0E4MPHM2JR5XTANC0XE0"
+    },
+    {
+      "system": "github",
+      "kind": "commit",
+      "ref": "d73a3a552469d6e0ee493b09478d2a923bc379bb",
+      "status": "exists",
+      "url": "https://github.com/rkendel1/felt-ops/commit/d73a3a552469d6e0ee493b09478d2a923bc379bb",
+      "via": "integration:req_01M6HV0DB66N075GD80P3QZN5X"
+    }
+  ],
+  "releaseVerification": {
+    "ok": true,
+    "environment": "production",
+    "runningCommit": "d73a3a552469d6e0ee493b09478d2a923bc379bb",
+    "releaseCommit": "d73a3a552469d6e0ee493b09478d2a923bc379bb"
+  },
+  "acceptanceEvidence": {
+    "refusedBeforeOnboarding": "Bluebird Packaging is requested; only active suppliers can be ordered from.",
+    "onboarding": [
+      {
+        "step": "started",
+        "by": "mw1azlcj556b9aa4cf9e",
+        "at": "2026-11-03T23:13:18.008Z"
+      },
+      {
+        "step": "tax-id",
+        "by": "mw1azlcj556b9aa4cf9e",
+        "at": "2026-11-03T23:13:18.018Z"
+      },
+      {
+        "step": "bank",
+        "by": "mw1azlck3af3e6ea064c",
+        "at": "2026-11-03T23:13:18.029Z",
+        "note": "Micro-deposit confirmed"
+      },
+      {
+        "step": "risk",
+        "by": "mw1azlck8059a91ab5b0",
+        "at": "2026-11-03T23:13:18.039Z"
+      },
+      {
+        "step": "approved",
+        "by": "mw1azlcj556b9aa4cf9e",
+        "at": "2026-11-03T23:13:18.049Z"
+      }
+    ],
+    "orderAfter": {
+      "number": "PR-0040",
+      "status": "pending"
+    }
+  },
+  "change": {
+    "number": "CR-0001",
+    "status": "accepted",
+    "acceptance": [
+      {
+        "text": "A requested supplier cannot be ordered from until onboarding is approved",
+        "met": true,
+        "checkedBy": "mw1azlcj2c53ae9b7f31"
+      },
+      {
+        "text": "Each check records who made it and when",
+        "met": true,
+        "checkedBy": "mw1azlcj2c53ae9b7f31"
+      },
+      {
+        "text": "An approved supplier can be ordered from",
+        "met": true,
+        "checkedBy": "mw1azlcj2c53ae9b7f31"
+      }
+    ]
+  },
+  "history": [
+    {
+      "at": "2026-11-03T23:12:47.924Z",
+      "actor": "priya",
+      "source": "platform",
+      "kind": "change.requested",
+      "summary": "CR-0001 (application): Supplier onboarding workflow"
+    },
+    {
+      "at": "2026-11-03T23:12:47.934Z",
+      "actor": "dana",
+      "source": "platform",
+      "kind": "change.assessed",
+      "summary": "requested → assessed by Dana Kim."
+    },
+    {
+      "at": "2026-11-03T23:12:47.945Z",
+      "actor": "dana",
+      "source": "platform",
+      "kind": "change.specified",
+      "summary": "3 requirement(s), 3 acceptance criteria. Impact: Procurement, Finance and IT & Security each own one onboarding check."
+    },
+    {
+      "at": "2026-11-03T23:12:47.972Z",
+      "actor": "eli",
+      "source": "platform",
+      "kind": "change.in-development",
+      "summary": "specified → in-development by Eli Novak."
+    },
+    {
+      "at": "2026-11-03T23:13:17.442Z",
+      "actor": "agent-scribe",
+      "source": "verification",
+      "kind": "evidence.observed",
+      "summary": "GitHub commit: 1 record(s) observed (call req_01M6HV0DB66N075GD80P3QZN5X)."
+    },
+    {
+      "at": "2026-11-03T23:13:17.854Z",
+      "actor": "agent-scribe",
+      "source": "verification",
+      "kind": "evidence.observed",
+      "summary": "GitHub runs: 1 record(s) observed (call req_01M6HV0E4MPHM2JR5XTANC0XE0)."
+    },
+    {
+      "at": "2026-11-03T23:13:17.903Z",
+      "actor": "eli",
+      "source": "platform",
+      "kind": "change.in-review",
+      "summary": "in-development → in-review by Eli Novak (evidence: github commit d73a3a552469d6e0ee493b09478d2a923bc379bb, observed)."
+    },
+    {
+      "at": "2026-11-03T23:13:17.916Z",
+      "actor": "eli",
+      "source": "platform",
+      "kind": "change.ci-passed",
+      "summary": "in-review → ci-passed by Eli Novak (evidence: github-actions workflow-run 41737040144, observed)."
+    },
+    {
+      "at": "2026-11-03T23:13:17.941Z",
+      "actor": "omar",
+      "source": "platform",
+      "kind": "change.release-approved",
+      "summary": "Release 1.0.0 approved by Omar Haddad."
+    },
+    {
+      "at": "2026-11-03T23:13:17.952Z",
+      "actor": "eli",
+      "source": "assertion",
+      "kind": "deployment.recorded",
+      "summary": "1.0.0 deployed to local-production (receipt recorded as reported)."
+    },
+    {
+      "at": "2026-11-03T23:13:17.975Z",
+      "actor": "eli",
+      "source": "platform",
+      "kind": "change.deployed",
+      "summary": "release-approved → deployed by Eli Novak (evidence: local-production deployment 1.0.0, reported)."
+    },
+    {
+      "at": "2026-11-03T23:13:18.119Z",
+      "actor": "priya",
+      "source": "verification",
+      "kind": "acceptance.checked",
+      "summary": "\"A requested supplier cannot be ordered from until onboarding is approved\": met — In production, ordering from Bluebird before onboarding was refused: \"Bluebird Packaging is requested; only active suppliers can be ordered from.\""
+    },
+    {
+      "at": "2026-11-03T23:13:18.131Z",
+      "actor": "priya",
+      "source": "verification",
+      "kind": "acceptance.checked",
+      "summary": "\"Each check records who made it and when\": met — Bluebird onboarding in production: started, tax-id, bank, risk, approved, each with who and when"
+    },
+    {
+      "at": "2026-11-03T23:13:18.148Z",
+      "actor": "priya",
+      "source": "verification",
+      "kind": "acceptance.checked",
+      "summary": "\"An approved supplier can be ordered from\": met — PR-0040 submitted to Bluebird after approval"
+    },
+    {
+      "at": "2026-11-03T23:13:18.158Z",
+      "actor": "priya",
+      "source": "platform",
+      "kind": "change.accepted",
+      "summary": "deployed → accepted by Priya Nair: Accepted in production.."
+    }
+  ],
+  "ok": true
+}

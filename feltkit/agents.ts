@@ -156,7 +156,13 @@ export const assignmentDetail = app.query({
     const chain = [];
     let prev = a.reassignedFrom;
     while (prev) { const p = await ctx.db.get(assignments, prev); if (!p) break; chain.push({ id: p.id, number: p.number, agentKey: p.agentKey, status: p.status }); prev = p.reassignedFrom; }
-    return { assignment: a, agent: agent ?? null, history, check: await verifierCheck(ctx, a), reassignedChain: chain };
+    // What the agent changed elsewhere while this assignment was its work (other subjects:
+    // incidents, links, invoices…). Direct MCP calls are not attached to its FeltKit task.
+    const until = a.verification?.at ?? "9999";
+    const elsewhere = (await ctx.db.find(timeline, { actorId: a.agentKey }))
+      .filter((h) => h.subject !== `assignment:${assignmentId}` && h.at >= a.assignedAt && h.at <= until)
+      .sort((x, y) => (x.at < y.at ? -1 : 1));
+    return { assignment: a, agent: agent ?? null, history, elsewhere, check: await verifierCheck(ctx, a), reassignedChain: chain };
   },
 });
 

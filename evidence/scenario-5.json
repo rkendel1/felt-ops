@@ -1,10 +1,10 @@
 {
-  "recordedAt": "2026-11-03T22:59:51.891Z",
+  "recordedAt": "2026-11-03T23:10:31.981Z",
   "before": {
     "grants": [
       {
-        "kind": "purchase.approve.finance",
-        "limit": 100000,
+        "kind": "invoice.approve",
+        "limit": 50000,
         "status": "active"
       },
       {
@@ -13,23 +13,23 @@
         "status": "active"
       },
       {
-        "kind": "invoice.approve",
-        "limit": 50000,
+        "kind": "purchase.approve.finance",
+        "limit": 100000,
         "status": "active"
       }
     ],
     "pendingApprovals": [
       {
-        "requestId": "mw1aiyaz3de682459de2",
-        "number": "PR-0038",
-        "step": "Finance",
-        "amount": 14250
-      },
-      {
-        "requestId": "mw1aiyazdc298d83b8cb",
+        "requestId": "mw1awo88671d25924344",
         "number": "PR-0037",
         "step": "Finance",
         "amount": 8400
+      },
+      {
+        "requestId": "mw1awo88f60992a73bb4",
+        "number": "PR-0038",
+        "step": "Finance",
+        "amount": 14250
       }
     ]
   },
@@ -55,24 +55,24 @@
       "transferredFrom": null
     },
     {
-      "kind": "purchase.approve.manager",
-      "limit": 25000,
-      "transferredFrom": "mw1aiyaq55e5f6714fc8"
-    },
-    {
       "kind": "purchase.approve.finance",
       "limit": 100000,
-      "transferredFrom": "mw1aiyaq24b52dc7a880"
+      "transferredFrom": "mw1awo826b0498c1de4d"
     },
     {
       "kind": "invoice.approve",
       "limit": 50000,
-      "transferredFrom": "mw1aiyaqac56a2a4dad5"
+      "transferredFrom": "mw1awo823e3db8e8ca2b"
+    },
+    {
+      "kind": "purchase.approve.manager",
+      "limit": 25000,
+      "transferredFrom": "mw1awo823e5ce18e8083"
     }
   ],
   "fionaHistory": [
     {
-      "at": "2026-11-03T22:59:51.731Z",
+      "at": "2026-11-03T23:10:31.834Z",
       "kind": "person.departed",
       "summary": "Left on 2026-11-07 (resignation). Responsibilities moved to Rhea Das.",
       "actorId": "agent-steward"
@@ -81,8 +81,8 @@
   "sessionsRevoked": 1,
   "verification": {
     "ok": true,
-    "by": "mw1aiyai22803847b2ba",
-    "at": "2026-11-03T22:59:51.881Z",
+    "by": "mw1awo7x856c598d8259",
+    "at": "2026-11-03T23:10:31.971Z",
     "method": "departure records",
     "detail": {
       "status": "departed",

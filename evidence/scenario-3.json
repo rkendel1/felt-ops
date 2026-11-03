@@ -1,18 +1,18 @@
 {
-  "recordedAt": "2026-11-03T22:59:48.496Z",
+  "recordedAt": "2026-11-03T23:10:28.535Z",
   "r1Commit": "171b6e3b9a9e1452f59713ef77c5d0203e4f3d07",
   "duplicatesInR1": [
     {
-      "commitmentId": "mw1aivhsb0a553519839",
-      "invoiceId": "mw1aivhs71c27d5143e8",
-      "keeps": "mw1aivh80c3b0e157f73",
+      "commitmentId": "mw1awl9xbb73c7a6e333",
+      "invoiceId": "mw1awl9x7008e9452dce",
+      "keeps": "mw1awl975d49843631a8",
       "amount": 4800,
       "number": "nw7781"
     },
     {
-      "commitmentId": "mw1aivhtdc47613bfa07",
-      "invoiceId": "mw1aivht9a6e79293f96",
-      "keeps": "mw1aivhh4763415d1ea0",
+      "commitmentId": "mw1awla03b83e45d7e52",
+      "invoiceId": "mw1awla00bf3ad26d80e",
+      "keeps": "mw1awl9hbe3a5eb4593d",
       "amount": 3150,
       "number": "NW 7790"
     }
@@ -32,88 +32,88 @@
     "affected": [
       {
         "collection": "commitments",
-        "id": "mw1aivhsb0a553519839"
+        "id": "mw1awl9xbb73c7a6e333"
       },
       {
         "collection": "commitments",
-        "id": "mw1aivhtdc47613bfa07"
+        "id": "mw1awla03b83e45d7e52"
       }
     ],
     "detectedBy": "agent-sentry",
-    "openedAt": "2026-11-03T22:59:48.093Z",
-    "ownerId": "mw1aivb40d73d70a9950",
+    "openedAt": "2026-11-03T23:10:28.084Z",
+    "ownerId": "mw1awl22d0095f24cd7f",
     "rootCause": "Manual entry and the supplier feed deduplicate only within their own channel; invoice numbers are not normalized.",
-    "changeId": "mw1aivqp5adcecb37d1c",
+    "changeId": "mw1awlk4523a0bbdcdf5",
     "verification": {
       "ok": true,
-      "by": "mw1aivb40d73d70a9950",
-      "at": "2026-11-03T22:59:48.471Z",
+      "by": "mw1awl22d0095f24cd7f",
+      "at": "2026-11-03T23:10:28.508Z",
       "method": "check:invoice-processing",
       "summary": "0 duplicate commitment(s) ($0.00), 0 over-committed PO(s)"
     },
     "review": "Cause: per-channel deduplication. Fix: cross-channel normalized check (current release). Two duplicate commitments (7,950.00) reversed with Finance approval; one wrong proposal refused by the duplicate rule.",
-    "id": "mw1aivp9da70a2b72130",
+    "id": "mw1awlis3a2943d259c0",
     "__version": 5
   },
   "incidentTimeline": [
     {
-      "at": "2026-11-03T22:59:48.094Z",
+      "at": "2026-11-03T23:10:28.085Z",
       "actor": "agent-sentry",
       "source": "platform",
       "kind": "incident.opened",
       "summary": "INC-0001 sev2: Invoice processing duplicates commitments. 2 record(s) affected."
     },
     {
-      "at": "2026-11-03T22:59:48.114Z",
+      "at": "2026-11-03T23:10:28.102Z",
       "actor": "agent-sentry",
       "source": "assertion",
       "kind": "detected.again",
       "summary": "Integration Sentry reported it again: Duplicates again"
     },
     {
-      "at": "2026-11-03T22:59:48.133Z",
+      "at": "2026-11-03T23:10:28.114Z",
       "actor": "eli",
       "source": "platform",
       "kind": "incident.updated",
-      "summary": "status → investigating, ownerId → mw1aivb40d73d70a9950, rootCause → Manual entry and the supplier feed deduplicate only within their own channel; invoice numbers are not normalized."
+      "summary": "status → investigating, ownerId → mw1awl22d0095f24cd7f, rootCause → Manual entry and the supplier feed deduplicate only within their own channel; invoice numbers are not normalized."
     },
     {
-      "at": "2026-11-03T22:59:48.145Z",
+      "at": "2026-11-03T23:10:28.132Z",
       "actor": "eli",
       "source": "platform",
       "kind": "change.linked",
       "summary": "Engineering change CR-0001 opened."
     },
     {
-      "at": "2026-11-03T22:59:48.151Z",
+      "at": "2026-11-03T23:10:28.166Z",
       "actor": "eli",
       "source": "platform",
       "kind": "incident.updated",
-      "summary": "changeId → mw1aivqp5adcecb37d1c"
+      "summary": "changeId → mw1awlk4523a0bbdcdf5"
     },
     {
-      "at": "2026-11-03T22:59:48.289Z",
+      "at": "2026-11-03T23:10:28.349Z",
       "actor": "agent-ledger",
       "source": "platform",
       "kind": "remediation.step",
-      "summary": "Reversed duplicate commitment mw1aivhsb0a553519839 ($4,800.00)."
+      "summary": "Reversed duplicate commitment mw1awl9xbb73c7a6e333 ($4,800.00)."
     },
     {
-      "at": "2026-11-03T22:59:48.353Z",
+      "at": "2026-11-03T23:10:28.405Z",
       "actor": "agent-ledger",
       "source": "platform",
       "kind": "remediation.step",
-      "summary": "Reversed duplicate commitment mw1aivhtdc47613bfa07 ($3,150.00)."
+      "summary": "Reversed duplicate commitment mw1awla03b83e45d7e52 ($3,150.00)."
     },
     {
-      "at": "2026-11-03T22:59:48.472Z",
+      "at": "2026-11-03T23:10:28.509Z",
       "actor": "eli",
       "source": "verification",
       "kind": "incident.resolved",
       "summary": "Resolved. 0 duplicate commitment(s) ($0.00), 0 over-committed PO(s)."
     },
     {
-      "at": "2026-11-03T22:59:48.486Z",
+      "at": "2026-11-03T23:10:28.522Z",
       "actor": "eli",
       "source": "platform",
       "kind": "incident.reviewed",
@@ -122,7 +122,7 @@
   ],
   "feltkitActions": [
     {
-      "actionId": "act-95007850e2f945999e33",
+      "actionId": "act-4213a30090bd401bb2b3",
       "capability": "commitments.reverse",
       "state": "succeeded",
       "proposedBy": "agent:agent-ledger",
@@ -131,7 +131,7 @@
       "determinedBy": "dispatch"
     },
     {
-      "actionId": "act-4e5a20df728d48b1b169",
+      "actionId": "act-39c734f94c424976a610",
       "capability": "commitments.reverse",
       "state": "succeeded",
       "proposedBy": "agent:agent-ledger",
@@ -140,7 +140,7 @@
       "determinedBy": "dispatch"
     },
     {
-      "actionId": "act-cff648d6ac584aa0b92d",
+      "actionId": "act-acd77bbcb54249418d80",
       "capability": "commitments.reverse",
       "state": "failed",
       "proposedBy": "agent:agent-ledger",
@@ -153,29 +153,29 @@
   "checkpoints": 11,
   "verification": {
     "ok": true,
-    "by": "mw1aivb45866680e8011",
-    "at": "2026-11-03T22:59:48.457Z",
+    "by": "mw1awl22aeaf95fa81dc",
+    "at": "2026-11-03T23:10:28.491Z",
     "method": "finance.reconciliation computed by CompanyOS",
     "detail": {
       "duplicates": 0,
       "overCommitted": 0,
       "openCommitments": 32,
-      "openTotal": 239516.73000000004
+      "openTotal": 239516.73000000007
     }
   },
   "resolved": {
     "ok": true,
-    "by": "mw1aivb40d73d70a9950",
-    "at": "2026-11-03T22:59:48.471Z",
+    "by": "mw1awl22d0095f24cd7f",
+    "at": "2026-11-03T23:10:28.508Z",
     "method": "check:invoice-processing",
     "summary": "0 duplicate commitment(s) ($0.00), 0 over-committed PO(s)"
   },
   "reconciliationAfter": {
     "openCommitments": 32,
-    "openTotal": 239516.73000000004,
+    "openTotal": 239516.73000000007,
     "duplicates": [],
     "duplicateTotal": 0,
     "overCommitted": []
   },
-  "syncAssignment": "mw1aivgzde99e830402b"
+  "syncAssignment": "mw1awl8w5eb5d5e4c1b1"
 }

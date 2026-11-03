@@ -1,0 +1,198 @@
+{
+  "recordedAt": "2026-11-03T22:57:43.040Z",
+  "r1Commit": "171b6e3b9a9e1452f59713ef77c5d0203e4f3d07",
+  "reconcileAfterRestart": {
+    "examined": 0,
+    "changes": []
+  },
+  "displayedVsActual": {
+    "assignmentStatusFromAgent": "running",
+    "feltkitActionStates": [
+      "proposed",
+      "proposed",
+      "succeeded",
+      "succeeded"
+    ],
+    "recordsCheck": {
+      "ok": false,
+      "method": "finance.reconciliation computed by CompanyOS",
+      "detail": {
+        "duplicates": 2,
+        "overCommitted": 2,
+        "openCommitments": 36,
+        "openTotal": 240316.73000000004
+      }
+    }
+  },
+  "orphanApproval": {
+    "productionOwnerResolves": false,
+    "devOwnerResolves": true,
+    "stateAfterApproval": "failed",
+    "error": "Agent agent-ledger is suspended (process lost; session revoked); it may not act."
+  },
+  "task1": [
+    {
+      "state": "succeeded",
+      "decidedBy": "user:rhea",
+      "executedAs": "agent:agent-ledger"
+    },
+    {
+      "state": "succeeded",
+      "decidedBy": "user:rhea",
+      "executedAs": "agent:agent-ledger"
+    },
+    {
+      "state": "failed",
+      "decidedBy": "user:maria",
+      "executedAs": "agent:agent-ledger"
+    },
+    {
+      "state": "cancelled",
+      "decidedBy": "user:otto"
+    }
+  ],
+  "task2": [
+    {
+      "state": "failed",
+      "decidedBy": "user:maria",
+      "executedAs": "agent:agent-ledger-2",
+      "error": "Commitment mw1ag6ela4f9aacada48 was already reversed at 2026-11-03T22:57:42.336Z by agent-ledger. Nothing changed."
+    },
+    {
+      "state": "succeeded",
+      "decidedBy": "user:maria",
+      "executedAs": "agent:agent-ledger-2"
+    },
+    {
+      "state": "succeeded",
+      "decidedBy": "user:maria",
+      "executedAs": "agent:agent-ledger-2"
+    }
+  ],
+  "reversed": [
+    {
+      "id": "mw1ag6ela4f9aacada48",
+      "by": "agent-ledger",
+      "amount": 1000
+    },
+    {
+      "id": "mw1ag6enac9f8fcd837f",
+      "by": "agent-ledger",
+      "amount": 1250
+    },
+    {
+      "id": "mw1ag6eo710dc2a01679",
+      "by": "agent-ledger-2",
+      "amount": 1500
+    },
+    {
+      "id": "mw1ag6ep28623ba35fec",
+      "by": "agent-ledger-2",
+      "amount": 1750
+    }
+  ],
+  "verification": {
+    "ok": true,
+    "by": "mw1ag65iba42fd8713b0",
+    "at": "2026-11-03T22:57:43.021Z",
+    "method": "finance.reconciliation computed by CompanyOS",
+    "detail": {
+      "duplicates": 0,
+      "overCommitted": 0,
+      "openCommitments": 34,
+      "openTotal": 237066.73000000004
+    }
+  },
+  "metrics": [
+    {
+      "key": "agent-ledger",
+      "name": "Ledger Reconciler",
+      "status": "suspended",
+      "provider": "none (deterministic playbook)",
+      "model": "none",
+      "attempted": 1,
+      "claimedComplete": 0,
+      "verified": 0,
+      "verificationFailed": 0,
+      "failed": 0,
+      "approvalWaits": 1,
+      "interventions": 1,
+      "recoveries": 1,
+      "medianMinutesToVerified": null,
+      "usage": {
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "costUsd": 0,
+        "source": "agent-reported (not metered by FeltKit)"
+      },
+      "refusals": "not visible to CompanyOS: FeltKit records denials in its activity log (Studio → Activity), which applications cannot read (G-08)"
+    },
+    {
+      "key": "agent-ledger-2",
+      "name": "Ledger Reconciler (standby)",
+      "status": "active",
+      "provider": "none (deterministic playbook)",
+      "model": "none",
+      "attempted": 1,
+      "claimedComplete": 1,
+      "verified": 1,
+      "verificationFailed": 0,
+      "failed": 0,
+      "approvalWaits": 0,
+      "interventions": 0,
+      "recoveries": 0,
+      "medianMinutesToVerified": 0,
+      "usage": {
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "costUsd": 0,
+        "source": "agent-reported (not metered by FeltKit)"
+      },
+      "refusals": "not visible to CompanyOS: FeltKit records denials in its activity log (Studio → Activity), which applications cannot read (G-08)"
+    }
+  ],
+  "timeline": [
+    {
+      "at": "2026-11-03T22:57:42.223Z",
+      "actor": "otto",
+      "source": "operator",
+      "kind": "assignment.created",
+      "summary": "AS-0002 for Ledger Reconciler: Reverse four duplicate Northwind commitments. Permitted: finance.reconciliation, commitments.reverse. Verified by: reconciliation-clean."
+    },
+    {
+      "at": "2026-11-03T22:57:42.253Z",
+      "actor": "agent-ledger",
+      "source": "platform",
+      "kind": "assignment.accepted",
+      "summary": "Ledger Reconciler accepted (FeltKit task task-b6b1c6ff-81e6-4c25-9f98-31d6a3256895)."
+    },
+    {
+      "at": "2026-11-03T22:57:42.297Z",
+      "actor": "agent-ledger",
+      "source": "assertion",
+      "kind": "agent.waiting-approval",
+      "summary": "4 reversals proposed."
+    },
+    {
+      "at": "2026-11-03T22:57:42.432Z",
+      "actor": "agent-ledger",
+      "source": "assertion",
+      "kind": "agent.progress",
+      "summary": "2 of 4 reversed."
+    },
+    {
+      "at": "2026-11-03T22:57:42.703Z",
+      "actor": "ivy",
+      "source": "operator",
+      "kind": "assignment.suspended",
+      "summary": "Agent suspended: process lost; session revoked"
+    },
+    {
+      "at": "2026-11-03T22:57:42.775Z",
+      "actor": "otto",
+      "source": "operator",
+      "kind": "operator.reassign",
+      "summary": "suspended → reassigned to Ledger Reconciler (standby) as AS-0003. Primary lost mid-run; 2 of 4 reversed per FeltKit task."
+    }
+  ]
+}

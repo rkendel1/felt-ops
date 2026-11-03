@@ -35,7 +35,11 @@ export const supplierapi = app.integration("supplierapi", {
   },
 });
 
-type CallRecord = { id: string; state: string; operation: string; input: Record<string, unknown>; output?: unknown; error?: { code: string; message: string }; determinedBy?: string };
+/**
+ * What onOutcome receives (FeltKit 0.3.13): id, capability, state, determinedBy, status,
+ * input, output, error, idempotencyKey. There is no `operation` field (finding F-019).
+ */
+type CallRecord = { id: string; state: string; capability: string; operation: string; input: Record<string, unknown>; output?: unknown; error?: { code: string; message: string }; determinedBy?: string };
 
 /**
  * Runs as the caller when a supplier call finishes. Records the link's health and imports
@@ -46,8 +50,9 @@ export const onSupplierCall = app.mutation({
   args: { call: s.record(s.unknown()) },
   handler: async (ctx, { call: raw }) => {
     const who = await actor(ctx);
-    const call = raw as unknown as CallRecord;
-    await withinAssignment(ctx, who, `supplierapi.${call.operation}`);
+    const call = { ...(raw as unknown as CallRecord) };
+    call.operation = String(call.capability ?? "").split(".").slice(1).join(".");
+    await withinAssignment(ctx, who, call.capability);
     const supplierId = String(call.input.supplierId ?? "");
     const [link] = await ctx.db.find(supplierLinks, { supplierId });
     if (!link) return { recorded: false, reason: "no link" };
@@ -185,8 +190,9 @@ export const onGithubCall = app.mutation({
   args: { call: s.record(s.unknown()) },
   handler: async (ctx, { call: raw }) => {
     const who = await actor(ctx);
-    const call = raw as unknown as CallRecord;
-    await withinAssignment(ctx, who, `github.${call.operation}`);
+    const call = { ...(raw as unknown as CallRecord) };
+    call.operation = String(call.capability ?? "").split(".").slice(1).join(".");
+    await withinAssignment(ctx, who, call.capability);
     const subject = String(call.input.subject ?? "");
     if (!subject) return { recorded: 0 };
     const prior = await ctx.db.find(externalRefs, { subject, observedVia: `integration:${call.id}` });

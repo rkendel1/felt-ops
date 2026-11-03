@@ -1,0 +1,95 @@
+{
+  "recordedAt": "2026-11-03T22:57:40.258Z",
+  "before": {
+    "grants": [
+      {
+        "kind": "invoice.approve",
+        "limit": 50000,
+        "status": "active"
+      },
+      {
+        "kind": "purchase.approve.finance",
+        "limit": 100000,
+        "status": "active"
+      },
+      {
+        "kind": "purchase.approve.manager",
+        "limit": 25000,
+        "status": "active"
+      }
+    ],
+    "pendingApprovals": [
+      {
+        "requestId": "mw1ag4n37083b15c8a5f",
+        "number": "PR-0037",
+        "step": "Finance",
+        "amount": 8400
+      },
+      {
+        "requestId": "mw1ag4n3f51edc698857",
+        "number": "PR-0038",
+        "step": "Finance",
+        "amount": 14250
+      }
+    ]
+  },
+  "action": {
+    "state": "succeeded",
+    "proposedBy": "agent:agent-steward",
+    "decidedBy": "user:ivy",
+    "executedAs": "agent:agent-steward",
+    "output": {
+      "grantsTransferred": 3,
+      "approvalsMoved": 2,
+      "workMoved": 1,
+      "agentsMoved": 0,
+      "platformSteps": [
+        "Revoke fiona's sessions: npx feltkit session list, then npx feltkit session revoke <ref> for each (CompanyOS already refuses them)."
+      ]
+    }
+  },
+  "rheaGrants": [
+    {
+      "kind": "purchase.approve.finance",
+      "limit": 25000,
+      "transferredFrom": null
+    },
+    {
+      "kind": "invoice.approve",
+      "limit": 50000,
+      "transferredFrom": "mw1ag4mu4ffde08453a0"
+    },
+    {
+      "kind": "purchase.approve.manager",
+      "limit": 25000,
+      "transferredFrom": "mw1ag4muc6585ffb2312"
+    },
+    {
+      "kind": "purchase.approve.finance",
+      "limit": 100000,
+      "transferredFrom": "mw1ag4mu6b0ef3738be6"
+    }
+  ],
+  "fionaHistory": [
+    {
+      "at": "2026-11-03T22:57:40.055Z",
+      "kind": "person.departed",
+      "summary": "Left on 2026-11-07 (resignation). Responsibilities moved to Rhea Das.",
+      "actorId": "agent-steward"
+    }
+  ],
+  "sessionsRevoked": 1,
+  "verification": {
+    "ok": true,
+    "by": "mw1ag4mn7a608ac4f06d",
+    "at": "2026-11-03T22:57:40.249Z",
+    "method": "departure records",
+    "detail": {
+      "status": "departed",
+      "activeGrants": 0,
+      "pendingApprovals": 0,
+      "openWork": 0,
+      "agentsOwned": 0
+    }
+  }
+}

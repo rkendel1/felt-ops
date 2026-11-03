@@ -1,0 +1,104 @@
+{
+  "recordedAt": "2026-11-03T22:57:38.613Z",
+  "supplierRequests": [
+    "POST /admin/invoices",
+    "POST /admin/invoices",
+    "GET /v1/invoices",
+    "POST /admin/cutover",
+    "POST /admin/invoices",
+    "GET /v1/invoices",
+    "GET /v2/accounts/meridian/invoices",
+    "GET /v2/accounts/meridian/invoices"
+  ],
+  "failedCheckpoint": {
+    "summary": "Observed supplierapi.invoicesv1 (failed: UPSTREAM_REJECTED)."
+  },
+  "lastFailure": {
+    "at": "2026-11-03T22:57:38.421Z",
+    "code": "UPSTREAM_REJECTED",
+    "message": "The API refused the request (410): {\"error\":\"gone\",\"message\":\"API v1 was retired on 2026-11-02. Use /v2/accounts/{account}/invoices.\"}",
+    "callId": "agent_2afc85c8-adb6-4597-9100-abd80ac733fc"
+  },
+  "linkHistory": [
+    {
+      "at": "2026-11-03T22:57:38.374Z",
+      "actor": "agent-sentry",
+      "source": "platform",
+      "kind": "sync.succeeded",
+      "summary": "invoicesv1: 2 row(s), 2 imported; synced through 2026-11-01T15:00:00.000Z."
+    },
+    {
+      "at": "2026-11-03T22:57:38.421Z",
+      "actor": "agent-sentry",
+      "source": "platform",
+      "kind": "call.failed",
+      "summary": "invoicesv1 failed: UPSTREAM_REJECTED The API refused the request (410): {\"error\":\"gone\",\"message\":\"API v1 was retired on 2026-11-02. Use /v2/accounts/{account}/invoices.\"}"
+    },
+    {
+      "at": "2026-11-03T22:57:38.457Z",
+      "actor": "agent-sentry",
+      "source": "platform",
+      "kind": "link.isolated",
+      "summary": "Isolated: v1 answers 410 Gone. Watermark held at 2026-11-01T15:00:00.000Z."
+    },
+    {
+      "at": "2026-11-03T22:57:38.524Z",
+      "actor": "agent-sentry",
+      "source": "verification",
+      "kind": "call.validated",
+      "summary": "invoicesv2 answered (link isolated, active version v1); nothing imported."
+    },
+    {
+      "at": "2026-11-03T22:57:38.540Z",
+      "actor": "sam",
+      "source": "platform",
+      "kind": "link.restored",
+      "summary": "Restored on v2 (validated by call agent_fa3533bb-2a1d-46be-be52-0b31a3060e87), change mw1ag3ot96f0768a9cd9. Missed invoices since 2026-11-01T15:00:00.000Z will be imported by the next sync."
+    },
+    {
+      "at": "2026-11-03T22:57:38.563Z",
+      "actor": "agent-sentry",
+      "source": "platform",
+      "kind": "sync.succeeded",
+      "summary": "invoicesv2: 1 row(s), 1 imported; synced through 2026-11-02T10:00:00.000Z."
+    }
+  ],
+  "invoices": [
+    {
+      "number": "NW-8003",
+      "channel": "supplier-feed",
+      "externalId": "inv_3",
+      "status": "matched"
+    },
+    {
+      "number": "NW-8002",
+      "channel": "supplier-feed",
+      "externalId": "nw-v1-2",
+      "status": "matched"
+    },
+    {
+      "number": "NW-8001",
+      "channel": "supplier-feed",
+      "externalId": "nw-v1-1",
+      "status": "matched"
+    }
+  ],
+  "verification": {
+    "ok": true,
+    "by": "mw1ag3e6e80e4c3f290a",
+    "at": "2026-11-03T22:57:38.597Z",
+    "method": "supplier link state",
+    "detail": {
+      "links": [
+        {
+          "supplierId": "mw1ag3ee28042c91d58d",
+          "status": "healthy",
+          "apiVersion": "v2",
+          "syncedThrough": "2026-11-02T10:00:00.000Z"
+        }
+      ]
+    }
+  },
+  "change": "CR-0001",
+  "incident": "INC-0001"
+}

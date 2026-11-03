@@ -1,0 +1,65 @@
+◆
+CompanyOS
+development
+Live
+Studio ↗
+Acting as
+Omar Haddad (CEO)
+Maria Chen (CFO)
+Fiona Walsh (Finance Manager)
+Rhea Das (Senior Accountant)
+Priya Nair (Operations Director)
+Pablo Ruiz (Procurement Lead)
+Dana Kim (Product Manager)
+Eli Novak (Engineering Lead)
+Sam Osei (Engineer)
+Ivy Brennan (IT & Security Manager)
+Otto Lind (Agent Operator)
+Vic Moreau (External Auditor)
+System
+Light
+Dark
+COMPANY
+Overview
+Approvals
+Organization
+Work
+BUSINESS OPERATIONS
+Purchasing
+Suppliers
+Finance
+Policies
+Customers
+PRODUCT & ENGINEERING
+Changes
+Releases
+Incidents
+AGENTS
+Agent operations
+Effectiveness
+Evidence explorer
+Otto Lind
+Agent Operations Lead
+Roles: staff, operator, finance
+INC-0001: Invoice processing duplicates commitments
+
+sev2 open invoice-processing · detected by eli just now
+
+Business impact
+
+Duplicate commitments overstate Finance spend.
+
+4 affected record(s): commitments/mw1c277hcommitments/mw1c277jcommitments/mw1c277kcommitments/mw1c277m
+
+Process check (computed now)
+
+3 duplicate commitment(s) ($4,500.00), 3 over-committed PO(s)
+
+Resolving requires this check to pass.
+
+Timeline
+RECORDED
+incident.opened
+eli
+just now
+INC-0001 sev2: Invoice processing duplicates commitments. 4 record(s) affected.

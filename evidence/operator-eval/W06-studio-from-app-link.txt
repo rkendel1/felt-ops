@@ -1,0 +1,11 @@
+Theme
+System theme
+Light theme
+Dark theme
+A Boundry product
+Open the FeltKit dashboard
+
+Open the Dashboard link feltkit dev prints (it carries the token), or paste the token from .feltkit/development/admin-token.
+
+Admin token *
+Continue

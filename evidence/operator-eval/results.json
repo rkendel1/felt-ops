@@ -1,0 +1,302 @@
+{
+  "recordedAt": "2026-11-03T23:44:15.247Z",
+  "commit": "1d45f7a960ce9a7d88cb1190e6d7e03a0f2073aa",
+  "consoleErrors": [],
+  "results": [
+    {
+      "id": "W01",
+      "workflow": "Register and configure an agent",
+      "outcome": "partial",
+      "seconds": 2.6,
+      "actions": 5,
+      "switches": 2,
+      "surfaces": [
+        "app",
+        "terminal"
+      ],
+      "obstacles": [
+        "No way to register an agent in the CompanyOS UI; the page says IT & Security registers agents and sessions come from `feltkit session create`.",
+        "Registered through the API (agents:register) plus a CLI session: two systems, and nothing ties the session's roles to the registry's roles."
+      ],
+      "matched": true,
+      "check": "agent page shows the agent: true; registry record roles: agent-finance",
+      "screens": [
+        "W01-operator",
+        "W01-registered"
+      ]
+    },
+    {
+      "id": "W02",
+      "workflow": "Understand and grant its authority",
+      "outcome": "partial",
+      "seconds": 1.3,
+      "actions": 1,
+      "switches": 0,
+      "surfaces": [
+        "app"
+      ],
+      "obstacles": [
+        "Granting authority is not an operator action: roles are fixed in code (feltkit/app.ts) and attached when a session is issued; the UI explains authority but cannot change it."
+      ],
+      "matched": true,
+      "check": "UI \"commitments.reverse · approval commitments.reverse via agent-finance\" / \"org.depart · approval org.access no\"; FeltKit authority: commitments.reverse=true, org.access=false",
+      "screens": [
+        "W02-why"
+      ]
+    },
+    {
+      "id": "W03",
+      "workflow": "Assign a business task to an agent",
+      "outcome": "completed",
+      "seconds": 2.9,
+      "actions": 11,
+      "switches": 0,
+      "surfaces": [
+        "app"
+      ],
+      "obstacles": [],
+      "matched": true,
+      "check": "stored caps finance.reconciliation, commitments.reverse; org.depart greyed out: true",
+      "screens": [
+        "W03-form",
+        "W03-assigned"
+      ]
+    },
+    {
+      "id": "W04",
+      "workflow": "Monitor execution",
+      "outcome": "completed",
+      "seconds": 2.9,
+      "actions": 3,
+      "switches": 1,
+      "surfaces": [
+        "terminal",
+        "app"
+      ],
+      "obstacles": [],
+      "matched": true,
+      "check": "page shows 4 proposed + waiting-approval: true; FeltKit pending: 4; stored status: waiting-approval",
+      "screens": [
+        "W04-running"
+      ]
+    },
+    {
+      "id": "W05",
+      "workflow": "Inspect capability usage and evidence",
+      "outcome": "partial",
+      "seconds": 1.3,
+      "actions": 2,
+      "switches": 0,
+      "surfaces": [
+        "app"
+      ],
+      "obstacles": [
+        "The agent made 10 recorded calls (1 reads of the reconciliation and its assignments); the page shows only its 4 proposals. Its reads and every refusal are only in Studio → Activity."
+      ],
+      "matched": true,
+      "check": "proposals shown = FeltKit actions (4); direct calls visible on the page: false; in the activity log: 10",
+      "screens": [
+        "W05-evidence"
+      ]
+    },
+    {
+      "id": "W06",
+      "workflow": "Review and approve a consequential action",
+      "outcome": "completed",
+      "seconds": 11.5,
+      "actions": 8,
+      "switches": 3,
+      "surfaces": [
+        "studio",
+        "terminal",
+        "app"
+      ],
+      "obstacles": [
+        "The app's \"Studio ↗\" link (/_feltkit/) opens Studio without signing in; the operator needs the tokenized link printed by `feltkit dev` (production: an operator grant).",
+        "Studio labels the agent's own running task \"Waiting for a coding agent — Nothing works on this task until one claims it\", although the agent owns it and is waiting for approval.",
+        "The proposal shows a raw commitment id; the amount, invoice and supplier are not on the approval screen."
+      ],
+      "matched": true,
+      "check": "page shows succeeded: true; FeltKit: 1 succeeded, approved by user:rhea, ran as agent:agent-ledger",
+      "screens": [
+        "W06-studio-from-app-link",
+        "W06-studio-list",
+        "W06-studio-task",
+        "W06-after-approve"
+      ]
+    },
+    {
+      "id": "W07",
+      "workflow": "Reject an action and observe the refusal",
+      "outcome": "completed",
+      "seconds": 7.6,
+      "actions": 5,
+      "switches": 1,
+      "surfaces": [
+        "studio",
+        "app"
+      ],
+      "obstacles": [],
+      "matched": true,
+      "check": "page shows rejected: true; FeltKit rejected: 1; duplicates left 3 (rejected one still a duplicate)",
+      "screens": [
+        "W07-studio-rejected",
+        "W07-after-reject"
+      ]
+    },
+    {
+      "id": "W08",
+      "workflow": "Intervene in a running task (context, suspend, approval while suspended, resume)",
+      "outcome": "completed",
+      "seconds": 14.1,
+      "actions": 12,
+      "switches": 2,
+      "surfaces": [
+        "app",
+        "studio"
+      ],
+      "obstacles": [
+        "Studio still offers Approve on a task whose CompanyOS assignment is suspended: the two systems do not share the suspension."
+      ],
+      "matched": true,
+      "check": "approval while suspended → failed: \"Assignment AS-0002 is suspended by an operator; commitments.reverse may not run under it.\"; status now recovering; context updated: true",
+      "screens": [
+        "W08-suspended",
+        "W08-resumed"
+      ]
+    },
+    {
+      "id": "W13",
+      "workflow": "Determine the real state of a task after a process failure",
+      "outcome": "completed",
+      "seconds": 1.3,
+      "actions": 2,
+      "switches": 1,
+      "surfaces": [
+        "terminal",
+        "app"
+      ],
+      "obstacles": [],
+      "matched": true,
+      "check": "process exit -1; records check shows 3 duplicates, reconciliation has 3; FeltKit states succeeded,rejected,failed,proposed all on the page: true",
+      "screens": [
+        "W13-after-crash"
+      ]
+    },
+    {
+      "id": "W12",
+      "workflow": "Investigate a production incident",
+      "outcome": "completed",
+      "seconds": 2.8,
+      "actions": 2,
+      "switches": 0,
+      "surfaces": [
+        "app"
+      ],
+      "obstacles": [
+        "The incident page does not show agent work on it."
+      ],
+      "matched": true,
+      "check": "incident check shows 3 duplicates; records 3",
+      "screens": [
+        "W12-incident"
+      ]
+    },
+    {
+      "id": "W09",
+      "workflow": "Recover from a failed task (suspend agent, cancel task, reassign, finish)",
+      "outcome": "completed",
+      "seconds": 23.8,
+      "actions": 23,
+      "switches": 6,
+      "surfaces": [
+        "app",
+        "studio",
+        "terminal"
+      ],
+      "obstacles": [],
+      "matched": true,
+      "check": "duplicates left 0; reversed 4 (unique 4); new assignment verified",
+      "screens": [
+        "W09-studio-cancelled",
+        "W09-studio-standby",
+        "W09-verified"
+      ]
+    },
+    {
+      "id": "W10",
+      "workflow": "Reassign work to a human",
+      "outcome": "completed",
+      "seconds": 4.2,
+      "actions": 5,
+      "switches": 0,
+      "surfaces": [
+        "app"
+      ],
+      "obstacles": [],
+      "matched": true,
+      "check": "\"Agent takeovers\" work item visible on Work: true",
+      "screens": [
+        "W10-work"
+      ]
+    },
+    {
+      "id": "W11",
+      "workflow": "Trace a business change through engineering and deployment",
+      "outcome": "partial",
+      "seconds": 2.8,
+      "actions": 2,
+      "switches": 0,
+      "surfaces": [
+        "app"
+      ],
+      "obstacles": [
+        "In this environment no GitHub evidence can be observed (sandbox network, F-016); the trace stops at the change. The production run (evidence/production-lifecycle.json) shows the full chain."
+      ],
+      "matched": true,
+      "check": "incident → change link works both ways: true",
+      "screens": [
+        "W11-change"
+      ]
+    },
+    {
+      "id": "W14",
+      "workflow": "Evaluate agent effectiveness and operational cost",
+      "outcome": "partial",
+      "seconds": 1.3,
+      "actions": 1,
+      "switches": 0,
+      "surfaces": [
+        "app"
+      ],
+      "obstacles": [
+        "No cost: FeltKit does not meter external agents and the deterministic agents report none; refusals are not counted."
+      ],
+      "matched": true,
+      "check": "UI row \"Ledger Reconciler (standby) active 1 1 1 0 0 1 0 0 0 min 0 / $0.00 none (deterministic playbook)\" vs metrics attempted=1 verified=1",
+      "screens": [
+        "W14-metrics"
+      ]
+    },
+    {
+      "id": "W15",
+      "workflow": "Revoke authority and verify that execution is refused",
+      "outcome": "completed",
+      "seconds": 3.5,
+      "actions": 6,
+      "switches": 1,
+      "surfaces": [
+        "app",
+        "terminal"
+      ],
+      "obstacles": [
+        "Nothing stopped IT from issuing a new FeltKit session to the suspended agent; only CompanyOS's own check refuses it."
+      ],
+      "matched": true,
+      "check": "old sessions revoked: 1; a fresh session's run exited 1: stopped: FORBIDDEN FORBIDDEN: Agent agent-ledger-2 is suspended (Quarter closed; standby retired from finance work); it may not act.",
+      "screens": [
+        "W15-suspended"
+      ]
+    }
+  ]
+}

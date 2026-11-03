@@ -1,0 +1,62 @@
+◆
+CompanyOS
+development
+Live
+Studio ↗
+Acting as
+Omar Haddad (CEO)
+Maria Chen (CFO)
+Fiona Walsh (Finance Manager)
+Rhea Das (Senior Accountant)
+Priya Nair (Operations Director)
+Pablo Ruiz (Procurement Lead)
+Dana Kim (Product Manager)
+Eli Novak (Engineering Lead)
+Sam Osei (Engineer)
+Ivy Brennan (IT & Security Manager)
+Otto Lind (Agent Operator)
+Vic Moreau (External Auditor)
+System
+Light
+Dark
+COMPANY
+Overview
+Approvals
+Organization
+Work
+BUSINESS OPERATIONS
+Purchasing
+Suppliers
+Finance
+Policies
+Customers
+PRODUCT & ENGINEERING
+Changes
+Releases
+Incidents
+AGENTS
+Agent operations
+Effectiveness
+Evidence explorer
+Otto Lind
+Agent Operations Lead
+Roles: staff, operator, finance
+Agent effectiveness
+
+Business outcomes, not tool calls: an assignment counts as successful only when it is verified from records.
+
+Agent	Attempted	Claimed done	Verified	Verification failed	Failures reported	Approval waits	Interventions	Recoveries	Median to verified	Tokens / cost
+Ledger Auditor active	1	0	0	0	0	0	1	0	—	0 / $0.00
+none (deterministic playbook)
+Ledger Reconciler suspended	1	0	0	0	0	1	4	2	—	0 / $0.00
+none (deterministic playbook)
+Ledger Reconciler (standby) active	1	1	1	0	0	1	0	0	0 min	0 / $0.00
+none (deterministic playbook)
+Engineering Scribe active	0	0	0	0	0	0	0	0	—	0 / $0.00
+none (deterministic playbook)
+Integration Sentry active	1	0	0	0	0	0	0	0	—	0 / $0.00
+none (deterministic playbook)
+Access Steward active	0	0	0	0	0	0	0	0	—	0 / $0.00
+none (deterministic playbook)
+
+Usage is agent-reported (FeltKit does not meter agents). Refusals are not counted here: FeltKit records denials in its activity log (Studio → Activity), which applications cannot read.

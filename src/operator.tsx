@@ -36,6 +36,7 @@ export function OperatorHome({ permissions }: { permissions: string[] }) {
           {rows.some((r) => r.assignment.status === "waiting-approval") && <p className="hint">{STUDIO_HINT}</p>}
         </Card>
       )}</Q>
+      {can(permissions, "agents.manage") && <RegisterAgent />}
       <Q state={agents}>{(rows) => (
         <Card title="Agents" aside={<a href={link("operator/metrics")}>Effectiveness →</a>}>
           {rows.length === 0 ? <Empty>No agents are registered. IT &amp; Security registers agents with their roles; sessions are issued with <code>feltkit session create --type agent</code>.</Empty> : (
@@ -176,7 +177,8 @@ export function AssignmentDetail({ id, permissions, people }: { id: string; perm
         </Card>
       </div>
 
-      <Card title="FeltKit actions" aside={a.feltkitTaskId ? <span className="muted small mono">task {a.feltkitTaskId.slice(0, 18)}…</span> : null}>
+      <LastHeard at={d.lastHeard?.at} kind={d.lastHeard?.kind} open={["accepted", "running", "waiting-approval", "recovering"].includes(a.status)} />
+      <Card title="FeltKit actions" aside={a.feltkitTaskId ? <a className="small" href={`/_feltkit/#/agent/${a.feltkitTaskId}`} target="_blank" rel="noreferrer" title="Approve, reject, cancel or settle actions here. Sign in to Studio first with the link `feltkit dev` prints (production: an operator grant).">Open this task in Studio ↗</a> : null}>
         {!a.feltkitTaskId ? <Empty>The agent has not linked a FeltKit task yet (it does when it accepts).</Empty>
           : task.error ? <div className="notice error">Could not read the FeltKit task: {task.error}</div>
           : !task.data ? <div className="muted">Loading FeltKit task…</div> : (
@@ -238,7 +240,9 @@ export function AssignmentDetail({ id, permissions, people }: { id: string; perm
 
 export function AssignForm({ onDone }: { onDone: (id: string) => void }) {
   const agents = useQueryState(api.agents.list, {});
+  const incidents = useQueryState(api.incidents.list, {});
   const assign = useMutation(api.agents.assign);
+  const [subject, setSubject] = useState("");
   const [f, setF] = useState({ agentKey: "", title: "", objective: "", context: "", constraints: "", expectedOutput: "", deadline: "", approvalRequired: true, verifier: "manual" as (typeof VERIFIERS)[number], caps: [] as string[] });
   const agent = agents.data?.find((a) => a.key === f.agentKey);
   const permits = (cap: string) => !!agent && can(agent.permissions, permissionFor(cap));
@@ -253,6 +257,7 @@ export function AssignForm({ onDone }: { onDone: (id: string) => void }) {
           <Field label="Constraints" hint="One per line."><textarea rows={2} value={f.constraints} onChange={(e) => setF({ ...f, constraints: e.target.value })} /></Field>
           <Field label="Expected output"><input value={f.expectedOutput} onChange={(e) => setF({ ...f, expectedOutput: e.target.value })} /></Field>
           <Field label="Deadline"><input type="datetime-local" value={f.deadline} onChange={(e) => setF({ ...f, deadline: e.target.value })} /></Field>
+          <Field label="Related record (optional)"><select value={subject} onChange={(e) => setSubject(e.target.value)}><option value="">None</option>{(incidents.data ?? []).filter((i) => !["resolved", "reviewed"].includes(i.status)).map((i) => <option key={i.id} value={i.id}>{i.number}: {i.title}</option>)}</select></Field>
           <Field label="Verified by"><select value={f.verifier} onChange={(e) => setF({ ...f, verifier: e.target.value as typeof f.verifier })}>{VERIFIERS.map((v) => <option key={v}>{v}</option>)}</select></Field>
         </div>
         <fieldset className="caps"><legend>Permitted capabilities {agent ? `(greyed: ${agent.name}'s roles do not grant them)` : "(choose an agent first)"}</legend>
@@ -263,7 +268,7 @@ export function AssignForm({ onDone }: { onDone: (id: string) => void }) {
         <label className="check"><input type="checkbox" checked={f.approvalRequired} onChange={(e) => setF({ ...f, approvalRequired: e.target.checked })} /> Consequential steps need a person's approval</label>
         <div className="btn-row">
           <Act kind="primary" label="Assign" run={async () => {
-            const id = await assign({ agentKey: f.agentKey, title: f.title, objective: f.objective, context: f.context, constraints: f.constraints.split("\n").map((x) => x.trim()).filter(Boolean), expectedOutput: f.expectedOutput, ...(f.deadline ? { deadline: new Date(f.deadline).toISOString() } : {}), permittedCapabilities: f.caps, approvalRequired: f.approvalRequired, verifier: f.verifier });
+            const id = await assign({ agentKey: f.agentKey, title: f.title, objective: f.objective, context: f.context, constraints: f.constraints.split("\n").map((x) => x.trim()).filter(Boolean), expectedOutput: f.expectedOutput, ...(f.deadline ? { deadline: new Date(f.deadline).toISOString() } : {}), permittedCapabilities: f.caps, approvalRequired: f.approvalRequired, verifier: f.verifier, ...(subject ? { subject: { collection: "incidents", id: subject } } : {}) });
             onDone(id);
           }} />
         </div>
@@ -290,6 +295,43 @@ export function Metrics() {
         </Card>
       )}</Q>
     </Page>
+  );
+}
+
+function LastHeard({ at, kind, open }: { at?: string; kind?: string; open: boolean }) {
+  if (!at) return <div className="notice warn">CompanyOS has not heard from this agent yet.</div>;
+  const minutes = (Date.now() - Date.parse(at)) / 60000;
+  const stale = open && minutes > 10;
+  return (
+    <p className={`small ${stale ? "notice warn" : "muted"}`} role={stale ? "alert" : undefined}>
+      Last heard from the agent {ago(at)} ({kind}).{stale && " It has open work and has been silent for more than 10 minutes: its process may have stopped. CompanyOS sees only what agents write; their reads and refusals are in Studio → Activity."}
+    </p>
+  );
+}
+
+const AGENT_ROLES = ["agent-finance", "agent-integration", "agent-access", "agent-engineering"];
+function RegisterAgent() {
+  const register = useMutation(api.agents.register);
+  const people = useQueryState(api.org.listPeople, { status: "active" });
+  const [open, setOpen] = useState(false);
+  const [f, setF] = useState({ key: "", name: "", purpose: "", runtime: "companyos-agent-runner (Node, MCP over HTTP)", provider: "none (deterministic playbook)", model: "none", role: AGENT_ROLES[0]!, ownerId: "" });
+  const [done, setDone] = useState<string | null>(null);
+  if (!open) return <div><button className="btn btn-secondary" onClick={() => setOpen(true)}>Register an agent</button></div>;
+  return (
+    <Card title="Register an agent">
+      <div className="form-grid">
+        <Field label="Key (its principal id)" hint="lowercase, e.g. agent-auditor"><input value={f.key} onChange={(e) => setF({ ...f, key: e.target.value })} /></Field>
+        <Field label="Name"><input value={f.name} onChange={(e) => setF({ ...f, name: e.target.value })} /></Field>
+        <Field label="Purpose"><input value={f.purpose} onChange={(e) => setF({ ...f, purpose: e.target.value })} /></Field>
+        <Field label="Role (its authority ceiling)"><select value={f.role} onChange={(e) => setF({ ...f, role: e.target.value })}>{AGENT_ROLES.map((r) => <option key={r}>{r}</option>)}</select></Field>
+        <Field label="Owner"><select value={f.ownerId} onChange={(e) => setF({ ...f, ownerId: e.target.value })}><option value="">Choose…</option>{(people.data ?? []).map((p) => <option key={p.id} value={p.id}>{p.name}</option>)}</select></Field>
+        <Field label="Runtime"><input value={f.runtime} onChange={(e) => setF({ ...f, runtime: e.target.value })} /></Field>
+        <Field label="Provider"><input value={f.provider} onChange={(e) => setF({ ...f, provider: e.target.value })} /></Field>
+        <Field label="Model"><input value={f.model} onChange={(e) => setF({ ...f, model: e.target.value })} /></Field>
+      </div>
+      <div className="btn-row"><Act kind="primary" label="Register" run={async () => { await register({ key: f.key, name: f.name, purpose: f.purpose, runtime: f.runtime, provider: f.provider, model: f.model, roles: [f.role], ownerId: f.ownerId }); setDone(`npx feltkit session create --type agent --id ${f.key} --role ${f.role}`); }} /></div>
+      {done && <div className="notice warn"><strong>Registered. It cannot act until IT &amp; Security issues its session</strong> (FeltKit keeps sessions; CompanyOS cannot issue them):<pre className="json">{done}</pre></div>}
+    </Card>
   );
 }
 

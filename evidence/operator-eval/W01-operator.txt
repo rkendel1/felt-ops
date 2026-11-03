@@ -1,0 +1,97 @@
+◆
+CompanyOS
+development
+Live
+Studio ↗
+Acting as
+Omar Haddad (CEO)
+Maria Chen (CFO)
+Fiona Walsh (Finance Manager)
+Rhea Das (Senior Accountant)
+Priya Nair (Operations Director)
+Pablo Ruiz (Procurement Lead)
+Dana Kim (Product Manager)
+Eli Novak (Engineering Lead)
+Sam Osei (Engineer)
+Ivy Brennan (IT & Security Manager)
+Otto Lind (Agent Operator)
+Vic Moreau (External Auditor)
+System
+Light
+Dark
+COMPANY
+Overview
+Approvals
+Organization
+Work
+BUSINESS OPERATIONS
+Purchasing
+Suppliers
+Finance
+Policies
+Customers
+PRODUCT & ENGINEERING
+Changes
+Releases
+Incidents
+AGENTS
+Agent operations
+Effectiveness
+Evidence explorer
+Otto Lind
+Agent Operations Lead
+Roles: staff, operator, finance
+Agent operations
+
+What agents are doing, what they may do, and what has actually been verified.
+
+Assign work
+Needs your attention (0)
+Nothing is waiting for a person.
+Agents
+Effectiveness →
+Ledger Reconciler
+active
+Find and remediate commitment discrepancies; propose reversals of duplicates for finance approval.
+0 active
+0 need attention
+0 verified
+Roles: agent-finance · Owner: Otto Lind · none (deterministic playbook)
+Ledger Reconciler (standby)
+active
+Standby reconciler: takes over when the primary is unavailable.
+0 active
+0 need attention
+0 verified
+Roles: agent-finance · Owner: Otto Lind · none (deterministic playbook)
+Engineering Scribe
+active
+Collect commit, pull request and CI evidence for change requests from GitHub.
+0 active
+0 need attention
+0 verified
+Roles: agent-engineering · Owner: Eli Novak · none (deterministic playbook)
+Integration Sentry
+active
+Sync supplier feeds, detect failing integrations, isolate them and report incidents.
+1 active
+0 need attention
+0 verified
+Roles: agent-integration · Owner: Eli Novak · none (deterministic playbook)
+Access Steward
+active
+Prepare offboarding: inventory a leaver's responsibilities and propose their transfer.
+0 active
+0 need attention
+0 verified
+Roles: agent-access · Owner: Ivy Brennan · none (deterministic playbook)
+Assignments
+Open
+All
+verified
+reassigned
+cancelled
+failed
+suspended
+#	Title	Agent	Status	Approval	Verified by	Deadline
+AS-0001	Daily Northwind invoice sync	agent-sentry	assigned	—	supplier-link-healthy	—

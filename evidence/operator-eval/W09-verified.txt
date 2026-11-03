@@ -1,0 +1,160 @@
+◆
+CompanyOS
+development
+Live
+Studio ↗
+Acting as
+Omar Haddad (CEO)
+Maria Chen (CFO)
+Fiona Walsh (Finance Manager)
+Rhea Das (Senior Accountant)
+Priya Nair (Operations Director)
+Pablo Ruiz (Procurement Lead)
+Dana Kim (Product Manager)
+Eli Novak (Engineering Lead)
+Sam Osei (Engineer)
+Ivy Brennan (IT & Security Manager)
+Otto Lind (Agent Operator)
+Vic Moreau (External Auditor)
+System
+Light
+Dark
+COMPANY
+Overview
+Approvals
+Organization
+Work
+BUSINESS OPERATIONS
+Purchasing
+Suppliers
+Finance
+Policies
+Customers
+PRODUCT & ENGINEERING
+Changes
+Releases
+Incidents
+AGENTS
+Agent operations
+Effectiveness
+Evidence explorer
+Otto Lind
+Agent Operations Lead
+Roles: staff, operator, finance
+AS-0003: Reverse duplicate Northwind commitments
+
+verified assigned to Ledger Reconciler (standby) just now
+
+The work
+Objective
+Every commitment finance.reconciliation lists as a duplicate is reversed.
+Expected output
+Zero duplicates in finance.reconciliation.
+Context
+Release R1 processed four Northwind invoices twice.
+
+[2026-11-03T23:43:22.653Z Otto Lind] Finance confirms: the NW-91xx invoices are the duplicates.
+
+[Reassigned from AS-0002 (agent-ledger, suspended)] Primary crashed; standby takes over.
+Constraints
+One proposal per commitment
+Never touch a commitment that is not listed
+Deadline
+none
+Permitted
+finance.reconciliationcommitments.reverse
+Approval
+Consequential steps need a person's approval
+Verified by
+reconciliation-clean
+Continues
+AS-0002 (agent-ledger, reassigned)
+Records check (computed now)
+
+Objective met according to records
+
+finance.reconciliation computed by CompanyOS
+
+{
+  "duplicates": 0,
+  "overCommitted": 0,
+  "openCommitments": 34,
+  "openTotal": 237066.73
+}
+
+VERIFIED Verified just now — finance.reconciliation computed by CompanyOS
+
+AGENT SAYS Agent's claim: “No duplicates remain; this task executed 3 reversal(s).”
+
+FeltKit actions
+task task-4a3ebc50-81e0…
+
+Read live from FeltKit (FeltDB agent state). Each action records who proposed it, who approved it, whose authority it ran with, and how its outcome was established. Task status: completed
+
+Capability	Input	State	Proposed by	Approved by	Ran as	Outcome
+commitments.reverse	commitmentId: mw1c277j676d23e66276, reason: Duplicate of mw1c273l0127ea5c1b85 (n	succeeded	agent:agent-ledger-2	user:maria	agent:agent-ledger-2	ok (dispatch)
+commitments.reverse	commitmentId: mw1c277k05bd417a28bb, reason: Duplicate of mw1c275g5688901f34de (n	succeeded	agent:agent-ledger-2	user:maria	agent:agent-ledger-2	ok (dispatch)
+commitments.reverse	commitmentId: mw1c277m47f31ca02e64, reason: Duplicate of mw1c27746155f0cc5a3f (n	succeeded	agent:agent-ledger-2	user:maria	agent:agent-ledger-2	ok (dispatch)
+Checkpoints (12) with FeltDB-verified evidence
+AGENT SAYS What the agent said
+AGENT SAYS
+agent.waiting-approval
+agent-ledger-2 (agent)
+just now
+3 reversal(s) proposed; waiting for Finance approval.
+AGENT SAYS
+agent.progress
+agent-ledger-2 (agent)
+just now
+1 reversal(s) executed; 2 open.
+AGENT SAYS
+agent.progress
+agent-ledger-2 (agent)
+just now
+2 reversal(s) executed; 1 open.
+AGENT SAYS
+agent.progress
+agent-ledger-2 (agent)
+just now
+3 reversal(s) executed; 0 open.
+AGENT SAYS
+agent.claim
+agent-ledger-2 (agent)
+just now
+No duplicates remain; this task executed 3 reversal(s).
+RECORDED What was recorded
+OPERATOR
+assignment.created
+otto
+just now
+AS-0003: reassigned from AS-0002. Primary crashed; standby takes over.
+RECORDED
+assignment.accepted
+agent-ledger-2 (agent)
+just now
+Ledger Reconciler (standby) accepted (FeltKit task task-4a3ebc50-81e0-4867-bead-3bb1173fc8b7).
+VERIFIED What was verified
+VERIFIED
+assignment.verified
+otto
+just now
+Verified by Otto Lind (finance.reconciliation computed by CompanyOS).
+RECORDED What it changed elsewhere while assigned
+
+CompanyOS records written by agent-ledger-2 since this assignment started, on other subjects (incidents, integrations, finance…). Calls that changed nothing in CompanyOS, and refusals, are only in FeltKit Studio → Activity.
+
+RECORDED
+commitment.reversed
+agent-ledger-2 (agent)
+just now
+[commitment] Reversed $1,250.00: Duplicate of mw1c273l0127ea5c1b85 (nw9101)
+RECORDED
+commitment.reversed
+agent-ledger-2 (agent)
+just now
+[commitment] Reversed $1,500.00: Duplicate of mw1c275g5688901f34de (nw9102)
+RECORDED
+commitment.reversed
+agent-ledger-2 (agent)
+just now
+[commitment] Reversed $1,750.00: Duplicate of mw1c27746155f0cc5a3f (nw9103)

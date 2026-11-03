@@ -1,23 +1,23 @@
 {
-  "recordedAt": "2026-11-03T23:10:24.668Z",
+  "recordedAt": "2026-11-03T23:42:36.929Z",
   "change": {
     "number": "CR-0001",
     "kind": "config",
     "title": "Purchasing approval thresholds: version 2",
     "problem": "Audit finding AF-12: approvals above 10k need an executive.",
-    "requestedBy": "mw1awikle7e0dabc63a8",
-    "businessOwnerId": "mw1awikle7e0dabc63a8",
+    "requestedBy": "mw1c1xid6455321b0963",
+    "businessOwnerId": "mw1c1xid6455321b0963",
     "status": "verified",
     "requirements": [],
     "acceptance": [
       {
         "text": "New requests follow the new rules from the effective date; earlier requests keep theirs.",
         "met": true,
-        "checkedBy": "mw1awikle7e0dabc63a8"
+        "checkedBy": "mw1c1xid6455321b0963"
       }
     ],
-    "policyVersionId": "mw1awiq42d7d33189e8b",
-    "id": "mw1awiq451acd2ed2664",
+    "policyVersionId": "mw1c1xo2e29dcced63eb",
+    "id": "mw1c1xo2641969fdc89e",
     "__version": 3
   },
   "impact": {
@@ -127,8 +127,8 @@
   "afterAt3000": "Department manager → Finance",
   "verification": {
     "ok": true,
-    "by": "mw1awikle7e0dabc63a8",
-    "at": "2026-11-03T23:10:24.653Z",
+    "by": "mw1c1xid6455321b0963",
+    "at": "2026-11-03T23:42:36.911Z",
     "inForceVersion": 2,
     "requestsChecked": 2,
     "requestNumbers": [
@@ -139,25 +139,25 @@
   },
   "history": [
     {
-      "at": "2026-11-03T23:10:24.461Z",
+      "at": "2026-11-03T23:42:36.722Z",
       "actor": "fiona",
       "source": "platform",
       "kind": "change.requested",
       "summary": "Configuration change for purchasing.approval v2."
     },
     {
-      "at": "2026-11-03T23:10:24.528Z",
+      "at": "2026-11-03T23:42:36.781Z",
       "actor": "maria",
       "source": "platform",
       "kind": "change.approved",
       "summary": "Approved by Maria Chen: Agreed with audit.."
     },
     {
-      "at": "2026-11-03T23:10:24.656Z",
+      "at": "2026-11-03T23:42:36.916Z",
       "actor": "fiona",
       "source": "verification",
       "kind": "change.verified",
-      "summary": "Verified: 2 request(s) since 2026-11-03T23:10:24.525Z follow v2."
+      "summary": "Verified: 2 request(s) since 2026-11-03T23:42:36.778Z follow v2."
     }
   ]
 }

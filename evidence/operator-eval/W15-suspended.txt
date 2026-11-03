@@ -1,0 +1,99 @@
+◆
+CompanyOS
+development
+Live
+Studio ↗
+Acting as
+Omar Haddad (CEO)
+Maria Chen (CFO)
+Fiona Walsh (Finance Manager)
+Rhea Das (Senior Accountant)
+Priya Nair (Operations Director)
+Pablo Ruiz (Procurement Lead)
+Dana Kim (Product Manager)
+Eli Novak (Engineering Lead)
+Sam Osei (Engineer)
+Ivy Brennan (IT & Security Manager)
+Otto Lind (Agent Operator)
+Vic Moreau (External Auditor)
+System
+Light
+Dark
+COMPANY
+Overview
+Approvals
+Organization
+Work
+BUSINESS OPERATIONS
+Purchasing
+Suppliers
+Finance
+Policies
+Customers
+PRODUCT & ENGINEERING
+Changes
+Releases
+Incidents
+AGENTS
+Agent operations
+Effectiveness
+Evidence explorer
+Otto Lind
+Agent Operations Lead
+Roles: staff, operator, finance
+Ledger Reconciler (standby)
+
+suspended Standby reconciler: takes over when the primary is unavailable.
+
+Identity
+Principal
+agent-ledger-2 (type agent)
+Runtime
+companyos-agent-runner (Node, MCP over HTTP)
+Provider / model
+none (deterministic playbook) / none
+Owner
+Otto Lind
+Delegation
+may not delegate (no platform delegation primitive)
+Status reason
+Quarter closed; standby retired from finance work
+Reactivate
+Done
+Why it may act
+
+Authority comes from its FeltKit roles (agent-finance), checked on every call. An assignment can only narrow it. Consequential capabilities marked “approval” run only after a person approves.
+
+Capability	Needs	Allowed
+commitments.reverse · approval	commitments.reverse	via agent-finance
+finance.reconciliation	commitments.read	via agent-finance
+commitments.list	commitments.read	via agent-finance
+invoices.list	invoices.read	via agent-finance
+invoices.ingest	invoices.ingest	no
+integrations.isolate	integrations.report	no
+integrations.link	integrations.read	no
+supplierapi.invoicesv1	supplierapi.read	no
+supplierapi.invoicesv2	supplierapi.read	no
+incidents.open	incidents.report	no
+incidents.note	incidents.note	via agent-finance
+incidents.list	incidents.read	via agent-finance
+org.depart · approval	org.access	no
+org.responsibilities	org.read	via agent-finance
+org.people	org.read	via agent-finance
+changes.evidence	changes.evidence	no
+github.commit	github.read	no
+github.runs	github.read	no
+github.pulls	github.read	no
+Assignments
+AS-0003	Reverse duplicate Northwind commitments	verified	just now
+History
+RECORDED
+agent.registered
+ivy
+1 min ago
+Ledger Reconciler (standby) registered with agent-finance.
+OPERATOR
+agent.suspended
+otto
+just now
+suspended by Otto Lind: Quarter closed; standby retired from finance work. 0 assignment(s) suspended. CompanyOS refuses it from now on; revoke its sessions to stop it at FeltKit too (npx feltkit session revoke).

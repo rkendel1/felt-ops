@@ -1,0 +1,220 @@
+Skip to content
+FK
+FeltKit
+companyos
+development
+●
+Live · events
+Theme
+System theme
+Light theme
+Dark theme
+Lock
+A Boundry product
+
+APPLICATION
+
+Overview
+Data
+Capabilities
+Integrations
+
+SERVICES
+
+Services
+Files
+Notifications
+Configuration
+API keys
+Webhooks
+Jobs
+Schedules
+Intelligence
+Credentials
+
+OPERATE
+
+Agent
+Models
+Activity
+Readiness
+
+DEVELOPMENT
+
+Settings
+Projects
+
+OTHER BOUNDRY PRODUCTS
+
+FeltDB
+AppBoundry
+AuthBoundry
+AppPort
+About Boundry
+
+FeltDB 0.21.0
+local
+/tmp/companyos-eval-WZ7kIf/.feltkit/development/state
+runtime ready · development tools on
+
+Agent
+/
+Task
+Agent
+Act as
+Omar Haddad (CEO) (staff, executive)
+Maria Chen (CFO) (staff, executive, finance)
+Fiona Walsh (Finance Manager) (staff, finance)
+Rhea Das (Senior Accountant) (staff, finance)
+Priya Nair (Operations Director) (staff, operations)
+Pablo Ruiz (Procurement Lead) (staff, procurement)
+Dana Kim (Product Manager) (staff, product)
+Eli Novak (Engineering Lead) (staff, engineering)
+Sam Osei (Engineer) (staff, engineering)
+Ivy Brennan (IT & Security Manager) (staff, itsec, operator, admin)
+Otto Lind (Agent Operator) (staff, operator, finance)
+Vic Moreau (External Auditor) (auditor)
+Ledger Reconciler (agent-finance)
+Ledger Reconciler (standby) (agent-finance)
+Integration Sentry (agent-integration)
+Access Steward (agent-access)
+Engineering Scribe (agent-engineering)
+
+FeltDB's agent runtime, operating this application through its AppPort capabilities and AppPort Services. Every action runs as the task owner; consequential ones wait for a person who may perform them.
+
+AS-0002: Every commitment finance.reconciliation lists as a duplicate is reversed.
+▲
+Blocked
+agent:agent-ledger
+FELTDB EXECUTION
+flow://agent/feltkit@1 · Waiting
+TASK
+task-0263d747-7006-4420-b1a2-cb540ed31f1b
+checkpoint v6
+▲
+
+Waiting for a coding agent
+
+Nothing works on this task until one claims it.
+Connect a coding agent
+Summary of what was done
+Complete task
+Cancel task
+Waiting for approval
+commitments.reverse
+proposed by agent:agent-ledger
+
+finance.reconciliation lists mw1c277hed72508884ec (1000) as a duplicate of mw1c271he24c2e2db36b
+
+{
+  "commitmentId": "mw1c277hed72508884ec",
+  "reason": "Duplicate of mw1c271he24c2e2db36b (nw9100)"
+}
+
+Runs as agent:agent-ledger, through the application's AppPort dispatch. You must be permitted to perform it yourself to approve it.
+
+Approve as rhea
+Reject
+Waiting for approval
+commitments.reverse
+proposed by agent:agent-ledger
+
+finance.reconciliation lists mw1c277j676d23e66276 (1250) as a duplicate of mw1c273l0127ea5c1b85
+
+{
+  "commitmentId": "mw1c277j676d23e66276",
+  "reason": "Duplicate of mw1c273l0127ea5c1b85 (nw9101)"
+}
+
+Runs as agent:agent-ledger, through the application's AppPort dispatch. You must be permitted to perform it yourself to approve it.
+
+Approve as rhea
+Reject
+Waiting for approval
+commitments.reverse
+proposed by agent:agent-ledger
+
+finance.reconciliation lists mw1c277k05bd417a28bb (1500) as a duplicate of mw1c275g5688901f34de
+
+{
+  "commitmentId": "mw1c277k05bd417a28bb",
+  "reason": "Duplicate of mw1c275g5688901f34de (nw9102)"
+}
+
+Runs as agent:agent-ledger, through the application's AppPort dispatch. You must be permitted to perform it yourself to approve it.
+
+Approve as rhea
+Reject
+Waiting for approval
+commitments.reverse
+proposed by agent:agent-ledger
+
+finance.reconciliation lists mw1c277m47f31ca02e64 (1750) as a duplicate of mw1c27746155f0cc5a3f
+
+{
+  "commitmentId": "mw1c277m47f31ca02e64",
+  "reason": "Duplicate of mw1c27746155f0cc5a3f (nw9103)"
+}
+
+Runs as agent:agent-ledger, through the application's AppPort dispatch. You must be permitted to perform it yourself to approve it.
+
+Approve as rhea
+Reject
+Checkpoints
+
+v6 Waiting for approval: commitments.reverse.
+
+2026-11-03 23:42:58 UTC · agent:agent-ledger 
+▲
+Blocked
+
+Decisions (4)
+Evidence:
+_feltdb.AgentMemory/act-725f247ac8f348448c95.1
+✓
+Verified · record verified at commit
+
+v5 Waiting for approval: commitments.reverse.
+
+2026-11-03 23:42:58 UTC · agent:agent-ledger 
+▲
+Blocked
+
+Evidence:
+_feltdb.AgentMemory/act-2351c397d4234c74b4ed.1
+✓
+Verified · record verified at commit
+
+v4 Waiting for approval: commitments.reverse.
+
+2026-11-03 23:42:58 UTC · agent:agent-ledger 
+▲
+Blocked
+
+Evidence:
+_feltdb.AgentMemory/act-51bf15b926104ca0a10e.1
+✓
+Verified · record verified at commit
+
+v3 Waiting for approval: commitments.reverse.
+
+2026-11-03 23:42:58 UTC · agent:agent-ledger 
+▲
+Blocked
+
+Evidence:
+_feltdb.AgentMemory/act-c7ffb1b35eb249dd86ec.1
+✓
+Verified · record verified at commit
+
+v2 Waiting for an agent to claim this task over MCP (feltkit_agent_claim).
+
+2026-11-03 23:42:58 UTC · agent:agent-ledger 
+◐
+Ready
+
+v1 Started by agent:agent-ledger (handoff).
+
+2026-11-03 23:42:58 UTC · agent:agent-ledger 
+◐
+Running

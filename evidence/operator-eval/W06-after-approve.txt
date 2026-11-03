@@ -1,0 +1,287 @@
+◆
+CompanyOS
+development
+Live
+Studio ↗
+Acting as
+Omar Haddad (CEO)
+Maria Chen (CFO)
+Fiona Walsh (Finance Manager)
+Rhea Das (Senior Accountant)
+Priya Nair (Operations Director)
+Pablo Ruiz (Procurement Lead)
+Dana Kim (Product Manager)
+Eli Novak (Engineering Lead)
+Sam Osei (Engineer)
+Ivy Brennan (IT & Security Manager)
+Otto Lind (Agent Operator)
+Vic Moreau (External Auditor)
+System
+Light
+Dark
+COMPANY
+Overview
+Approvals
+Organization
+Work
+BUSINESS OPERATIONS
+Purchasing
+Suppliers
+Finance
+Policies
+Customers
+PRODUCT & ENGINEERING
+Changes
+Releases
+Incidents
+AGENTS
+Agent operations
+Effectiveness
+Evidence explorer
+Otto Lind
+Agent Operations Lead
+Roles: staff, operator, finance
+AS-0002: Reverse duplicate Northwind commitments
+
+running assigned to Ledger Reconciler just now
+
+The work
+Objective
+Every commitment finance.reconciliation lists as a duplicate is reversed.
+Expected output
+Zero duplicates in finance.reconciliation.
+Context
+Release R1 processed four Northwind invoices twice.
+Constraints
+One proposal per commitment
+Never touch a commitment that is not listed
+Deadline
+none
+Permitted
+finance.reconciliationcommitments.reverse
+Approval
+Consequential steps need a person's approval
+Verified by
+reconciliation-clean
+Records check (computed now)
+
+Objective not met according to records
+
+finance.reconciliation computed by CompanyOS
+
+{
+  "duplicates": 3,
+  "overCommitted": 3,
+  "openCommitments": 37,
+  "openTotal": 241566.73
+}
+FeltKit actions
+task task-0263d747-7006…
+
+Read live from FeltKit (FeltDB agent state). Each action records who proposed it, who approved it, whose authority it ran with, and how its outcome was established. Task status: blocked
+
+Capability	Input	State	Proposed by	Approved by	Ran as	Outcome
+commitments.reverse	commitmentId: mw1c277hed72508884ec, reason: Duplicate of mw1c271he24c2e2db36b (n	succeeded	agent:agent-ledger	user:rhea	agent:agent-ledger	ok (dispatch)
+commitments.reverse	commitmentId: mw1c277j676d23e66276, reason: Duplicate of mw1c273l0127ea5c1b85 (n	proposed	agent:agent-ledger	—	—	
+commitments.reverse	commitmentId: mw1c277k05bd417a28bb, reason: Duplicate of mw1c275g5688901f34de (n	proposed	agent:agent-ledger	—	—	
+commitments.reverse	commitmentId: mw1c277m47f31ca02e64, reason: Duplicate of mw1c27746155f0cc5a3f (n	proposed	agent:agent-ledger	—	—	
+3 action(s) wait for approval. Approvals of agent actions happen in FeltKit Studio → Agent (development: the Dashboard link `feltkit dev` prints; production: an operator grant). CompanyOS cannot host them (gap G-07).
+Checkpoints (8) with FeltDB-verified evidence
+AGENT SAYS What the agent said
+AGENT SAYS
+agent.waiting-approval
+agent-ledger (agent)
+just now
+4 reversal(s) proposed; waiting for Finance approval.
+AGENT SAYS
+agent.progress
+agent-ledger (agent)
+just now
+1 reversal(s) executed; 3 open.
+RECORDED What was recorded
+OPERATOR
+assignment.created
+otto
+just now
+AS-0002 for Ledger Reconciler: Reverse duplicate Northwind commitments. Permitted: finance.reconciliation, commitments.reverse. Verified by: reconciliation-clean.
+RECORDED
+assignment.accepted
+agent-ledger (agent)
+just now
+Ledger Reconciler accepted (FeltKit task task-0263d747-7006-4420-b1a2-cb540ed31f1b).
+VERIFIED What was verified
+Not verified yet.
+RECORDED What it changed elsewhere while assigned
+
+CompanyOS records written by agent-ledger since this assignment started, on other subjects (incidents, integrations, finance…). Calls that changed nothing in CompanyOS, and refusals, are only in FeltKit Studio → Activity.
+
+RECORDED
+commitment.reversed
+agent-ledger (agent)
+just now
+[commitment] Reversed $1,000.00: Duplicate of mw1c271he24c2e2db36b (nw9100)
+Intervene
+Note (required for every intervention)
+Suspend
+Add context
+Cancel
+Reassign or escalate to…
+Ledger Auditor
+Ledger Reconciler (standby)
+Engineering Scribe
+Integration Sentry
+Access Steward
+Alex Abbott
+Alex Bauer
+Alex Moss
+Alex Ng
+Alex Okafor
+Alex Sato
+Alex Ueda
+Bea Cruz
+Bea Moss
+Bea Price
+Bea Reyes
+Bea Sato
+Carlos Fischer
+Carlos Kaur
+Carlos Ng
+Carlos Varga
+Dana Kim
+Dee Ng
+Dee Toivonen
+Eli Novak
+Emil Cruz
+Emil Dalton
+Emil Grant
+Emil Kaur
+Emil Ng
+Emil Reyes
+Emil Wolfe
+Farah Cruz
+Farah Dalton
+Farah Grant
+Farah Jensen
+Farah Lopez
+Farah Moss
+Farah Ng
+Farah Toivonen
+Fiona Walsh
+Gil Dalton
+Gil Grant
+Gil Jensen
+Gil Lopez
+Gil Moss
+Gil Okafor
+Gil Varga
+Gil Wolfe
+Hana Bauer
+Hana Grant
+Hana Iqbal
+Hana Ueda
+Hana Varga
+Ian Fischer
+Ian Jensen
+Ian Lopez
+Ian Ng
+Ivy Brennan
+Jade Cruz
+Jade Dalton
+Jade Eze
+Jade Ng
+Jade Reyes
+Jade Ueda
+Jade Wolfe
+Kofi Iqbal
+Kofi Jensen
+Kofi Moss
+Kofi Sato
+Kofi Wolfe
+Lena Abbott
+Lena Bauer
+Lena Cruz
+Lena Holm
+Lena Ng
+Maria Chen
+Milo Abbott
+Milo Jensen
+Milo Lopez
+Milo Ng
+Milo Okafor
+Milo Toivonen
+Nia Dalton
+Nia Grant
+Nia Lopez
+Nia Moss
+Nia Sato
+Nia Ueda
+Omar Haddad
+Otto Lind
+Owen Eze
+Owen Jensen
+Owen Kaur
+Owen Sato
+Owen Varga
+Pablo Ruiz
+Pia Fischer
+Pia Lopez
+Pia Reyes
+Pia Wolfe
+Priya Nair
+Quinn Dalton
+Quinn Fischer
+Quinn Grant
+Quinn Jensen
+Rhea Das
+Rosa Eze
+Rosa Grant
+Rosa Okafor
+Rosa Sato
+Rosa Toivonen
+Rosa Wolfe
+Sam Osei
+Seth Bauer
+Seth Dalton
+Seth Eze
+Seth Fischer
+Seth Jensen
+Seth Ng
+Tara Dalton
+Tara Eze
+Tara Moss
+Tara Ng
+Tara Wolfe
+Uma Abbott
+Uma Bauer
+Uma Kaur
+Uma Okafor
+Uma Reyes
+Vik Dalton
+Vik Kaur
+Vik Moss
+Vik Price
+Vik Varga
+Wren Fischer
+Wren Iqbal
+Wren Jensen
+Wren Moss
+Wren Okafor
+Yara Kaur
+Yara Lopez
+Yara Wolfe
+Zeke Eze
+Zeke Fischer
+Zeke Jensen
+Zeke Okafor
+Zeke Price
+Zeke Reyes
+Zeke Toivonen
+Zeke Ueda
+Zeke Varga
+Reassign
+Escalate
+Verify the outcome
+
+Verification is computed from business records (reconciliation-clean), never taken from the agent's claim.
+
+Verify now

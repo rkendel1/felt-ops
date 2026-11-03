@@ -1,0 +1,90 @@
+◆
+CompanyOS
+development
+Live
+Studio ↗
+Acting as
+Omar Haddad (CEO)
+Maria Chen (CFO)
+Fiona Walsh (Finance Manager)
+Rhea Das (Senior Accountant)
+Priya Nair (Operations Director)
+Pablo Ruiz (Procurement Lead)
+Dana Kim (Product Manager)
+Eli Novak (Engineering Lead)
+Sam Osei (Engineer)
+Ivy Brennan (IT & Security Manager)
+Otto Lind (Agent Operator)
+Vic Moreau (External Auditor)
+System
+Light
+Dark
+COMPANY
+Overview
+Approvals
+Organization
+Work
+BUSINESS OPERATIONS
+Purchasing
+Suppliers
+Finance
+Policies
+Customers
+PRODUCT & ENGINEERING
+Changes
+Releases
+Incidents
+AGENTS
+Agent operations
+Effectiveness
+Evidence explorer
+Otto Lind
+Agent Operations Lead
+Roles: staff, operator, finance
+Assign work to an agent
+
+Scope, context and authority for one piece of work. An assignment can narrow an agent's authority, never widen it.
+
+Agent
+Choose…
+Ledger Auditor — agent-finance
+Ledger Reconciler — agent-finance
+Ledger Reconciler (standby) — agent-finance
+Engineering Scribe — agent-engineering
+Integration Sentry — agent-integration
+Access Steward — agent-access
+Title
+Objective
+What must be true when the work is done.
+Business context
+Constraints
+One per line.
+Expected output
+Deadline
+Verified by
+reconciliation-clean
+supplier-link-healthy
+departure-complete
+manual
+Permitted capabilities (greyed: Ledger Reconciler's roles do not grant them)
+ finance.reconciliation
+ commitments.list
+ commitments.reverse
+ invoices.list
+ invoices.ingest
+ integrations.link
+ integrations.isolate
+ supplierapi.invoicesv1
+ supplierapi.invoicesv2
+ incidents.list
+ incidents.open
+ incidents.note
+ org.people
+ org.responsibilities
+ org.depart
+ changes.evidence
+ github.commit
+ github.runs
+ github.pulls
+Consequential steps need a person's approval
+Assign

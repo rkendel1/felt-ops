@@ -3,7 +3,7 @@
  * engineering change that fixes the cause, and verification computed from records.
  */
 import { fail, s } from "@feltdb/feltkit";
-import { app, changes, incidents, supplierLinks, timeline } from "./app.js";
+import { app, assignments, changes, incidents, supplierLinks, timeline } from "./app.js";
 import { actor, money, nextNumber, nowIso, record, requirePerson } from "./_lib.js";
 import { reconcileState } from "./purchasing.js";
 import { withinAssignment } from "./_scope.js";
@@ -56,7 +56,9 @@ export const detail = app.query({
     if (!incident) fail("NOT_FOUND", `No incident ${incidentId}.`);
     const history = await ctx.db.find(timeline, { subject: `incident:${incidentId}` }, { orderBy: [{ field: "seq", direction: "asc" }] });
     const change = incident.changeId ? await ctx.db.get(changes, incident.changeId) : null;
-    return { incident, history, change, check: await check(ctx, incident.process) };
+    const work = (await ctx.db.find(assignments, {})).filter((a) => a.subject?.collection === "incidents" && a.subject.id === incidentId)
+      .map((a) => ({ id: a.id, number: a.number, agentKey: a.agentKey, title: a.title, status: a.status }));
+    return { incident, history, change, assignments: work, check: await check(ctx, incident.process) };
   },
 });
 

@@ -14,6 +14,8 @@ const BASE = [
   "org.read", "ops.read", "work.read", "work.write", "policy.read", "policy.acknowledge",
   "purchasing.read", "purchasing.request", "purchasing.approve", "changes.read", "changes.request", "incidents.read",
   "agents.read", "feltkit.agent.read", "notifications.*", "files.read",
+  // After-commit webhooks run as the caller (purchase.approved, incident.opened, change.released).
+  "webhooks.emit", "webhooks.deliver",
 ];
 
 export const app = feltkit({
@@ -38,7 +40,7 @@ export const app = feltkit({
     admin: ["org.admin", "intelligence.*", "credential.*", "configuration.*", "apikeys.*", "webhooks.*", "jobs.*", "schedules.*", "feltkit.operations.*"],
     // Agents. Narrow by design: each holds what its purpose needs, never `*.approve`.
     "agent-finance": ["org.read", "purchasing.read", "invoices.read", "commitments.read", "commitments.reverse", "finance.read", "incidents.read", "incidents.note", "assignments.work", "agents.read", "feltkit.agent.*"],
-    "agent-integration": ["org.read", "suppliers.read", "invoices.read", "invoices.ingest", "integrations.read", "integrations.report", "supplierapi.*", "incidents.read", "incidents.report", "incidents.note", "assignments.work", "agents.read", "feltkit.agent.*"],
+    "agent-integration": ["org.read", "suppliers.read", "invoices.read", "invoices.ingest", "integrations.read", "integrations.report", "supplierapi.*", "incidents.read", "incidents.report", "incidents.note", "assignments.work", "agents.read", "feltkit.agent.*", "webhooks.emit", "webhooks.deliver"],
     "agent-access": ["org.read", "org.access", "purchasing.read", "work.read", "assignments.work", "agents.read", "feltkit.agent.*"],
     "agent-engineering": ["changes.read", "changes.evidence", "github.*", "incidents.read", "assignments.work", "agents.read", "feltkit.agent.*"],
   },

@@ -1,0 +1,230 @@
+Skip to content
+FK
+FeltKit
+companyos
+development
+●
+Live · events
+Theme
+System theme
+Light theme
+Dark theme
+Lock
+A Boundry product
+
+APPLICATION
+
+Overview
+Data
+Capabilities
+Integrations
+
+SERVICES
+
+Services
+Files
+Notifications
+Configuration
+API keys
+Webhooks
+Jobs
+Schedules
+Intelligence
+Credentials
+
+OPERATE
+
+Agent
+Models
+Activity
+Readiness
+
+DEVELOPMENT
+
+Settings
+Projects
+
+OTHER BOUNDRY PRODUCTS
+
+FeltDB
+AppBoundry
+AuthBoundry
+AppPort
+About Boundry
+
+FeltDB 0.21.0
+local
+/tmp/companyos-eval-WZ7kIf/.feltkit/development/state
+runtime ready · development tools on
+
+Agent
+/
+Task
+Agent
+Act as
+Omar Haddad (CEO) (staff, executive)
+Maria Chen (CFO) (staff, executive, finance)
+Fiona Walsh (Finance Manager) (staff, finance)
+Rhea Das (Senior Accountant) (staff, finance)
+Priya Nair (Operations Director) (staff, operations)
+Pablo Ruiz (Procurement Lead) (staff, procurement)
+Dana Kim (Product Manager) (staff, product)
+Eli Novak (Engineering Lead) (staff, engineering)
+Sam Osei (Engineer) (staff, engineering)
+Ivy Brennan (IT & Security Manager) (staff, itsec, operator, admin)
+Otto Lind (Agent Operator) (staff, operator, finance)
+Vic Moreau (External Auditor) (auditor)
+Ledger Reconciler (agent-finance)
+Ledger Reconciler (standby) (agent-finance)
+Integration Sentry (agent-integration)
+Access Steward (agent-access)
+Engineering Scribe (agent-engineering)
+
+FeltDB's agent runtime, operating this application through its AppPort capabilities and AppPort Services. Every action runs as the task owner; consequential ones wait for a person who may perform them.
+
+AS-0003: Every commitment finance.reconciliation lists as a duplicate is reversed.
+◐
+Running
+agent:agent-ledger-2
+FELTDB EXECUTION
+flow://agent/feltkit@1 · Observing
+TASK
+task-4a3ebc50-81e0-4867-bead-3bb1173fc8b7
+checkpoint v11
+▲
+
+Waiting for a coding agent
+
+Nothing works on this task until one claims it.
+Connect a coding agent
+Summary of what was done
+Complete task
+Cancel task
+Checkpoints
+
+v11 Ran commitments.reverse, approved by user:maria.
+
+2026-11-03 23:43:58 UTC · agent:agent-ledger-2 
+◐
+Running
+
+commitments.reverse (attempt 1) → {"commitmentId":"mw1c277m47f31ca02e64","status":"reversed"}
+Decisions (6)
+Evidence:
+_feltkit_activity/mw1c3p3m839c32457583
+✓
+Verified · record verified at commit
+Evidence:
+_feltdb.AgentMemory/act-00c1b06fbf274525a129.4
+✓
+Verified · record verified at commit
+
+v10 Approved by maria: running commitments.reverse.
+
+2026-11-03 23:43:58 UTC · agent:agent-ledger-2 
+◐
+Running
+
+Evidence:
+_feltdb.AgentMemory/act-00c1b06fbf274525a129.2
+✓
+Verified · record verified at commit
+
+v9 Ran commitments.reverse, approved by user:maria.
+
+2026-11-03 23:43:57 UTC · agent:agent-ledger-2 
+▲
+Blocked
+
+commitments.reverse (attempt 1) → {"commitmentId":"mw1c277k05bd417a28bb","status":"reversed"}
+Evidence:
+_feltkit_activity/mw1c3nvfdf773bd1d25a
+✓
+Verified · record verified at commit
+Evidence:
+_feltdb.AgentMemory/act-fc69f38f773743098dc2.4
+✓
+Verified · record verified at commit
+
+v8 Approved by maria: running commitments.reverse.
+
+2026-11-03 23:43:57 UTC · agent:agent-ledger-2 
+◐
+Running
+
+Evidence:
+_feltdb.AgentMemory/act-fc69f38f773743098dc2.2
+✓
+Verified · record verified at commit
+
+v7 Ran commitments.reverse, approved by user:maria.
+
+2026-11-03 23:43:55 UTC · agent:agent-ledger-2 
+▲
+Blocked
+
+commitments.reverse (attempt 1) → {"commitmentId":"mw1c277j676d23e66276","status":"reversed"}
+Evidence:
+_feltkit_activity/mw1c3mn9fc92e5b8264e
+✓
+Verified · record verified at commit
+Evidence:
+_feltdb.AgentMemory/act-2752da16a88448669844.4
+✓
+Verified · record verified at commit
+
+v6 Approved by maria: running commitments.reverse.
+
+2026-11-03 23:43:55 UTC · agent:agent-ledger-2 
+◐
+Running
+
+Evidence:
+_feltdb.AgentMemory/act-2752da16a88448669844.2
+✓
+Verified · record verified at commit
+
+v5 Waiting for approval: commitments.reverse.
+
+2026-11-03 23:43:51 UTC · agent:agent-ledger-2 
+▲
+Blocked
+
+Evidence:
+_feltdb.AgentMemory/act-00c1b06fbf274525a129.1
+✓
+Verified · record verified at commit
+
+v4 Waiting for approval: commitments.reverse.
+
+2026-11-03 23:43:51 UTC · agent:agent-ledger-2 
+▲
+Blocked
+
+Evidence:
+_feltdb.AgentMemory/act-fc69f38f773743098dc2.1
+✓
+Verified · record verified at commit
+
+v3 Waiting for approval: commitments.reverse.
+
+2026-11-03 23:43:51 UTC · agent:agent-ledger-2 
+▲
+Blocked
+
+Evidence:
+_feltdb.AgentMemory/act-2752da16a88448669844.1
+✓
+Verified · record verified at commit
+
+v2 Waiting for an agent to claim this task over MCP (feltkit_agent_claim).
+
+2026-11-03 23:43:51 UTC · agent:agent-ledger-2 
+◐
+Ready
+
+v1 Started by agent:agent-ledger-2 (handoff).
+
+2026-11-03 23:43:51 UTC · agent:agent-ledger-2 
+◐
+Running

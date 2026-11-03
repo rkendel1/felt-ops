@@ -1,0 +1,111 @@
+◆
+CompanyOS
+development
+Live
+Studio ↗
+Acting as
+Omar Haddad (CEO)
+Maria Chen (CFO)
+Fiona Walsh (Finance Manager)
+Rhea Das (Senior Accountant)
+Priya Nair (Operations Director)
+Pablo Ruiz (Procurement Lead)
+Dana Kim (Product Manager)
+Eli Novak (Engineering Lead)
+Sam Osei (Engineer)
+Ivy Brennan (IT & Security Manager)
+Otto Lind (Agent Operator)
+Vic Moreau (External Auditor)
+System
+Light
+Dark
+COMPANY
+Overview
+Approvals
+Organization
+Work
+BUSINESS OPERATIONS
+Purchasing
+Suppliers
+Finance
+Policies
+Customers
+PRODUCT & ENGINEERING
+Changes
+Releases
+Incidents
+AGENTS
+Agent operations
+Effectiveness
+Evidence explorer
+Otto Lind
+Agent Operations Lead
+Roles: staff, operator, finance
+Work
+
+Projects, dependencies and completion evidence.
+
+Access review Q4
+business · Ivy Brennan · 2/3 done · 1 overdue
+Manager attestations	done	Otto Lind	2026-10-18		
+Remove stale accounts	todo	Ivy Brennan	2026-10-27		
+Start
+ 
+Done
+
+Export access list	done	Ivy Brennan	2026-10-09		
+Agent takeovers
+business · Otto Lind · 0/1 done
+AS-0004 (taken over from agent-auditor): Quarterly commitment review	todo	Rhea Das			
+Start
+ 
+Done
+Customer onboarding refresh
+business · Priya Nair · 2/4 done · 1 overdue
+Pilot with two accounts	todo	Sam Osei	2026-11-05	waits on 1	
+Start
+ 
+Done
+
+Interview five customers	done	Sam Osei	2026-10-18		
+Draft new playbook	doing	Sam Osei	2026-10-27		
+Start
+ 
+Done
+
+Map current onboarding	done	Priya Nair	2026-10-09		
+FY2026 close readiness
+business · Fiona Walsh · 2/4 done · 1 overdue
+Accrual schedule	done	Sam Osei	2026-10-09		
+Budget variance report	doing	Otto Lind	2026-10-27		
+Start
+ 
+Done
+
+Vendor statement review	done	Fiona Walsh	2026-10-18		
+Close calendar	todo	Fiona Walsh	2026-11-05	waits on 1	
+Start
+ 
+Done
+Purchasing platform hardening
+engineering · Eli Novak · 2/4 done · 1 overdue
+Supplier feed monitoring	todo	Sam Osei	2026-11-05	waits on 1	
+Start
+ 
+Done
+
+Add request audit view	done	Otto Lind	2026-10-09		
+Invoice matching tests	doing	Otto Lind	2026-10-27		
+Start
+ 
+Done
+
+Policy-driven approval chains	done	Eli Novak	2026-10-18		
+Supplier risk review
+business · Pablo Ruiz · 2/3 done · 1 overdue
+Collect certificates	done	Sam Osei	2026-10-09		
+Score suppliers	done	Sam Osei	2026-10-18		
+Escalate high risk	todo	Otto Lind	2026-10-27		
+Start
+ 
+Done

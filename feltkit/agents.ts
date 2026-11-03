@@ -162,7 +162,10 @@ export const assignmentDetail = app.query({
     const elsewhere = (await ctx.db.find(timeline, { actorId: a.agentKey }))
       .filter((h) => h.subject !== `assignment:${assignmentId}` && h.at >= a.assignedAt && h.at <= until)
       .sort((x, y) => (x.at < y.at ? -1 : 1));
-    return { assignment: a, agent: agent ?? null, history, elsewhere, check: await verifierCheck(ctx, a), reassignedChain: chain };
+    // The agent's latest write anywhere in CompanyOS: the only liveness signal available
+    // (FeltKit has no agent heartbeat; its reads are only in the activity log).
+    const lastHeard = (await ctx.db.find(timeline, { actorId: a.agentKey })).sort((x, y) => (x.at < y.at ? 1 : -1))[0] ?? null;
+    return { assignment: a, agent: agent ?? null, history, elsewhere, lastHeard: lastHeard ? { at: lastHeard.at, kind: lastHeard.kind, summary: lastHeard.summary } : null, check: await verifierCheck(ctx, a), reassignedChain: chain };
   },
 });
 

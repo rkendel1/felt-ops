@@ -1,5 +1,5 @@
 {
-  "recordedAt": "2026-11-03T23:10:30.429Z",
+  "recordedAt": "2026-11-03T23:42:42.229Z",
   "supplierRequests": [
     "POST /admin/invoices",
     "POST /admin/invoices",
@@ -14,49 +14,49 @@
     "summary": "Observed supplierapi.invoicesv1 (failed: UPSTREAM_REJECTED)."
   },
   "lastFailure": {
-    "at": "2026-11-03T23:10:30.227Z",
+    "at": "2026-11-03T23:42:42.007Z",
     "code": "UPSTREAM_REJECTED",
     "message": "The API refused the request (410): {\"error\":\"gone\",\"message\":\"API v1 was retired on 2026-11-02. Use /v2/accounts/{account}/invoices.\"}",
-    "callId": "agent_1461afea-8cf8-4fdc-96a2-51cb5e8e0a52"
+    "callId": "agent_2a63f09f-a317-4ee2-b2ba-02fba4f2a03d"
   },
   "linkHistory": [
     {
-      "at": "2026-11-03T23:10:30.175Z",
+      "at": "2026-11-03T23:42:41.959Z",
       "actor": "agent-sentry",
       "source": "platform",
       "kind": "sync.succeeded",
       "summary": "invoicesv1: 2 row(s), 2 imported; synced through 2026-11-01T15:00:00.000Z."
     },
     {
-      "at": "2026-11-03T23:10:30.227Z",
+      "at": "2026-11-03T23:42:42.008Z",
       "actor": "agent-sentry",
       "source": "platform",
       "kind": "call.failed",
       "summary": "invoicesv1 failed: UPSTREAM_REJECTED The API refused the request (410): {\"error\":\"gone\",\"message\":\"API v1 was retired on 2026-11-02. Use /v2/accounts/{account}/invoices.\"}"
     },
     {
-      "at": "2026-11-03T23:10:30.260Z",
+      "at": "2026-11-03T23:42:42.043Z",
       "actor": "agent-sentry",
       "source": "platform",
       "kind": "link.isolated",
       "summary": "Isolated: v1 answers 410 Gone. Watermark held at 2026-11-01T15:00:00.000Z."
     },
     {
-      "at": "2026-11-03T23:10:30.331Z",
+      "at": "2026-11-03T23:42:42.102Z",
       "actor": "agent-sentry",
       "source": "verification",
       "kind": "call.validated",
       "summary": "invoicesv2 answered (link isolated, active version v1); nothing imported."
     },
     {
-      "at": "2026-11-03T23:10:30.349Z",
+      "at": "2026-11-03T23:42:42.118Z",
       "actor": "sam",
       "source": "platform",
       "kind": "link.restored",
-      "summary": "Restored on v2 (validated by call agent_8f99bb87-10ed-4ae4-bef2-2799285c7541), change mw1awn7t0b031651e282. Missed invoices since 2026-11-01T15:00:00.000Z will be imported by the next sync."
+      "summary": "Restored on v2 (validated by call agent_7135bba2-38dd-4321-8f3e-233c6ce04f93), change mw1c21shda239ffcd5b0. Missed invoices since 2026-11-01T15:00:00.000Z will be imported by the next sync."
     },
     {
-      "at": "2026-11-03T23:10:30.376Z",
+      "at": "2026-11-03T23:42:42.146Z",
       "actor": "agent-sentry",
       "source": "platform",
       "kind": "sync.succeeded",
@@ -85,13 +85,13 @@
   ],
   "verification": {
     "ok": true,
-    "by": "mw1awmv985c40a07dc37",
-    "at": "2026-11-03T23:10:30.409Z",
+    "by": "mw1c21gaa04ac244f189",
+    "at": "2026-11-03T23:42:42.199Z",
     "method": "supplier link state",
     "detail": {
       "links": [
         {
-          "supplierId": "mw1awmvi25a7a9663bbc",
+          "supplierId": "mw1c21gg2269a5d4ecc0",
           "status": "healthy",
           "apiVersion": "v2",
           "syncedThrough": "2026-11-02T10:00:00.000Z"

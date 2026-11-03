@@ -132,6 +132,9 @@ export function IncidentDetail({ id, permissions }: { id: string; permissions: s
           <Card title="Business impact"><p>{x.incident.businessImpact}</p><p className="small">{x.incident.affected.length} affected record(s): {x.incident.affected.slice(0, 8).map((a) => <code key={a.id} className="cap">{a.collection}/{a.id.slice(0, 8)}</code>)}</p>{x.incident.rootCause && <p><strong>Root cause:</strong> {x.incident.rootCause}</p>}{x.change && <p>Fix: <a href={link(`change/${x.change.id}`)}>{x.change.number}</a> <Badge value={x.change.status} /></p>}</Card>
           <Card title="Process check (computed now)" tone={x.check.healthy === true ? "ok" : x.check.healthy === false ? "danger" : undefined}><p><strong>{x.check.summary}</strong></p><p className="small muted">Resolving requires this check to pass.</p></Card>
         </div>
+        <Card title="Agent work on this incident">
+          {x.assignments.length === 0 ? <Empty>No agent is assigned to this incident.</Empty> : x.assignments.map((a) => <div key={a.id}><a href={link(`assignment/${a.id}`)}>{a.number}</a> {a.title} · {a.agentKey} <Badge value={a.status} /></div>)}
+        </Card>
         {can(permissions, "incidents.write") && (
           <Card title="Act">
             <textarea rows={2} aria-label="Note or review" placeholder="Note, root cause or post-incident review" value={text} onChange={(e) => setText(e.target.value)} />

@@ -1,0 +1,66 @@
+◆
+CompanyOS
+development
+Live
+Studio ↗
+Acting as
+Omar Haddad (CEO)
+Maria Chen (CFO)
+Fiona Walsh (Finance Manager)
+Rhea Das (Senior Accountant)
+Priya Nair (Operations Director)
+Pablo Ruiz (Procurement Lead)
+Dana Kim (Product Manager)
+Eli Novak (Engineering Lead)
+Sam Osei (Engineer)
+Ivy Brennan (IT & Security Manager)
+Otto Lind (Agent Operator)
+Vic Moreau (External Auditor)
+System
+Light
+Dark
+COMPANY
+Overview
+Approvals
+Organization
+Work
+BUSINESS OPERATIONS
+Purchasing
+Suppliers
+Finance
+Policies
+Customers
+PRODUCT & ENGINEERING
+Changes
+Releases
+Incidents
+AGENTS
+Agent operations
+Effectiveness
+Evidence explorer
+Otto Lind
+Agent Operations Lead
+Roles: staff, operator, finance
+CR-0001: Deduplicate invoices across channels
+
+requested Application change · requested by Eli Novak · business owner Eli Novak
+
+The change
+
+Same invoice via manual entry and feed is processed twice.
+
+Fixes incident INC-0001: Invoice processing duplicates commitments
+
+Next steps
+→ assessed
+ needs changes.write
+→ rejected
+ needs changes.write
+Evidence from external systems
+No commits, CI runs or deployments recorded. Observations come through the GitHub integration (the Engineering Scribe agent).
+History
+RECORDED
+change.requested
+eli
+just now
+CR-0001 (application): Deduplicate invoices across channels

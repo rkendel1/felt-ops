@@ -35,6 +35,70 @@ export const requestSupplier = app.mutation({
   },
 });
 
+// ───────────── Supplier onboarding (CR: requested by Operations, road-test Scenario 2) ─────────────
+
+const CHECKS = {
+  "tax-id": { permission: "suppliers.write", label: "Tax ID verified (Procurement)" },
+  bank: { permission: "finance.write", label: "Bank details verified (Finance)" },
+  risk: { permission: "org.access", label: "Risk tier reviewed (IT & Security)" },
+} as const;
+
+export const startOnboarding = app.mutation({
+  access: "suppliers.write",
+  args: { supplierId: s.string() },
+  handler: async (ctx, { supplierId }) => {
+    const who = await requirePerson(ctx, "start supplier onboarding");
+    const sup = await ctx.db.get(suppliers, supplierId);
+    if (!sup) fail("NOT_FOUND", `No supplier ${supplierId}.`);
+    if (sup.status !== "requested") fail("FAILED_PRECONDITION", `${sup.name} is ${sup.status}; only a requested supplier starts onboarding.`);
+    await ctx.db.patch(suppliers, supplierId, { status: "onboarding", onboarding: [{ step: "started", by: who.recordId, at: nowIso() }] });
+    await record(ctx, `supplier:${supplierId}`, who, "onboarding.started", `${who.name} started onboarding ${sup.name}.`);
+    return supplierId;
+  },
+});
+
+/** Each check is made by the function that owns it, and recorded with who and when. */
+export const recordCheck = app.mutation({
+  access: "authenticated",
+  args: { supplierId: s.string(), check: s.enum(["tax-id", "bank", "risk"]), value: s.string({ minLength: 2 }), note: s.optional(s.string()) },
+  handler: async (ctx, { supplierId, check, value, note }) => {
+    const who = await requirePerson(ctx, "record an onboarding check");
+    const rule = CHECKS[check];
+    if (!ctx.auth.has(rule.permission)) fail("FORBIDDEN", `${rule.label} needs ${rule.permission}.`);
+    const sup = await ctx.db.get(suppliers, supplierId);
+    if (!sup) fail("NOT_FOUND", `No supplier ${supplierId}.`);
+    if (sup.status !== "onboarding") fail("FAILED_PRECONDITION", `${sup.name} is ${sup.status}, not onboarding.`);
+    const patch: Record<string, unknown> = {};
+    if (check === "tax-id") { if (!/^TX-\d{6}$/.test(value)) fail("INVALID_ARGUMENT", "A tax ID looks like TX-123456."); patch.taxId = value; }
+    if (check === "bank") { if (value !== "verified") fail("INVALID_ARGUMENT", 'Record the bank check as "verified" once the micro-deposit is confirmed.'); patch.bankVerified = true; }
+    if (check === "risk") { if (!["low", "medium", "high"].includes(value)) fail("INVALID_ARGUMENT", "Risk tier is low, medium or high."); patch.riskTier = value; }
+    const steps = [...(sup.onboarding ?? []).filter((x) => x.step !== check), { step: check, by: who.recordId, at: nowIso(), ...(note ? { note } : {}) }];
+    await ctx.db.patch(suppliers, supplierId, { ...patch, onboarding: steps });
+    await record(ctx, `supplier:${supplierId}`, who, "onboarding.check", `${rule.label}: ${value}${note ? ` (${note})` : ""}.`);
+    return supplierId;
+  },
+});
+
+export const decideOnboarding = app.mutation({
+  access: "suppliers.approve",
+  args: { supplierId: s.string(), decision: s.enum(["approved", "rejected"]), note: s.optional(s.string()) },
+  handler: async (ctx, { supplierId, decision, note }) => {
+    const who = await requirePerson(ctx, "decide supplier onboarding");
+    const sup = await ctx.db.get(suppliers, supplierId);
+    if (!sup) fail("NOT_FOUND", `No supplier ${supplierId}.`);
+    if (sup.status !== "onboarding") fail("FAILED_PRECONDITION", `${sup.name} is ${sup.status}, not onboarding.`);
+    if (sup.requestedBy === who.recordId) fail("FORBIDDEN", "The person who requested a supplier cannot approve it.");
+    const done = new Set((sup.onboarding ?? []).map((x) => x.step));
+    const missing = (Object.keys(CHECKS) as Array<keyof typeof CHECKS>).filter((c) => !done.has(c));
+    if (decision === "approved" && missing.length) fail("FAILED_PRECONDITION", `Onboarding is incomplete: ${missing.map((c) => CHECKS[c].label).join(", ")}.`);
+    if (decision === "approved" && sup.riskTier === "high" && !note) fail("INVALID_ARGUMENT", "A high-risk supplier is approved only with a note on the mitigation.");
+    const status = decision === "approved" ? "active" : "rejected";
+    await ctx.db.patch(suppliers, supplierId, { status, onboarding: [...(sup.onboarding ?? []), { step: decision, by: who.recordId, at: nowIso(), ...(note ? { note } : {}) }] });
+    await record(ctx, `supplier:${supplierId}`, who, `onboarding.${decision}`, `${sup.name} ${decision} by ${who.name}${note ? `: ${note}` : ""}.`);
+    return status;
+  },
+});
+
 // ───────────── Purchase requests ─────────────
 
 /** For each step, the first active holder of a covering grant who is not the requester. */

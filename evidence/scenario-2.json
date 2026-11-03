@@ -1,0 +1,130 @@
+{
+  "recordedAt": "2026-11-03T22:52:00.306Z",
+  "change": {
+    "number": "CR-0001",
+    "kind": "application",
+    "title": "Supplier onboarding workflow",
+    "problem": "Requested suppliers can never become active: there is no onboarding, so Operations cannot buy from new suppliers.",
+    "requestedBy": "mw1a8uhn1900883655bc",
+    "businessOwnerId": "mw1a8uhn1900883655bc",
+    "status": "in-development",
+    "requirements": [
+      "Procurement starts onboarding for a requested supplier",
+      "Tax ID, bank and risk checks are each recorded by the owning function",
+      "Procurement approves or rejects; the requester cannot approve"
+    ],
+    "acceptance": [
+      {
+        "text": "A requested supplier cannot be ordered from until onboarding is approved",
+        "met": true,
+        "checkedBy": "mw1a8uhn1900883655bc"
+      },
+      {
+        "text": "Each check records who made it and when",
+        "met": true,
+        "checkedBy": "mw1a8uhn1900883655bc"
+      },
+      {
+        "text": "The requester cannot approve their own supplier",
+        "met": true,
+        "checkedBy": "mw1a8uhn1900883655bc"
+      }
+    ],
+    "impact": "Procurement, Finance and IT & Security each own one check; Operations can order from approved suppliers.",
+    "id": "mw1a8ul8e5c16773b931",
+    "__version": 7
+  },
+  "history": [
+    {
+      "at": "2026-11-03T22:52:00.092Z",
+      "actor": "priya",
+      "source": "platform",
+      "kind": "change.requested",
+      "summary": "CR-0001 (application): Supplier onboarding workflow"
+    },
+    {
+      "at": "2026-11-03T22:52:00.105Z",
+      "actor": "dana",
+      "source": "platform",
+      "kind": "change.assessed",
+      "summary": "requested → assessed by Dana Kim: Blocks two Operations projects.."
+    },
+    {
+      "at": "2026-11-03T22:52:00.115Z",
+      "actor": "dana",
+      "source": "platform",
+      "kind": "change.specified",
+      "summary": "3 requirement(s), 3 acceptance criteria. Impact: Procurement, Finance and IT & Security each own one check; Operations can order from approved suppliers."
+    },
+    {
+      "at": "2026-11-03T22:52:00.123Z",
+      "actor": "eli",
+      "source": "platform",
+      "kind": "change.in-development",
+      "summary": "specified → in-development by Eli Novak."
+    },
+    {
+      "at": "2026-11-03T22:52:00.129Z",
+      "actor": "dana",
+      "source": "assertion",
+      "kind": "evidence.reported",
+      "summary": "Dana Kim reported github commit deadbeef: exists."
+    },
+    {
+      "at": "2026-11-03T22:52:00.283Z",
+      "actor": "priya",
+      "source": "verification",
+      "kind": "acceptance.checked",
+      "summary": "\"A requested supplier cannot be ordered from until onboarding is approved\": met — Checked in the test environment"
+    },
+    {
+      "at": "2026-11-03T22:52:00.289Z",
+      "actor": "priya",
+      "source": "verification",
+      "kind": "acceptance.checked",
+      "summary": "\"Each check records who made it and when\": met — Checked in the test environment"
+    },
+    {
+      "at": "2026-11-03T22:52:00.295Z",
+      "actor": "priya",
+      "source": "verification",
+      "kind": "acceptance.checked",
+      "summary": "\"The requester cannot approve their own supplier\": met — Checked in the test environment"
+    }
+  ],
+  "github": {
+    "reachable": false
+  },
+  "supplier": {
+    "name": "Bluebird Packaging",
+    "status": "active",
+    "onboarding": [
+      {
+        "step": "started",
+        "by": "mw1a8uhn14c5ea4b6b99",
+        "at": "2026-11-03T22:52:00.158Z"
+      },
+      {
+        "step": "tax-id",
+        "by": "mw1a8uhn14c5ea4b6b99",
+        "at": "2026-11-03T22:52:00.166Z"
+      },
+      {
+        "step": "bank",
+        "by": "mw1a8uhn8902ec2ddec5",
+        "at": "2026-11-03T22:52:00.184Z",
+        "note": "Micro-deposit confirmed"
+      },
+      {
+        "step": "risk",
+        "by": "mw1a8uhn5f2893f87f88",
+        "at": "2026-11-03T22:52:00.192Z"
+      },
+      {
+        "step": "approved",
+        "by": "mw1a8uhn14c5ea4b6b99",
+        "at": "2026-11-03T22:52:00.198Z"
+      }
+    ]
+  }
+}

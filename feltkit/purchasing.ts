@@ -5,7 +5,7 @@
 import { fail, s } from "@feltdb/feltkit";
 import { app, authorities, budgets, commitments, invoices, people, purchaseOrders, purchaseRequests, receipts, supplierLinks, suppliers, timeline } from "./app.js";
 import { actor, effectiveVersion, grantFor, money, nextNumber, nowIso, record, requirePerson, stepsFor } from "./_lib.js";
-import { processInvoice } from "./_invoicing.js";
+import { normalizeNumber as normalize, processInvoice } from "./_invoicing.js";
 import { withinAssignment } from "./_scope.js";
 
 const Request = s.doc(purchaseRequests);
@@ -191,7 +191,7 @@ export const ingestInvoices = app.mutation({
       if (seen) { skipped += 1; continue; }
       const out = await processInvoice(ctx, who, { supplierId, number: row.number, amount: row.amount, channel: "supplier-feed", externalId: row.externalId, ...(row.poNumber ? { poNumber: row.poNumber } : {}) });
       imported += 1;
-      if (out.status === "exception") exceptions += 1;
+      if (out.status !== "matched") exceptions += 1;
     }
     if (syncedThrough) {
       const [link] = await ctx.db.find(supplierLinks, { supplierId });
@@ -224,7 +224,6 @@ export const listCommitments = app.query({
   },
 });
 
-const normalize = (n: string) => n.toUpperCase().replace(/[^A-Z0-9]/g, "");
 
 /**
  * Independent reconciliation: computed from records by CompanyOS, never by an agent.

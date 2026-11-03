@@ -12,7 +12,7 @@ import { feltkit, s } from "@feltdb/feltkit";
 
 const BASE = [
   "org.read", "ops.read", "work.read", "work.write", "policy.read", "policy.acknowledge",
-  "purchasing.read", "purchasing.request", "changes.read", "changes.request", "incidents.read",
+  "purchasing.read", "purchasing.request", "purchasing.approve", "changes.read", "changes.request", "incidents.read",
   "agents.read", "feltkit.agent.read", "notifications.*", "files.read",
 ];
 

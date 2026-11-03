@@ -1,0 +1,181 @@
+{
+  "recordedAt": "2026-11-03T22:50:05.649Z",
+  "r1Commit": "171b6e3b9a9e1452f59713ef77c5d0203e4f3d07",
+  "duplicatesInR1": [
+    {
+      "commitmentId": "mw1a6dtvc0b5d43f1ac3",
+      "invoiceId": "mw1a6dtu19a2407236f8",
+      "keeps": "mw1a6dtd300bbc2121e8",
+      "amount": 4800,
+      "number": "nw7781"
+    },
+    {
+      "commitmentId": "mw1a6dtw0e3d79381f01",
+      "invoiceId": "mw1a6dtwc632e5993f96",
+      "keeps": "mw1a6dtjc5b5e756ffd3",
+      "amount": 3150,
+      "number": "NW 7790"
+    }
+  ],
+  "heldByFix": {
+    "imported": 1,
+    "skipped": 0,
+    "exceptions": 1
+  },
+  "incident": {
+    "number": "INC-0001",
+    "title": "Invoice processing duplicates commitments",
+    "severity": "sev2",
+    "status": "reviewed",
+    "process": "invoice-processing",
+    "businessImpact": "2 duplicate commitments overstate Finance spend by 7950.00",
+    "affected": [
+      {
+        "collection": "commitments",
+        "id": "mw1a6dtvc0b5d43f1ac3"
+      },
+      {
+        "collection": "commitments",
+        "id": "mw1a6dtw0e3d79381f01"
+      }
+    ],
+    "detectedBy": "agent-sentry",
+    "openedAt": "2026-11-03T22:50:05.304Z",
+    "ownerId": "mw1a6doh5ae29b87cd78",
+    "rootCause": "Manual entry and the supplier feed deduplicate only within their own channel; invoice numbers are not normalized.",
+    "changeId": "mw1a6e1pb57928327e7d",
+    "verification": {
+      "ok": true,
+      "by": "mw1a6doh5ae29b87cd78",
+      "at": "2026-11-03T22:50:05.630Z",
+      "method": "check:invoice-processing",
+      "summary": "0 duplicate commitment(s) ($0.00), 0 over-committed PO(s)"
+    },
+    "review": "Cause: per-channel deduplication. Fix: cross-channel normalized check (current release). Two duplicate commitments (7,950.00) reversed with Finance approval; one wrong proposal refused by the duplicate rule.",
+    "id": "mw1a6e0pc18df050e9fa",
+    "__version": 5
+  },
+  "incidentTimeline": [
+    {
+      "at": "2026-11-03T22:50:05.305Z",
+      "actor": "agent-sentry",
+      "source": "platform",
+      "kind": "incident.opened",
+      "summary": "INC-0001 sev2: Invoice processing duplicates commitments. 2 record(s) affected."
+    },
+    {
+      "at": "2026-11-03T22:50:05.318Z",
+      "actor": "agent-sentry",
+      "source": "assertion",
+      "kind": "detected.again",
+      "summary": "Integration Sentry reported it again: Duplicates again"
+    },
+    {
+      "at": "2026-11-03T22:50:05.330Z",
+      "actor": "eli",
+      "source": "platform",
+      "kind": "incident.updated",
+      "summary": "status → investigating, ownerId → mw1a6doh5ae29b87cd78, rootCause → Manual entry and the supplier feed deduplicate only within their own channel; invoice numbers are not normalized."
+    },
+    {
+      "at": "2026-11-03T22:50:05.341Z",
+      "actor": "eli",
+      "source": "platform",
+      "kind": "change.linked",
+      "summary": "Engineering change CR-0001 opened."
+    },
+    {
+      "at": "2026-11-03T22:50:05.348Z",
+      "actor": "eli",
+      "source": "platform",
+      "kind": "incident.updated",
+      "summary": "changeId → mw1a6e1pb57928327e7d"
+    },
+    {
+      "at": "2026-11-03T22:50:05.504Z",
+      "actor": "agent-ledger",
+      "source": "platform",
+      "kind": "remediation.step",
+      "summary": "Reversed duplicate commitment mw1a6dtvc0b5d43f1ac3 ($4,800.00)."
+    },
+    {
+      "at": "2026-11-03T22:50:05.548Z",
+      "actor": "agent-ledger",
+      "source": "platform",
+      "kind": "remediation.step",
+      "summary": "Reversed duplicate commitment mw1a6dtw0e3d79381f01 ($3,150.00)."
+    },
+    {
+      "at": "2026-11-03T22:50:05.630Z",
+      "actor": "eli",
+      "source": "verification",
+      "kind": "incident.resolved",
+      "summary": "Resolved. 0 duplicate commitment(s) ($0.00), 0 over-committed PO(s)."
+    },
+    {
+      "at": "2026-11-03T22:50:05.641Z",
+      "actor": "eli",
+      "source": "platform",
+      "kind": "incident.reviewed",
+      "summary": "Cause: per-channel deduplication. Fix: cross-channel normalized check (current release). Two duplicate commitments (7,950.00) reversed with Finance approval; one wrong proposal refused by the duplicate rule."
+    }
+  ],
+  "feltkitActions": [
+    {
+      "actionId": "act-d25f9e16947d4b139285",
+      "capability": "commitments.reverse",
+      "state": "succeeded",
+      "proposedBy": "agent:agent-ledger",
+      "decidedBy": "user:rhea",
+      "executedAs": "agent:agent-ledger",
+      "determinedBy": "dispatch"
+    },
+    {
+      "actionId": "act-d76d85b4aa1b4b5892fc",
+      "capability": "commitments.reverse",
+      "state": "succeeded",
+      "proposedBy": "agent:agent-ledger",
+      "decidedBy": "user:maria",
+      "executedAs": "agent:agent-ledger",
+      "determinedBy": "dispatch"
+    },
+    {
+      "actionId": "act-dbfa260602d14005a217",
+      "capability": "commitments.reverse",
+      "state": "failed",
+      "proposedBy": "agent:agent-ledger",
+      "decidedBy": "user:fiona",
+      "executedAs": "agent:agent-ledger",
+      "determinedBy": "dispatch",
+      "error": "The reconciliation does not identify this commitment as a duplicate; it cannot be reversed here."
+    }
+  ],
+  "checkpoints": 11,
+  "verification": {
+    "ok": true,
+    "by": "mw1a6doi1356485d1238",
+    "at": "2026-11-03T22:50:05.619Z",
+    "method": "finance.reconciliation computed by CompanyOS",
+    "detail": {
+      "duplicates": 0,
+      "overCommitted": 0,
+      "openCommitments": 32,
+      "openTotal": 239516.73000000004
+    }
+  },
+  "resolved": {
+    "ok": true,
+    "by": "mw1a6doh5ae29b87cd78",
+    "at": "2026-11-03T22:50:05.630Z",
+    "method": "check:invoice-processing",
+    "summary": "0 duplicate commitment(s) ($0.00), 0 over-committed PO(s)"
+  },
+  "reconciliationAfter": {
+    "openCommitments": 32,
+    "openTotal": 239516.73000000004,
+    "duplicates": [],
+    "duplicateTotal": 0,
+    "overCommitted": []
+  },
+  "syncAssignment": "mw1a6dt5a75e1555a45f"
+}

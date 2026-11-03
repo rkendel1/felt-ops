@@ -1,0 +1,163 @@
+{
+  "recordedAt": "2026-11-03T22:47:46.859Z",
+  "change": {
+    "number": "CR-0001",
+    "kind": "config",
+    "title": "Purchasing approval thresholds: version 2",
+    "problem": "Audit finding AF-12: approvals above 10k need an executive.",
+    "requestedBy": "mw1a3ewed6e98815efea",
+    "businessOwnerId": "mw1a3ewed6e98815efea",
+    "status": "verified",
+    "requirements": [],
+    "acceptance": [
+      {
+        "text": "New requests follow the new rules from the effective date; earlier requests keep theirs.",
+        "met": true,
+        "checkedBy": "mw1a3ewed6e98815efea"
+      }
+    ],
+    "policyVersionId": "mw1a3f252f555a3dcd4c",
+    "id": "mw1a3f256b748f86d344",
+    "__version": 3
+  },
+  "impact": {
+    "changedAmounts": [
+      4999,
+      5000,
+      12000,
+      24999,
+      25000
+    ],
+    "comparison": [
+      {
+        "amount": 500,
+        "current": [
+          "Department manager"
+        ],
+        "proposed": [
+          "Department manager"
+        ]
+      },
+      {
+        "amount": 4999,
+        "current": [
+          "Department manager"
+        ],
+        "proposed": [
+          "Department manager",
+          "Finance"
+        ]
+      },
+      {
+        "amount": 5000,
+        "current": [
+          "Department manager"
+        ],
+        "proposed": [
+          "Department manager",
+          "Finance"
+        ]
+      },
+      {
+        "amount": 12000,
+        "current": [
+          "Department manager",
+          "Finance"
+        ],
+        "proposed": [
+          "Department manager",
+          "Finance",
+          "Executive"
+        ]
+      },
+      {
+        "amount": 24999,
+        "current": [
+          "Department manager",
+          "Finance"
+        ],
+        "proposed": [
+          "Department manager",
+          "Finance",
+          "Executive"
+        ]
+      },
+      {
+        "amount": 25000,
+        "current": [
+          "Department manager",
+          "Finance"
+        ],
+        "proposed": [
+          "Department manager",
+          "Finance",
+          "Executive"
+        ]
+      },
+      {
+        "amount": 60000,
+        "current": [
+          "Department manager",
+          "Finance",
+          "Executive"
+        ],
+        "proposed": [
+          "Department manager",
+          "Finance",
+          "Executive"
+        ]
+      },
+      {
+        "amount": 150000,
+        "current": [
+          "Department manager",
+          "Finance",
+          "Executive"
+        ],
+        "proposed": [
+          "Department manager",
+          "Finance",
+          "Executive"
+        ]
+      }
+    ]
+  },
+  "before": "Department manager → Finance",
+  "afterAt12000": "Department manager → Finance → Executive",
+  "afterAt3000": "Department manager → Finance",
+  "verification": {
+    "ok": true,
+    "by": "mw1a3ewed6e98815efea",
+    "at": "2026-11-03T22:47:46.845Z",
+    "inForceVersion": 2,
+    "requestsChecked": 2,
+    "requestNumbers": [
+      "PR-0042",
+      "PR-0043"
+    ],
+    "problems": []
+  },
+  "history": [
+    {
+      "at": "2026-11-03T22:47:46.686Z",
+      "actor": "fiona",
+      "source": "platform",
+      "kind": "change.requested",
+      "summary": "Configuration change for purchasing.approval v2."
+    },
+    {
+      "at": "2026-11-03T22:47:46.755Z",
+      "actor": "maria",
+      "source": "platform",
+      "kind": "change.approved",
+      "summary": "Approved by Maria Chen: Agreed with audit.."
+    },
+    {
+      "at": "2026-11-03T22:47:46.848Z",
+      "actor": "fiona",
+      "source": "verification",
+      "kind": "change.verified",
+      "summary": "Verified: 2 request(s) since 2026-11-03T22:47:46.754Z follow v2."
+    }
+  ]
+}

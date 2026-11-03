@@ -46,7 +46,7 @@ test("scenario 2: supplier onboarding goes from a business request to accepted s
     if (sha && (await githubReachable())) {
       const scribe = principal("agent-scribe");
       await session(t, "agent-scribe");
-      await t.as("eli").mutation(api.agents.assign, { agentKey: "agent-scribe", title: `Collect GitHub evidence for ${change.number}`, objective: "Observe the implementing commit and its CI runs on GitHub.", context: `Commit ${sha}`, constraints: ["Observe only"], expectedOutput: "Commit and CI run recorded on the change.", permittedCapabilities: ["github.commit", "github.runs"], approvalRequired: false, verifier: "manual" });
+      await t.as("otto").mutation(api.agents.assign, { agentKey: "agent-scribe", title: `Collect GitHub evidence for ${change.number}`, objective: "Observe the implementing commit and its CI runs on GitHub.", context: `Commit ${sha}`, constraints: ["Observe only"], expectedOutput: "Commit and CI run recorded on the change.", permittedCapabilities: ["github.commit", "github.runs"], approvalRequired: false, verifier: "manual" });
       const task = await t.runtime.agent.createTask({ objective: `Evidence for ${change.number}`, principal: scribe });
       const taskId = task.task.task_id;
       await t.runtime.agent.propose(taskId, { capability: "github.commit", input: { ...REPO, sha, subject: `change:${change.id}` }, reason: "the implementing commit" }, scribe);

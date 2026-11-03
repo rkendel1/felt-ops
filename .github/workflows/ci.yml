@@ -22,6 +22,8 @@ jobs:
       - run: npm run typecheck
       - run: npm test
       - run: npm run build
+      - name: Scenario 6 live (real agent processes over MCP, crash and recovery)
+        run: npm run scenario:6-live
       - name: Scenario 7 (platform upgrade from FeltKit 0.3.12 + FeltDB 0.20.0)
         run: npm run scenario:7
       - name: Upload scenario evidence

@@ -1,0 +1,81 @@
+{
+  "recordedAt": "2026-11-03T23:01:38.188Z",
+  "r1Commit": "171b6e3b9a9e1452f59713ef77c5d0203e4f3d07",
+  "server": "http://localhost:32835",
+  "approvedBeforeCrash": 2,
+  "firstAgent": {
+    "exitCode": 137,
+    "log": [
+      "[agent 2026-11-03T23:01:36.283Z] connected to http://localhost:32835: 36 tools",
+      "[agent 2026-11-03T23:01:36.306Z] working AS-0002 (assigned): Reverse four duplicate Northwind commitments",
+      "[agent 2026-11-03T23:01:36.372Z] accepted with FeltKit task task-a111d5b6-5c4f-40c0-90e7-a8d09942bee1",
+      "[agent 2026-11-03T23:01:36.461Z] 4 duplicate(s); 4 reversal(s) proposed",
+      "[agent 2026-11-03T23:01:36.785Z] FAULT INJECTION: exiting abruptly after 2 succeeded action(s)"
+    ]
+  },
+  "sessionsRevoked": 1,
+  "revokedTokenStatus": 401,
+  "operatorView": {
+    "assignmentStatus": "waiting-approval",
+    "lastAgentStatement": "4 reversal(s) proposed; waiting for Finance approval.",
+    "feltkitActions": [
+      "succeeded",
+      "succeeded",
+      "proposed",
+      "proposed"
+    ],
+    "recordsCheck": {
+      "ok": false,
+      "method": "finance.reconciliation computed by CompanyOS",
+      "detail": {
+        "duplicates": 2,
+        "overCommitted": 2,
+        "openCommitments": 36,
+        "openTotal": 240316.73000000004
+      }
+    }
+  },
+  "approvedAfterRecovery": 2,
+  "secondAgent": {
+    "exitCode": 0,
+    "log": [
+      "[agent 2026-11-03T23:01:37.616Z] connected to http://localhost:32835: 36 tools",
+      "[agent 2026-11-03T23:01:37.628Z] working AS-0003 (assigned): Reverse four duplicate Northwind commitments",
+      "[agent 2026-11-03T23:01:37.672Z] accepted with FeltKit task task-4ec79fad-40f3-4e07-be5c-ced9355f9f9a",
+      "[agent 2026-11-03T23:01:37.711Z] 2 duplicate(s); 2 reversal(s) proposed",
+      "[agent 2026-11-03T23:01:38.105Z] done: No duplicates remain; this task executed 2 reversal(s)."
+    ]
+  },
+  "verification": {
+    "ok": true,
+    "by": "mw1al5o982d01c43dcf9",
+    "at": "2026-11-03T23:01:38.144Z",
+    "method": "finance.reconciliation computed by CompanyOS",
+    "detail": {
+      "duplicates": 0,
+      "overCommitted": 0,
+      "openCommitments": 34,
+      "openTotal": 237066.73000000004
+    }
+  },
+  "reversed": [
+    {
+      "id": "mw1al6458b99b8c3ffd4",
+      "by": "agent-ledger"
+    },
+    {
+      "id": "mw1al6481aebcaae137e",
+      "by": "agent-ledger"
+    },
+    {
+      "id": "mw1al64aeda5d641e640",
+      "by": "agent-ledger-2"
+    },
+    {
+      "id": "mw1al64c8b08be4076b5",
+      "by": "agent-ledger-2"
+    }
+  ],
+  "exactlyOnce": true,
+  "ok": true
+}

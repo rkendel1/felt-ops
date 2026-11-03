@@ -12,7 +12,9 @@
     "deploy": "feltkit deploy",
     "typecheck": "tsc --noEmit",
     "scenario:7": "tsx scripts/scenario-7-platform-upgrade.ts",
-    "supplier-api": "tsx tools/supplier-api.ts"
+    "supplier-api": "tsx tools/supplier-api.ts",
+    "scenario:6-live": "tsx scripts/scenario-6-live.ts",
+    "agent": "tsx agents/runner.ts"
   },
   "dependencies": {
     "@feltdb/feltkit": "^0.3.13",

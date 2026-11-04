@@ -109,6 +109,16 @@ way back to v1, in case it is ever needed. It is not recommended.
 
 **Plan: a corrected v3** (not authorized; each gate is a separate decision)
 
+> **Progress (2026-11-04):**
+> - Steps 1–4 are done. All three preconditions are met.
+> - v3 is generated with FeltKit 0.3.14 (67 collections, 70 indexes, 21 unique).
+> - v3 is **staged** as revision 3 (`sha256:370cc21b…`).
+> - Production is **still v2**.
+> - The diff from v2 is BREAKING, `diff_hash sha256:2ef5d9c0ed24d39962b8ffbd08128212d8fc608f6d2537303cf5f3e98fd00024`.
+>   It has 29 destructive operations and 26 added security-sensitive policies.
+> - Evidence: `evidence/managed-feltdb/companyos-v3-staged-2026-11-04.md`.
+> - Step 5 (approval of that exact diff) is pending.
+
 1. Preconditions:
    - F-048 is released in FeltKit;
    - the live service reports a commit containing `85a869c`

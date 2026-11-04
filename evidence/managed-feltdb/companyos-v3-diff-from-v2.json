@@ -1,0 +1,1538 @@
+{
+  "application_id": "app_VdI0HIgo0jINzwhFSs",
+  "changes": [
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "agents",
+      "safety": "REQUIRES_MIGRATION",
+      "section": "collections"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "assignments",
+      "safety": "REQUIRES_MIGRATION",
+      "section": "collections"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "authorities",
+      "safety": "REQUIRES_MIGRATION",
+      "section": "collections"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "budgets",
+      "safety": "REQUIRES_MIGRATION",
+      "section": "collections"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "changes",
+      "safety": "REQUIRES_MIGRATION",
+      "section": "collections"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "commitments",
+      "safety": "REQUIRES_MIGRATION",
+      "section": "collections"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "contracts",
+      "safety": "REQUIRES_MIGRATION",
+      "section": "collections"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "customerIssues",
+      "safety": "REQUIRES_MIGRATION",
+      "section": "collections"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "customers",
+      "safety": "REQUIRES_MIGRATION",
+      "section": "collections"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "departments",
+      "safety": "REQUIRES_MIGRATION",
+      "section": "collections"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "externalRefs",
+      "safety": "REQUIRES_MIGRATION",
+      "section": "collections"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "incidents",
+      "safety": "REQUIRES_MIGRATION",
+      "section": "collections"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "invoices",
+      "safety": "REQUIRES_MIGRATION",
+      "section": "collections"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "people",
+      "safety": "REQUIRES_MIGRATION",
+      "section": "collections"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "policies",
+      "safety": "REQUIRES_MIGRATION",
+      "section": "collections"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "policyAcks",
+      "safety": "REQUIRES_MIGRATION",
+      "section": "collections"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "policyVersions",
+      "safety": "REQUIRES_MIGRATION",
+      "section": "collections"
+    },
+    {
+      "detail": null,
+      "kind": "modified",
+      "name": "projects",
+      "safety": "REQUIRES_MIGRATION",
+      "section": "collections"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "purchaseOrders",
+      "safety": "REQUIRES_MIGRATION",
+      "section": "collections"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "purchaseRequests",
+      "safety": "REQUIRES_MIGRATION",
+      "section": "collections"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "receipts",
+      "safety": "REQUIRES_MIGRATION",
+      "section": "collections"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "releases",
+      "safety": "REQUIRES_MIGRATION",
+      "section": "collections"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "supplierLinks",
+      "safety": "REQUIRES_MIGRATION",
+      "section": "collections"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "suppliers",
+      "safety": "REQUIRES_MIGRATION",
+      "section": "collections"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "teams",
+      "safety": "REQUIRES_MIGRATION",
+      "section": "collections"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "timeline",
+      "safety": "REQUIRES_MIGRATION",
+      "section": "collections"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "workItems",
+      "safety": "REQUIRES_MIGRATION",
+      "section": "collections"
+    },
+    {
+      "detail": "resource removal requires explicit destructive-change approval",
+      "kind": "removed",
+      "name": "tasks",
+      "safety": "BREAKING",
+      "section": "collections"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "agents_key_unique",
+      "safety": "SAFE",
+      "section": "indexes"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "assignments_agentKey_status",
+      "safety": "SAFE",
+      "section": "indexes"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "assignments_number_unique",
+      "safety": "SAFE",
+      "section": "indexes"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "assignments_status",
+      "safety": "SAFE",
+      "section": "indexes"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "authorities_holderId_status",
+      "safety": "SAFE",
+      "section": "indexes"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "authorities_kind_status",
+      "safety": "SAFE",
+      "section": "indexes"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "budgets_departmentId_fiscalYear_unique",
+      "safety": "SAFE",
+      "section": "indexes"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "changes_kind_status",
+      "safety": "SAFE",
+      "section": "indexes"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "changes_number_unique",
+      "safety": "SAFE",
+      "section": "indexes"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "commitments_invoiceId",
+      "safety": "SAFE",
+      "section": "indexes"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "commitments_poId",
+      "safety": "SAFE",
+      "section": "indexes"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "contracts_customerId",
+      "safety": "SAFE",
+      "section": "indexes"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "customers_name_unique",
+      "safety": "SAFE",
+      "section": "indexes"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "departments_code_unique",
+      "safety": "SAFE",
+      "section": "indexes"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "externalRefs_subject",
+      "safety": "SAFE",
+      "section": "indexes"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "incidents_number_unique",
+      "safety": "SAFE",
+      "section": "indexes"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "invoices_poId",
+      "safety": "SAFE",
+      "section": "indexes"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "invoices_supplierId_number",
+      "safety": "SAFE",
+      "section": "indexes"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "people_departmentId",
+      "safety": "SAFE",
+      "section": "indexes"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "people_email_unique",
+      "safety": "SAFE",
+      "section": "indexes"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "people_login_unique",
+      "safety": "SAFE",
+      "section": "indexes"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "people_status",
+      "safety": "SAFE",
+      "section": "indexes"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "policies_key_unique",
+      "safety": "SAFE",
+      "section": "indexes"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "policyAcks_policyVersionId_personId_unique",
+      "safety": "SAFE",
+      "section": "indexes"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "policyVersions_policyId_version_unique",
+      "safety": "SAFE",
+      "section": "indexes"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "projects_name_unique",
+      "safety": "SAFE",
+      "section": "indexes"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "purchaseOrders_number_unique",
+      "safety": "SAFE",
+      "section": "indexes"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "purchaseOrders_requestId_unique",
+      "safety": "SAFE",
+      "section": "indexes"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "purchaseRequests_number_unique",
+      "safety": "SAFE",
+      "section": "indexes"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "purchaseRequests_status",
+      "safety": "SAFE",
+      "section": "indexes"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "releases_version_unique",
+      "safety": "SAFE",
+      "section": "indexes"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "supplierLinks_supplierId_unique",
+      "safety": "SAFE",
+      "section": "indexes"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "suppliers_name_unique",
+      "safety": "SAFE",
+      "section": "indexes"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "teams_name_unique",
+      "safety": "SAFE",
+      "section": "indexes"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "timeline_actorId",
+      "safety": "SAFE",
+      "section": "indexes"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "timeline_subject",
+      "safety": "SAFE",
+      "section": "indexes"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "timeline_subject_seq_unique",
+      "safety": "SAFE",
+      "section": "indexes"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "workItems_assigneeId",
+      "safety": "SAFE",
+      "section": "indexes"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "workItems_projectId",
+      "safety": "SAFE",
+      "section": "indexes"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "agents",
+      "safety": "SECURITY_SENSITIVE",
+      "section": "policies"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "assignments",
+      "safety": "SECURITY_SENSITIVE",
+      "section": "policies"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "authorities",
+      "safety": "SECURITY_SENSITIVE",
+      "section": "policies"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "budgets",
+      "safety": "SECURITY_SENSITIVE",
+      "section": "policies"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "changes",
+      "safety": "SECURITY_SENSITIVE",
+      "section": "policies"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "commitments",
+      "safety": "SECURITY_SENSITIVE",
+      "section": "policies"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "contracts",
+      "safety": "SECURITY_SENSITIVE",
+      "section": "policies"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "customerIssues",
+      "safety": "SECURITY_SENSITIVE",
+      "section": "policies"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "customers",
+      "safety": "SECURITY_SENSITIVE",
+      "section": "policies"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "departments",
+      "safety": "SECURITY_SENSITIVE",
+      "section": "policies"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "externalRefs",
+      "safety": "SECURITY_SENSITIVE",
+      "section": "policies"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "incidents",
+      "safety": "SECURITY_SENSITIVE",
+      "section": "policies"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "invoices",
+      "safety": "SECURITY_SENSITIVE",
+      "section": "policies"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "people",
+      "safety": "SECURITY_SENSITIVE",
+      "section": "policies"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "policies",
+      "safety": "SECURITY_SENSITIVE",
+      "section": "policies"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "policyAcks",
+      "safety": "SECURITY_SENSITIVE",
+      "section": "policies"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "policyVersions",
+      "safety": "SECURITY_SENSITIVE",
+      "section": "policies"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "purchaseOrders",
+      "safety": "SECURITY_SENSITIVE",
+      "section": "policies"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "purchaseRequests",
+      "safety": "SECURITY_SENSITIVE",
+      "section": "policies"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "receipts",
+      "safety": "SECURITY_SENSITIVE",
+      "section": "policies"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "releases",
+      "safety": "SECURITY_SENSITIVE",
+      "section": "policies"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "supplierLinks",
+      "safety": "SECURITY_SENSITIVE",
+      "section": "policies"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "suppliers",
+      "safety": "SECURITY_SENSITIVE",
+      "section": "policies"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "teams",
+      "safety": "SECURITY_SENSITIVE",
+      "section": "policies"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "timeline",
+      "safety": "SECURITY_SENSITIVE",
+      "section": "policies"
+    },
+    {
+      "detail": null,
+      "kind": "added",
+      "name": "workItems",
+      "safety": "SECURITY_SENSITIVE",
+      "section": "policies"
+    },
+    {
+      "detail": "resource removal requires explicit destructive-change approval",
+      "kind": "removed",
+      "name": "tasks",
+      "safety": "BREAKING",
+      "section": "policies"
+    }
+  ],
+  "classification": "BREAKING",
+  "compatibility": "breaking",
+  "diff_hash": "sha256:2ef5d9c0ed24d39962b8ffbd08128212d8fc608f6d2537303cf5f3e98fd00024",
+  "from_revision": "apprev://tenant_m174odKLypm5X0jB88/app_VdI0HIgo0jINzwhFSs/sha256:d4a01cf926ef923382bd4899f16cbccf40a2014dee1c179e9094f077a451383f",
+  "migration_plan": {
+    "destructive_operations": [
+      {
+        "destructive": true,
+        "operation": "add",
+        "resource": "agents",
+        "section": "collections"
+      },
+      {
+        "destructive": true,
+        "operation": "add",
+        "resource": "assignments",
+        "section": "collections"
+      },
+      {
+        "destructive": true,
+        "operation": "add",
+        "resource": "authorities",
+        "section": "collections"
+      },
+      {
+        "destructive": true,
+        "operation": "add",
+        "resource": "budgets",
+        "section": "collections"
+      },
+      {
+        "destructive": true,
+        "operation": "add",
+        "resource": "changes",
+        "section": "collections"
+      },
+      {
+        "destructive": true,
+        "operation": "add",
+        "resource": "commitments",
+        "section": "collections"
+      },
+      {
+        "destructive": true,
+        "operation": "add",
+        "resource": "contracts",
+        "section": "collections"
+      },
+      {
+        "destructive": true,
+        "operation": "add",
+        "resource": "customerIssues",
+        "section": "collections"
+      },
+      {
+        "destructive": true,
+        "operation": "add",
+        "resource": "customers",
+        "section": "collections"
+      },
+      {
+        "destructive": true,
+        "operation": "add",
+        "resource": "departments",
+        "section": "collections"
+      },
+      {
+        "destructive": true,
+        "operation": "add",
+        "resource": "externalRefs",
+        "section": "collections"
+      },
+      {
+        "destructive": true,
+        "operation": "add",
+        "resource": "incidents",
+        "section": "collections"
+      },
+      {
+        "destructive": true,
+        "operation": "add",
+        "resource": "invoices",
+        "section": "collections"
+      },
+      {
+        "destructive": true,
+        "operation": "add",
+        "resource": "people",
+        "section": "collections"
+      },
+      {
+        "destructive": true,
+        "operation": "add",
+        "resource": "policies",
+        "section": "collections"
+      },
+      {
+        "destructive": true,
+        "operation": "add",
+        "resource": "policyAcks",
+        "section": "collections"
+      },
+      {
+        "destructive": true,
+        "operation": "add",
+        "resource": "policyVersions",
+        "section": "collections"
+      },
+      {
+        "destructive": true,
+        "operation": "alter",
+        "resource": "projects",
+        "section": "collections"
+      },
+      {
+        "destructive": true,
+        "operation": "add",
+        "resource": "purchaseOrders",
+        "section": "collections"
+      },
+      {
+        "destructive": true,
+        "operation": "add",
+        "resource": "purchaseRequests",
+        "section": "collections"
+      },
+      {
+        "destructive": true,
+        "operation": "add",
+        "resource": "receipts",
+        "section": "collections"
+      },
+      {
+        "destructive": true,
+        "operation": "add",
+        "resource": "releases",
+        "section": "collections"
+      },
+      {
+        "destructive": true,
+        "operation": "add",
+        "resource": "supplierLinks",
+        "section": "collections"
+      },
+      {
+        "destructive": true,
+        "operation": "add",
+        "resource": "suppliers",
+        "section": "collections"
+      },
+      {
+        "destructive": true,
+        "operation": "add",
+        "resource": "teams",
+        "section": "collections"
+      },
+      {
+        "destructive": true,
+        "operation": "add",
+        "resource": "timeline",
+        "section": "collections"
+      },
+      {
+        "destructive": true,
+        "operation": "add",
+        "resource": "workItems",
+        "section": "collections"
+      },
+      {
+        "destructive": true,
+        "operation": "remove",
+        "resource": "tasks",
+        "section": "collections"
+      },
+      {
+        "destructive": true,
+        "operation": "remove",
+        "resource": "tasks",
+        "section": "policies"
+      }
+    ],
+    "from_revision": "apprev://tenant_m174odKLypm5X0jB88/app_VdI0HIgo0jINzwhFSs/sha256:d4a01cf926ef923382bd4899f16cbccf40a2014dee1c179e9094f077a451383f",
+    "operations": [
+      {
+        "destructive": true,
+        "operation": "add",
+        "resource": "agents",
+        "section": "collections"
+      },
+      {
+        "destructive": true,
+        "operation": "add",
+        "resource": "assignments",
+        "section": "collections"
+      },
+      {
+        "destructive": true,
+        "operation": "add",
+        "resource": "authorities",
+        "section": "collections"
+      },
+      {
+        "destructive": true,
+        "operation": "add",
+        "resource": "budgets",
+        "section": "collections"
+      },
+      {
+        "destructive": true,
+        "operation": "add",
+        "resource": "changes",
+        "section": "collections"
+      },
+      {
+        "destructive": true,
+        "operation": "add",
+        "resource": "commitments",
+        "section": "collections"
+      },
+      {
+        "destructive": true,
+        "operation": "add",
+        "resource": "contracts",
+        "section": "collections"
+      },
+      {
+        "destructive": true,
+        "operation": "add",
+        "resource": "customerIssues",
+        "section": "collections"
+      },
+      {
+        "destructive": true,
+        "operation": "add",
+        "resource": "customers",
+        "section": "collections"
+      },
+      {
+        "destructive": true,
+        "operation": "add",
+        "resource": "departments",
+        "section": "collections"
+      },
+      {
+        "destructive": true,
+        "operation": "add",
+        "resource": "externalRefs",
+        "section": "collections"
+      },
+      {
+        "destructive": true,
+        "operation": "add",
+        "resource": "incidents",
+        "section": "collections"
+      },
+      {
+        "destructive": true,
+        "operation": "add",
+        "resource": "invoices",
+        "section": "collections"
+      },
+      {
+        "destructive": true,
+        "operation": "add",
+        "resource": "people",
+        "section": "collections"
+      },
+      {
+        "destructive": true,
+        "operation": "add",
+        "resource": "policies",
+        "section": "collections"
+      },
+      {
+        "destructive": true,
+        "operation": "add",
+        "resource": "policyAcks",
+        "section": "collections"
+      },
+      {
+        "destructive": true,
+        "operation": "add",
+        "resource": "policyVersions",
+        "section": "collections"
+      },
+      {
+        "destructive": true,
+        "operation": "alter",
+        "resource": "projects",
+        "section": "collections"
+      },
+      {
+        "destructive": true,
+        "operation": "add",
+        "resource": "purchaseOrders",
+        "section": "collections"
+      },
+      {
+        "destructive": true,
+        "operation": "add",
+        "resource": "purchaseRequests",
+        "section": "collections"
+      },
+      {
+        "destructive": true,
+        "operation": "add",
+        "resource": "receipts",
+        "section": "collections"
+      },
+      {
+        "destructive": true,
+        "operation": "add",
+        "resource": "releases",
+        "section": "collections"
+      },
+      {
+        "destructive": true,
+        "operation": "add",
+        "resource": "supplierLinks",
+        "section": "collections"
+      },
+      {
+        "destructive": true,
+        "operation": "add",
+        "resource": "suppliers",
+        "section": "collections"
+      },
+      {
+        "destructive": true,
+        "operation": "add",
+        "resource": "teams",
+        "section": "collections"
+      },
+      {
+        "destructive": true,
+        "operation": "add",
+        "resource": "timeline",
+        "section": "collections"
+      },
+      {
+        "destructive": true,
+        "operation": "add",
+        "resource": "workItems",
+        "section": "collections"
+      },
+      {
+        "destructive": true,
+        "operation": "remove",
+        "resource": "tasks",
+        "section": "collections"
+      },
+      {
+        "destructive": true,
+        "operation": "remove",
+        "resource": "tasks",
+        "section": "policies"
+      }
+    ],
+    "reversible": false,
+    "to_revision": "apprev://tenant_m174odKLypm5X0jB88/app_VdI0HIgo0jINzwhFSs/sha256:370cc21b53aec837048e6bb038e016b11f7cc8d175db544f0f9d70b4e7d32162"
+  },
+  "migrations": [
+    {
+      "destructive": true,
+      "operation": "add",
+      "resource": "agents",
+      "section": "collections"
+    },
+    {
+      "destructive": true,
+      "operation": "add",
+      "resource": "assignments",
+      "section": "collections"
+    },
+    {
+      "destructive": true,
+      "operation": "add",
+      "resource": "authorities",
+      "section": "collections"
+    },
+    {
+      "destructive": true,
+      "operation": "add",
+      "resource": "budgets",
+      "section": "collections"
+    },
+    {
+      "destructive": true,
+      "operation": "add",
+      "resource": "changes",
+      "section": "collections"
+    },
+    {
+      "destructive": true,
+      "operation": "add",
+      "resource": "commitments",
+      "section": "collections"
+    },
+    {
+      "destructive": true,
+      "operation": "add",
+      "resource": "contracts",
+      "section": "collections"
+    },
+    {
+      "destructive": true,
+      "operation": "add",
+      "resource": "customerIssues",
+      "section": "collections"
+    },
+    {
+      "destructive": true,
+      "operation": "add",
+      "resource": "customers",
+      "section": "collections"
+    },
+    {
+      "destructive": true,
+      "operation": "add",
+      "resource": "departments",
+      "section": "collections"
+    },
+    {
+      "destructive": true,
+      "operation": "add",
+      "resource": "externalRefs",
+      "section": "collections"
+    },
+    {
+      "destructive": true,
+      "operation": "add",
+      "resource": "incidents",
+      "section": "collections"
+    },
+    {
+      "destructive": true,
+      "operation": "add",
+      "resource": "invoices",
+      "section": "collections"
+    },
+    {
+      "destructive": true,
+      "operation": "add",
+      "resource": "people",
+      "section": "collections"
+    },
+    {
+      "destructive": true,
+      "operation": "add",
+      "resource": "policies",
+      "section": "collections"
+    },
+    {
+      "destructive": true,
+      "operation": "add",
+      "resource": "policyAcks",
+      "section": "collections"
+    },
+    {
+      "destructive": true,
+      "operation": "add",
+      "resource": "policyVersions",
+      "section": "collections"
+    },
+    {
+      "destructive": true,
+      "operation": "alter",
+      "resource": "projects",
+      "section": "collections"
+    },
+    {
+      "destructive": true,
+      "operation": "add",
+      "resource": "purchaseOrders",
+      "section": "collections"
+    },
+    {
+      "destructive": true,
+      "operation": "add",
+      "resource": "purchaseRequests",
+      "section": "collections"
+    },
+    {
+      "destructive": true,
+      "operation": "add",
+      "resource": "receipts",
+      "section": "collections"
+    },
+    {
+      "destructive": true,
+      "operation": "add",
+      "resource": "releases",
+      "section": "collections"
+    },
+    {
+      "destructive": true,
+      "operation": "add",
+      "resource": "supplierLinks",
+      "section": "collections"
+    },
+    {
+      "destructive": true,
+      "operation": "add",
+      "resource": "suppliers",
+      "section": "collections"
+    },
+    {
+      "destructive": true,
+      "operation": "add",
+      "resource": "teams",
+      "section": "collections"
+    },
+    {
+      "destructive": true,
+      "operation": "add",
+      "resource": "timeline",
+      "section": "collections"
+    },
+    {
+      "destructive": true,
+      "operation": "add",
+      "resource": "workItems",
+      "section": "collections"
+    },
+    {
+      "destructive": true,
+      "operation": "remove",
+      "resource": "tasks",
+      "section": "collections"
+    },
+    {
+      "destructive": true,
+      "operation": "remove",
+      "resource": "tasks",
+      "section": "policies"
+    }
+  ],
+  "security_changes": [
+    {
+      "description": "Added security-sensitive resource",
+      "resource": "agents",
+      "section": "policies"
+    },
+    {
+      "description": "Added security-sensitive resource",
+      "resource": "assignments",
+      "section": "policies"
+    },
+    {
+      "description": "Added security-sensitive resource",
+      "resource": "authorities",
+      "section": "policies"
+    },
+    {
+      "description": "Added security-sensitive resource",
+      "resource": "budgets",
+      "section": "policies"
+    },
+    {
+      "description": "Added security-sensitive resource",
+      "resource": "changes",
+      "section": "policies"
+    },
+    {
+      "description": "Added security-sensitive resource",
+      "resource": "commitments",
+      "section": "policies"
+    },
+    {
+      "description": "Added security-sensitive resource",
+      "resource": "contracts",
+      "section": "policies"
+    },
+    {
+      "description": "Added security-sensitive resource",
+      "resource": "customerIssues",
+      "section": "policies"
+    },
+    {
+      "description": "Added security-sensitive resource",
+      "resource": "customers",
+      "section": "policies"
+    },
+    {
+      "description": "Added security-sensitive resource",
+      "resource": "departments",
+      "section": "policies"
+    },
+    {
+      "description": "Added security-sensitive resource",
+      "resource": "externalRefs",
+      "section": "policies"
+    },
+    {
+      "description": "Added security-sensitive resource",
+      "resource": "incidents",
+      "section": "policies"
+    },
+    {
+      "description": "Added security-sensitive resource",
+      "resource": "invoices",
+      "section": "policies"
+    },
+    {
+      "description": "Added security-sensitive resource",
+      "resource": "people",
+      "section": "policies"
+    },
+    {
+      "description": "Added security-sensitive resource",
+      "resource": "policies",
+      "section": "policies"
+    },
+    {
+      "description": "Added security-sensitive resource",
+      "resource": "policyAcks",
+      "section": "policies"
+    },
+    {
+      "description": "Added security-sensitive resource",
+      "resource": "policyVersions",
+      "section": "policies"
+    },
+    {
+      "description": "Added security-sensitive resource",
+      "resource": "purchaseOrders",
+      "section": "policies"
+    },
+    {
+      "description": "Added security-sensitive resource",
+      "resource": "purchaseRequests",
+      "section": "policies"
+    },
+    {
+      "description": "Added security-sensitive resource",
+      "resource": "receipts",
+      "section": "policies"
+    },
+    {
+      "description": "Added security-sensitive resource",
+      "resource": "releases",
+      "section": "policies"
+    },
+    {
+      "description": "Added security-sensitive resource",
+      "resource": "supplierLinks",
+      "section": "policies"
+    },
+    {
+      "description": "Added security-sensitive resource",
+      "resource": "suppliers",
+      "section": "policies"
+    },
+    {
+      "description": "Added security-sensitive resource",
+      "resource": "teams",
+      "section": "policies"
+    },
+    {
+      "description": "Added security-sensitive resource",
+      "resource": "timeline",
+      "section": "policies"
+    },
+    {
+      "description": "Added security-sensitive resource",
+      "resource": "workItems",
+      "section": "policies"
+    }
+  ],
+  "state_schema_compatibility": {
+    "changes": [
+      {
+        "classification": "SAFE",
+        "collection": "agents",
+        "description": "collection added",
+        "field": null
+      },
+      {
+        "classification": "SAFE",
+        "collection": "assignments",
+        "description": "collection added",
+        "field": null
+      },
+      {
+        "classification": "SAFE",
+        "collection": "authorities",
+        "description": "collection added",
+        "field": null
+      },
+      {
+        "classification": "SAFE",
+        "collection": "budgets",
+        "description": "collection added",
+        "field": null
+      },
+      {
+        "classification": "SAFE",
+        "collection": "changes",
+        "description": "collection added",
+        "field": null
+      },
+      {
+        "classification": "SAFE",
+        "collection": "commitments",
+        "description": "collection added",
+        "field": null
+      },
+      {
+        "classification": "SAFE",
+        "collection": "contracts",
+        "description": "collection added",
+        "field": null
+      },
+      {
+        "classification": "SAFE",
+        "collection": "customerIssues",
+        "description": "collection added",
+        "field": null
+      },
+      {
+        "classification": "SAFE",
+        "collection": "customers",
+        "description": "collection added",
+        "field": null
+      },
+      {
+        "classification": "SAFE",
+        "collection": "departments",
+        "description": "collection added",
+        "field": null
+      },
+      {
+        "classification": "SAFE",
+        "collection": "externalRefs",
+        "description": "collection added",
+        "field": null
+      },
+      {
+        "classification": "SAFE",
+        "collection": "incidents",
+        "description": "collection added",
+        "field": null
+      },
+      {
+        "classification": "SAFE",
+        "collection": "invoices",
+        "description": "collection added",
+        "field": null
+      },
+      {
+        "classification": "SAFE",
+        "collection": "people",
+        "description": "collection added",
+        "field": null
+      },
+      {
+        "classification": "SAFE",
+        "collection": "policies",
+        "description": "collection added",
+        "field": null
+      },
+      {
+        "classification": "SAFE",
+        "collection": "policyAcks",
+        "description": "collection added",
+        "field": null
+      },
+      {
+        "classification": "SAFE",
+        "collection": "policyVersions",
+        "description": "collection added",
+        "field": null
+      },
+      {
+        "classification": "DESTRUCTIVE",
+        "collection": "projects",
+        "description": "field added",
+        "field": "kind"
+      },
+      {
+        "classification": "DESTRUCTIVE",
+        "collection": "projects",
+        "description": "field added",
+        "field": "ownerId"
+      },
+      {
+        "classification": "DESTRUCTIVE",
+        "collection": "projects",
+        "description": "field added",
+        "field": "status"
+      },
+      {
+        "classification": "SAFE",
+        "collection": "projects",
+        "description": "field added",
+        "field": "teamId"
+      },
+      {
+        "classification": "DESTRUCTIVE",
+        "collection": "projects",
+        "description": "field removed",
+        "field": "createdAt"
+      },
+      {
+        "classification": "DESTRUCTIVE",
+        "collection": "projects",
+        "description": "field removed",
+        "field": "createdBy"
+      },
+      {
+        "classification": "SAFE",
+        "collection": "purchaseOrders",
+        "description": "collection added",
+        "field": null
+      },
+      {
+        "classification": "SAFE",
+        "collection": "purchaseRequests",
+        "description": "collection added",
+        "field": null
+      },
+      {
+        "classification": "SAFE",
+        "collection": "receipts",
+        "description": "collection added",
+        "field": null
+      },
+      {
+        "classification": "SAFE",
+        "collection": "releases",
+        "description": "collection added",
+        "field": null
+      },
+      {
+        "classification": "SAFE",
+        "collection": "supplierLinks",
+        "description": "collection added",
+        "field": null
+      },
+      {
+        "classification": "SAFE",
+        "collection": "suppliers",
+        "description": "collection added",
+        "field": null
+      },
+      {
+        "classification": "SAFE",
+        "collection": "teams",
+        "description": "collection added",
+        "field": null
+      },
+      {
+        "classification": "SAFE",
+        "collection": "timeline",
+        "description": "collection added",
+        "field": null
+      },
+      {
+        "classification": "SAFE",
+        "collection": "workItems",
+        "description": "collection added",
+        "field": null
+      },
+      {
+        "classification": "DESTRUCTIVE",
+        "collection": "tasks",
+        "description": "collection removed",
+        "field": null
+      }
+    ],
+    "classification": "DESTRUCTIVE",
+    "from_version": 2,
+    "to_version": 3
+  },
+  "to_revision": "apprev://tenant_m174odKLypm5X0jB88/app_VdI0HIgo0jINzwhFSs/sha256:370cc21b53aec837048e6bb038e016b11f7cc8d175db544f0f9d70b4e7d32162"
+}

@@ -167,7 +167,7 @@ any contract, any promote, revoking keys.
 | Fix | branch `claude/ci-npm11-platform-binaries` (flow_db): `rollup` in `@feltdb/studio` devDependencies; lockfile regenerated with npm 11.6.0 (+26 entries, nothing removed or re-versioned); `tools/check-lockfile-optional-dependencies.mjs` plus a CI step after `npm ci`, so a recurrence fails with its cause named |
 | Action | land the fix through CI on `main`; the normal `fly-deploy.yml` run then deploys `feltdb-control-plane` at a commit containing `85a869c`, then confirm with `tools/check-managed-release-identity.mjs` (`FELTDB_LIVE_EXPECTED_COMMIT` = the deployed commit) |
 | Acceptance | `/health` `git_commit` has `85a869c` as an ancestor; the isolated test below passes |
-| **Outcome (2026-11-04)** | rkendel1/flow_db#464 merged (`99e56e3`). CI on `main` (run 41751047630) was green on attempt 2. Attempt 1 was cancelled after an intermittent browser-matrix launch failure in "Test public package entry points and CLIs" hung the step. Its 30 s Chrome launch timeout and the hang that follows are a separate flow_db test defect. `fly-deploy.yml` then ran from `workflow_run` (run 41759570729), with no dispatch. **Live:** `git_commit 99e56e3…`, `release_id 0.21.0-99e56e3…`, server `0.6.1`, built 02:16:45 UTC; `85a869c` is an ancestor. `check-managed-release-identity.mjs` passes (`evidence/managed-feltdb/release-identity-2026-11-04.json`). CompanyOS production is unchanged (still v2; readiness `READY`). **Not yet done:** the isolated canary (§4), which is the remaining acceptance criterion |
+| **Outcome (2026-11-04)** | rkendel1/flow_db#464 merged (`99e56e3`). CI on `main` (run 41751047630) was green on attempt 2. Attempt 1 was cancelled after an intermittent browser-matrix launch failure in "Test public package entry points and CLIs" hung the step. Its 30 s Chrome launch timeout and the hang that follows are a separate flow_db test defect. `fly-deploy.yml` then ran from `workflow_run` (run 41759570729), with no dispatch. **Live:** `git_commit 99e56e3…`, `release_id 0.21.0-99e56e3…`, server `0.6.1`, built 02:16:45 UTC; `85a869c` is an ancestor. `check-managed-release-identity.mjs` passes (`evidence/managed-feltdb/release-identity-2026-11-04.json`). CompanyOS production is unchanged (still v2; readiness `READY`). **Canary (§4) passed** the same day: `evidence/managed-feltdb/canary-2026-11-04.md`. F-041 is resolved on the live service |
 
 FeltKit's managed e2e test (`tests/e2e/managed-feltdb.test.mjs`) runs against a server built
 from a local flow_db checkout, never against the live service, so it could not see this
@@ -201,6 +201,8 @@ drift. The hardening plan adds a live-service check (F-051).
 - `INDEX_UNAVAILABLE` or any start-up error;
 - a credential file appears in `git status`;
 - a step would touch `app_VdI0HIgo0jINzwhFSs`.
+
+**Outcome 2026-11-04:** passed, with every step green (`evidence/managed-feltdb/canary-2026-11-04.md`). The only stop condition met was the expected F-039 untracked `.env.local`, recorded by prior agreement. The test ran in a separate new account and tenant.
 
 CompanyOS is tested on the managed path only after the canary passes, and only after F-048
 (constraint parity) is fixed. Otherwise the test would prove a contract without CompanyOS's

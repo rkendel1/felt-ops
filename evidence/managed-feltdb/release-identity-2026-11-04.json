@@ -1,0 +1,12 @@
+{
+  "schema": "feltdb.managed.release-evidence/v1",
+  "observed_at": "2026-11-04T02:19:56.974Z",
+  "endpoint_origin": "https://api.feltdb.com",
+  "git_commit": "99e56e3421593b55966f4c18feb6c954d3001d2a",
+  "release_id": "0.21.0-99e56e3421593b55966f4c18feb6c954d3001d2a",
+  "build_timestamp": "2026-11-04T02:16:45Z",
+  "server_version": "0.6.1",
+  "public_contract": "feltdb.public.substrate@1.0",
+  "deployment_id": "registry.fly.io/feltdb-control-plane:deployment-01M6J5GCDYXWXS6DYRWDTN4MAK",
+  "capability_fingerprint": "sha256:50c864212d904d2645ce6ae4fdf07a517e34122af4f980a9096ed7101542f8d8"
+}

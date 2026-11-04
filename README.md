@@ -90,6 +90,7 @@ Evidence files are written to `evidence/`.
 | [AGENT-OPERATOR-GUIDE](docs/AGENT-OPERATOR-GUIDE.md) | For people who supervise agents |
 | [AGENT-OPERATOR-EVALUATION](docs/AGENT-OPERATOR-EVALUATION.md) | Independent evaluation of the operator experience |
 | [FELTKIT-GAP-REPORT](docs/FELTKIT-GAP-REPORT.md) | Prioritized platform gaps |
+| [EXTRACTION-AUDIT](docs/EXTRACTION-AUDIT.md) | What should move into FeltKit, measured in code |
 | [PRODUCTION-RUNBOOK](docs/PRODUCTION-RUNBOOK.md) | Deploy, configure, release, upgrade, back up, restore, respond |
 | [FINAL-EVALUATION](docs/FINAL-EVALUATION.md) | Executive assessment and scores |
 

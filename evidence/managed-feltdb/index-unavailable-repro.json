@@ -1,0 +1,50 @@
+{
+  "note": "One of the 19 startup reads refused by Managed FeltDB (CompanyOS run; the unmodified starter sent the same shape). Authorization header omitted.",
+  "request": {
+    "method": "POST",
+    "path": "/v1/query?application_id=<app>&environment=production",
+    "body": {
+      "application_id": "app_VdI0HIgo0jINzwhFSs",
+      "revision_id": "<revision>",
+      "environment": "production",
+      "query": {
+        "collection": "jobs",
+        "filter": {
+          "operator": "and",
+          "filters": [
+            {
+              "operator": "eq",
+              "field": "tenantId",
+              "value": "companyos"
+            },
+            {
+              "operator": "eq",
+              "field": "applicationId",
+              "value": "companyos"
+            },
+            {
+              "operator": "eq",
+              "field": "status",
+              "value": "running"
+            }
+          ]
+        },
+        "limit": 2
+      }
+    }
+  },
+  "response": {
+    "status": 422,
+    "body": {
+      "actual": null,
+      "causal_position": null,
+      "code": "INDEX_UNAVAILABLE",
+      "error": "INDEX_UNAVAILABLE",
+      "expected": null,
+      "message": "the schema-declared scoped equality index is unavailable",
+      "request_id": "req_93285980185244338eddd6bad7065e8d",
+      "resource": null,
+      "transaction": null
+    }
+  }
+}

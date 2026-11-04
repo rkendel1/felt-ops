@@ -64,6 +64,27 @@ external API.
 - Export `IntegrationOutcome`.
 - Accept a `context` field that is passed to `onOutcome` but not to the API.
 
+### G-15 · Constraint parity between local and managed contracts (defect)
+Finding: F-048.
+
+`feltdbContract()` emits fields only. CompanyOS's 21 unique constraints and 18 indexes, all
+enforced locally, are absent from the Managed FeltDB contract, so FeltDB would not enforce
+uniqueness there. This is a silent integrity difference between environments.
+
+**Ask:** generate the managed contract from the same compiler as the local state contract,
+and add a test that compares the two.
+
+### G-16 · Client/server version compatibility (missing primitive)
+Findings: F-041, F-051.
+
+FeltKit 0.3.13 requires FeltDB ≥ 0.21.0. Managed FeltDB reports release 0.19.0, and nothing
+compares the two. The mismatch surfaced as an unrelated-looking query error.
+
+**Ask:**
+- FeltKit checks the server's reported release at publish and at start, and refuses (or warns)
+  with the versions named;
+- FeltDB keeps Managed FeltDB at or above the newest published client release.
+
 ## Priority 2: needed for production organizations
 
 ### G-05 · Approval provenance in the handler (missing primitive)
@@ -83,7 +104,14 @@ identity), or at least report the divergence in `approvability`.
 ### G-11 · Operations without downtime, complete deploy contracts, a working managed path (defect + gap)
 Findings: F-023, F-024, F-004, F-005, F-037–F-042.
 
-The managed path is the most urgent part: `npx feltdb` does not resolve from a FeltKit project, `init-managed --help` runs setup, credentials land outside `.gitignore`, and CompanyOS then failed to start on Managed FeltDB with `INDEX_UNAVAILABLE` (F-041, open).
+The managed path is the most urgent part:
+- `npx feltdb` does not resolve from a FeltKit project (F-037);
+- `init-managed --help` runs setup (F-038);
+- credentials land outside the scaffold's `.gitignore` (F-039);
+- the managed application is chosen by `package.json` name (F-049);
+- interactive `deploy` replaces the artifact directory under a running process (F-042).
+
+The start-up failure (F-041) is **not** a FeltKit defect: Managed FeltDB runs a server build that predates FeltDB's fix for scoped reads of empty collections, and FeltKit's start-up reads of empty AppPort Services collections hit it. Reproduced with the unmodified starter (ROAD-TEST-FINDINGS, "Managed FeltDB root cause").
 
 - Online backup of local production. The development server can already pause calls while it
   reads; production cannot.

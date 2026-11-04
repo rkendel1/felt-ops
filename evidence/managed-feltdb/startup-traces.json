@@ -1,0 +1,133 @@
+{
+  "note": "Sanitized summaries of FeltKit start-up traffic to Managed FeltDB (fetch preload; no headers or credentials recorded). Server: GET /health reported version 0.6.0, release_id 0.19.0-791cb05, build 2026-11-03T16:50:58Z.",
+  "companyos": {
+    "run": "CompanyOS hosted artifact, app companyos, contract v1",
+    "requests": 78,
+    "byStatus": {
+      "200": 33,
+      "404": 26,
+      "422": 19
+    },
+    "byEndpoint": {
+      "GET /v1/application 200": 2,
+      "POST /v1/query 404": 26,
+      "POST /v1/query 200": 29,
+      "POST /v1/transactions 200": 1,
+      "GET /v1/schema 200": 1,
+      "POST /v1/query 422": 19
+    },
+    "refused422ByCollection": {
+      "webhook_endpoints": 1,
+      "ConfigurationVariables": 1,
+      "api_keys": 1,
+      "jobs": 4,
+      "ConfigurationSecrets": 1,
+      "webhook_deliveries": 3,
+      "job_schedules": 2,
+      "notification_deliveries": 3,
+      "files": 1,
+      "notifications": 1,
+      "_feltdb.AgentTask": 1
+    },
+    "notFound404Collections": [
+      "__indexes__:ConfigurationAuditEvents",
+      "__indexes__:ConfigurationSecrets",
+      "__indexes__:ConfigurationVariables",
+      "__indexes__:SecretAuditEvents",
+      "__indexes__:SecretVersions",
+      "__indexes__:Secrets",
+      "__indexes__:_feltkit_collections",
+      "__indexes__:_feltkit_meta",
+      "__indexes__:_feltkit_restore",
+      "__indexes__:api_key_audit_events",
+      "__indexes__:api_key_prefixes",
+      "__indexes__:api_keys",
+      "__indexes__:file_audit_events",
+      "__indexes__:files",
+      "__indexes__:job_audit_events",
+      "__indexes__:job_schedules",
+      "__indexes__:jobs",
+      "__indexes__:notification_audit_events",
+      "__indexes__:notification_deliveries",
+      "__indexes__:notifications",
+      "__indexes__:service_effect_evidence",
+      "__indexes__:webhook_audit_events",
+      "__indexes__:webhook_deliveries",
+      "__indexes__:webhook_endpoints",
+      "__indexes__:webhook_integrations",
+      "_feltkit_restore"
+    ],
+    "environmentInQuery": [
+      "production"
+    ],
+    "errorCodes": {
+      "UNKNOWN_COLLECTION": 26,
+      "INDEX_UNAVAILABLE": 19
+    }
+  },
+  "starter": {
+    "run": "unmodified create-feltkit starter (baseline abf3f95), contract v2 on the same app",
+    "requests": 54,
+    "byStatus": {
+      "200": 9,
+      "404": 26,
+      "422": 19
+    },
+    "byEndpoint": {
+      "GET /v1/application 200": 2,
+      "POST /v1/query 404": 26,
+      "POST /v1/query 200": 4,
+      "POST /v1/transactions 200": 2,
+      "GET /v1/schema 200": 1,
+      "POST /v1/query 422": 19
+    },
+    "refused422ByCollection": {
+      "webhook_endpoints": 1,
+      "jobs": 4,
+      "webhook_deliveries": 3,
+      "job_schedules": 2,
+      "api_keys": 1,
+      "notification_deliveries": 3,
+      "notifications": 1,
+      "files": 1,
+      "ConfigurationSecrets": 1,
+      "ConfigurationVariables": 1,
+      "_feltdb.AgentTask": 1
+    },
+    "notFound404Collections": [
+      "__indexes__:ConfigurationAuditEvents",
+      "__indexes__:ConfigurationSecrets",
+      "__indexes__:ConfigurationVariables",
+      "__indexes__:SecretAuditEvents",
+      "__indexes__:SecretVersions",
+      "__indexes__:Secrets",
+      "__indexes__:_feltkit_collections",
+      "__indexes__:_feltkit_meta",
+      "__indexes__:_feltkit_restore",
+      "__indexes__:api_key_audit_events",
+      "__indexes__:api_key_prefixes",
+      "__indexes__:api_keys",
+      "__indexes__:file_audit_events",
+      "__indexes__:files",
+      "__indexes__:job_audit_events",
+      "__indexes__:job_schedules",
+      "__indexes__:jobs",
+      "__indexes__:notification_audit_events",
+      "__indexes__:notification_deliveries",
+      "__indexes__:notifications",
+      "__indexes__:service_effect_evidence",
+      "__indexes__:webhook_audit_events",
+      "__indexes__:webhook_deliveries",
+      "__indexes__:webhook_endpoints",
+      "__indexes__:webhook_integrations",
+      "_feltkit_restore"
+    ],
+    "environmentInQuery": [
+      "production"
+    ],
+    "errorCodes": {
+      "UNKNOWN_COLLECTION": 26,
+      "INDEX_UNAVAILABLE": 19
+    }
+  }
+}

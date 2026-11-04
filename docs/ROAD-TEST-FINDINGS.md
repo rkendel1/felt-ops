@@ -52,14 +52,97 @@ environment limitation) · **Untested**.
 | F-037 | Medium | Doc | `npx feltdb init-managed` (printed by `feltkit deploy` and the README) fails: npm 404, the `feltdb` binary is only nested inside `@feltdb/feltkit` | call `node_modules/@feltdb/feltkit/node_modules/@feltdb/core/bin/feltdb.js` |
 | F-038 | Medium | FK-defect | `feltdb init-managed --help` runs setup: writes `feltdb.config.json` and an empty `feltdb.flow` into the project | removed the files |
 | F-039 | High | FK-defect | `init-managed` writes credentials (`.env.local`, `.feltdb/managed.json`) to the project root; the scaffold's `.gitignore` does not cover them | added to `.gitignore` |
-| F-040 | Low | Doc | A first publish is refused "Publish requires explicit approval … authorization boundary changed" without naming the flag; the flag is `--approve-destructive-changes` for a non-destructive first contract | flag found in source |
-| F-041 | High | Untested (open) | The hosted artifact refused to start on Managed FeltDB: `the schema-declared scoped equality index is unavailable (HTTP 422, INDEX_UNAVAILABLE)` after the contract was published and promoted. Not yet diagnosed (transient index build vs. an index Managed FeltDB does not support) | none: hosted target not working |
-| F-042 | Medium | FK-gap | Interactive `feltkit deploy` replaces `.feltkit/deploy`, the directory the local production deployment was started from (its state is kept; a restart would load the new target) | use `--out` |
+| F-040 | Low | FeltDB CLI (UX) | A first contract publish is refused ("Publish requires explicit approval … SECURITY_SENSITIVE, authorization boundary changed") without naming the flag (`--approve-destructive-changes`); the flag's name calls a first, non-destructive contract "destructive" | flag found in source (`publish-engine.js:276`, `commands.js:651`) |
+| F-041 | **Critical** | Managed FeltDB service (version skew) | Every FeltKit 0.3.13 app fails to start on Managed FeltDB with `INDEX_UNAVAILABLE`: the service runs FeltDB server 0.6.0 (release 0.19.0, built 2026-11-03 16:50 UTC), before the fix "a scoped read of an empty collection answers through its index, not INDEX_UNAVAILABLE" (`85a869c`, 18:35 UTC, shipped in 0.21.0 / crates 0.6.1). FeltKit's start-up reads of empty AppPort Services and agent-state collections hit it. Reproduced with the unmodified starter. See "Managed FeltDB root cause" | none: hosted target unusable until the service is updated |
+| F-042 | High | FeltKit CLI | Interactive `feltkit deploy` deleted and recreated `.feltkit/deploy` under the running production process started from it (`/proc/<pid>/cwd` → `.feltkit/deploy (deleted)`); the new directory holds a different target (hosted) and the kept state. The output says "replaced on every deploy", but nothing checks for a running process | use `--out`; state continuity of the running process unverified |
 | F-043 | Medium | FK-gap | The Studio link FeltKit reports to the app (`session.dashboard` = `/_feltkit/`) carries no credential: an operator following it from the app is not signed in | guide points to the printed link |
 | F-044 | Medium | FK-defect | Studio shows an agent's own working task (created with `feltkit_agent_create`, default playbook `handoff`) as "Waiting for a coding agent — Nothing works on this task until one claims it" | none |
 | F-045 | Medium | FK-gap | Studio's approval screen shows the proposal's raw input (record ids), not what it affects (amount, invoice, supplier) | agents put business detail in the proposal reason |
 | F-046 | Medium | FK-gap | An app-level suspension is unknown to Studio: Approve stays available; the approved action then fails at CompanyOS's check | refused at execution |
 | F-047 | Low | FK-gap | No agent liveness signal: a crashed agent process is visible only as silence | "last heard from the agent" from app records |
+| F-048 | High | FeltKit contract generation | The Managed FeltDB contract (`feltdbContract()`, `runtime/contract.js:80`) emits only fields: every application-declared `unique` constraint and `index` is dropped (measured: CompanyOS declares 21 unique constraints on 19 collections and 18 indexes on 11 collections; `feltdb.contract.json` contains none of them and no `unique` key at all), while the local state contract keeps them. On Managed FeltDB, uniqueness CompanyOS relies on (PR/PO numbers, e-mail, login, timeline `(subject, seq)`) would not be enforced by FeltDB | none; not exercised at run time (F-041) |
+| F-049 | Medium | FeltDB CLI ↔ FeltKit | `init-managed` names the managed application from `--name` or `package.json` `name` (`commands.js:1162`), not FeltKit\'s app name (`feltkit/app.ts`). A project whose two names differ (the scaffold allows it, F-003) publishes into another application | pass `--name` |
+| F-050 | High | **Investigation incident (operator error)** | During this investigation, the starter control experiment (scratch copy whose `package.json` is `companyos`) published the starter\'s contract as **version 2 of the CompanyOS managed application and promoted it to production**. FeltDB refuses such a breaking publish without approval; the investigator had passed `--approve-destructive-changes` pre-emptively. No data existed. Version 1 (CompanyOS) still exists | needs a decision: re-promote v1, or delete the managed app |
+| F-051 | High | FeltKit + Managed FeltDB | No compatibility check: FeltKit 0.3.13 requires `@feltdb/core >=0.21.0` but neither publish nor start compares that with the managed server\'s version (0.19.0 release, reported by `GET /health`); the mismatch surfaces as an unrelated-looking query error | none |
+
+
+## Managed FeltDB root cause (F-041, F-048, F-050, F-051)
+
+Investigated 2026-11-04 without changing CompanyOS or its schema.
+
+**Symptom.** `feltkit start` of the hosted artifact exits: `FeltKit could not start the production runtime: the schema-declared scoped equality index is unavailable (HTTP 422, INDEX_UNAVAILABLE)`.
+
+**What was established, and how**
+
+| Question | Answer | Evidence |
+|---|---|---|
+| Which queries fail? | 19 start-up reads by FeltKit, all on **platform** collections: AppPort Services (`jobs` ×4, `webhook_deliveries` ×3, `notification_deliveries` ×3, `job_schedules` ×2, `webhook_endpoints`, `api_keys`, `notifications`, `files`, `ConfigurationSecrets`, `ConfigurationVariables`) and FeltDB agent state (`_feltdb.AgentTask`). **No CompanyOS collection.** | fetch trace, `evidence/managed-feltdb/startup-traces.json` |
+| Query shape | tenant-scoped equality, e.g. `jobs` where `tenantId = companyos AND applicationId = companyos AND status = running`, `limit 2` | `evidence/managed-feltdb/index-unavailable-repro.json` |
+| Index involved | `jobs_by_tenant` (`tenantId`), and the equivalent single-field tenant index of each services collection, all declared in the contract FeltKit generated | `feltdb.contract.json` `indexes` |
+| Code path | FeltDB server: a live query whose filter carries the managed scope (`tenantId`) must use a declared equality index; for an **empty** collection, pre-fix code reported the access as a scan, which raised `INDEX_UNAVAILABLE` | `state_contract.rs` (`contains_managed_scope`, `execute_bounded_query`); `lib.rs` `select_page` comment: "Reporting a scan here made a scoped read of an empty collection fail with INDEX_UNAVAILABLE" |
+| When was it fixed? | `85a869c` (2026-11-03 18:35 UTC) "fix(feltdb): a scoped read of an empty collection answers through its index, not INDEX_UNAVAILABLE"; shipped in release 0.21.0 (`e356149`, 19:37 UTC, "Rust crates 0.6.1") | `gh api search/commits` on `rkendel1/flow_db` |
+| What does Managed FeltDB run? | `GET /health`: `version 0.6.0`, `release_id 0.19.0-791cb05…`, built 2026-11-03 16:50 UTC: **before the fix**. npm has no `@feltdb/core` 0.19.0. | health response |
+| Is it CompanyOS? | **No.** The unmodified `create-feltkit` starter (baseline `abf3f95`) fails identically: the same 19 refused reads on the same collections, the same 26 tolerated 404 probes | `startup-traces.json` (`starter`) |
+| Right application and environment? | Yes: every query names the managed application id and `environment=production`; `init-managed` verified the runtime key resolves the promoted revision | traces; setup output |
+| Contract version promoted at the failure | version 1 (CompanyOS), published and promoted by `init-managed`; the earlier start failure ("no active contract", HTTP 404) came before any promotion | command outputs (deployment timeline below) |
+| Index provisioning and status | In the shipped server source, equality indexes are created on demand at query time from the contract's declarations; no index-status endpoint was found or used, so provisioning state is **not observable** from the client | `state_contract.rs` (`create_equality_index`) |
+
+**Classification**
+
+| Candidate | Verdict |
+|---|---|
+| CompanyOS schema or query defect | **Ruled out** (starter reproduces; failing collections are FeltKit's and AppPort Services'; CompanyOS's indexes are not even in the contract, F-048) |
+| FeltKit contract generation or runtime defect | **Not the cause of F-041.** FeltKit's start-up reads are legitimate. Separate defect found: F-048 (constraints dropped) |
+| Managed FeltDB provisioning or deployment defect | **Primary cause (high confidence, not confirmed by the service operator):** the service runs a server build that predates a fix FeltKit 0.3.13 depends on |
+| Contract publication or promotion sequencing | Contributed earlier ("no active contract"), resolved by publishing; not the cause of `INDEX_UNAVAILABLE` |
+| Environment or configuration mismatch | Ruled out for F-041. The sandbox proxy (F-016) explains the first failed publish ("Manifest request failed"), which succeeded with `NODE_USE_ENV_PROXY=1` (inference) |
+| Missing compatibility check | Contributing: F-051 |
+
+**Not established.** The managed service's source is not visible. The link between "server 0.6.0, built 16:50" and "fix shipped in crates 0.6.1 at 19:37" is inferred from versions, timestamps and the fix's description. **Confirming test (not run; needs approval):** after FeltDB deploys crates ≥ 0.6.1 to the service, start the unmodified starter once.
+
+**Recommended owners.**
+- FeltDB: deploy ≥ 0.6.1 to Managed FeltDB.
+- FeltKit: refuse or warn at publish and start when the server is older than the FeltDB version it requires (F-051); include app `unique`/`indexes` in the managed contract (F-048).
+
+**Investigation incident (F-050).** The starter control run published the starter's contract into the CompanyOS managed application (version 2, promoted). Causes:
+- `init-managed` picks the application by `package.json` name (F-049);
+- the investigator passed `--approve-destructive-changes`, which bypassed the guard that would have refused it.
+
+Nothing else was changed on the account. **Pending a decision:** re-promote version 1, or delete the managed application.
+
+## Deployment workflow: reconstruction and defects
+
+**Sequence (2026-11-03/04, from command outputs in the session)**
+
+| # | Command | Result |
+|---|---|---|
+| 1 | `npx feltkit deploy --target hosted --out .feltkit/deploy-hosted --yes` | artifact built and boot-verified; printed `npx feltdb init-managed --contract … --runtime-scopes minimal` |
+| 2 | `npx feltdb init-managed --help` | npm 404 (`feltdb` not on the project's bin path) |
+| 3 | `node …/@feltdb/core/bin/feltdb.js init-managed --help` | **ran setup**: created `feltdb.config.json`, empty `feltdb.flow`; stopped for credentials. Both files deleted afterwards |
+| 4 | `init-managed --contract … --runtime-scopes minimal` (signup, no proxy) | account, workspace, app `companyos` created; keys written to `.env.local`, `.feltdb/managed.json`; publish failed "Manifest request failed" |
+| 5 | `.gitignore` amended (`.env.local`, `.env`, `.feltdb/`, `feltdb.config.json`, `feltdb.flow`) | credentials confirmed ignored before any commit |
+| 6 | start hosted artifact | refused: "no contract revision is promoted to environment production" (HTTP 404) |
+| 7 | `feltdb publish …` | "feltdb.config.json is required for publish" (deleted in step 3) |
+| 8 | `init-managed` (signin, proxy) | publish reached the service; refused: "Publish requires explicit approval … authorization boundary changed"; version 1 staged |
+| 9 | `init-managed … --approve-destructive-changes --yes` | version 1 published and promoted; runtime key verified |
+| 10 | start hosted artifact | `INDEX_UNAVAILABLE` (F-041) |
+| 11 | start retries (interrupted by the user) | no new evidence |
+| 12 | `npx feltkit deploy` (interactive, option 2) | did not ask for credentials; **replaced `.feltkit/deploy`** under the running local production process (F-042) |
+| 13 | (investigation) starter control | F-050; reproduced F-041 |
+
+**Reported problems**
+
+| Problem | Reproducible? | Classification | Sev | Evidence | Owner |
+|---|---|---|---|---|---|
+| `feltkit deploy` prints `npx feltdb …`, which 404s | **Yes**: `npx feltdb --version` → `E404 … registry.npmjs.org/feltdb` | FeltKit doc/CLI defect (F-037) | Medium | `deploy.js:304,310`; npm output | FeltKit (print the runnable path, or expose a `feltkit managed` command) |
+| `feltdb` binary only nested inside FeltKit | **Yes**: `node_modules/.bin` has no `feltdb`; the binary is `…/@feltdb/feltkit/node_modules/@feltdb/core/bin/feltdb.js` | FeltKit packaging (cause of the row above) | Medium | `ls` | FeltKit |
+| `init-managed --help` performs setup | **Yes**, in an empty directory with no credentials: creates `feltdb.config.json` and `feltdb.flow`, starts managed setup | FeltDB CLI defect (F-038) | Medium | scratch reproduction | FeltDB |
+| Credential files not covered by the scaffold's `.gitignore` | **Yes**: baseline `.gitignore` lists `node_modules/ dist/ .feltkit/ .feltkit-platform/ *.app/` only | create-feltkit defect (F-039) | High | `git show abf3f95:.gitignore` | FeltKit (scaffold) |
+| Interactive deploy replaced `.feltkit/deploy` under a running process | **Yes** (observed): the running server's cwd is `.feltkit/deploy (deleted)` | FeltKit CLI gap (F-042); documented "replaced on every deploy" | High | `/proc/<pid>/cwd` | FeltKit (refuse or warn when a process runs from the artifact; default to a new release directory, as platform PR 3 does) |
+| First publish requires an unnamed flag | **Yes** (source + output): the message names no flag | FeltDB CLI UX (F-040) | Low | `publish-engine.js:276` | FeltDB |
+| *Also found:* `feltkit deploy` (hosted) does not provision Managed FeltDB or ask for credentials | Yes (observed) | Expectation/doc: FeltKit delegates to the FeltDB CLI | Info | interactive transcript | FeltKit docs |
+| *Also found:* managed app identity from `package.json` | Yes (source) | F-049 | Medium | `commands.js:1162` | FeltDB/FeltKit |
+| *Also found:* constraints dropped from the managed contract | Yes (source + measured contract) | F-048 | High | `contract.js:80` | FeltKit |
 
 ## Details
 

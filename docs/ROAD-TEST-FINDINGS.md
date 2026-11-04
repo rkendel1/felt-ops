@@ -48,6 +48,18 @@ environment limitation) · **Untested**.
 | F-033 | Medium | Ext | No pull request was opened: the repository had no base branch, and pushing other branches was not authorized | commits + CI runs on one branch |
 | F-034 | Info | — | Platform upgrade 0.3.12 + FeltDB 0.20.0 → 0.3.13 + 0.21.0 on production data: same contract, data verified (positive) | n/a |
 | F-035 | Info | FK-gap | `approval: "required"` cannot be conditional (e.g. only above an amount) | separate capabilities would be needed |
+| F-036 | Medium | App + FK-gap | After-commit webhooks run as the caller; roles without `webhooks.emit` committed the change and the announcement was then denied, only logged (`incident.opened`) | fixed: staff and integration agent hold `webhooks.emit/deliver` |
+| F-037 | Medium | Doc | `npx feltdb init-managed` (printed by `feltkit deploy` and the README) fails: npm 404, the `feltdb` binary is only nested inside `@feltdb/feltkit` | call `node_modules/@feltdb/feltkit/node_modules/@feltdb/core/bin/feltdb.js` |
+| F-038 | Medium | FK-defect | `feltdb init-managed --help` runs setup: writes `feltdb.config.json` and an empty `feltdb.flow` into the project | removed the files |
+| F-039 | High | FK-defect | `init-managed` writes credentials (`.env.local`, `.feltdb/managed.json`) to the project root; the scaffold's `.gitignore` does not cover them | added to `.gitignore` |
+| F-040 | Low | Doc | A first publish is refused "Publish requires explicit approval … authorization boundary changed" without naming the flag; the flag is `--approve-destructive-changes` for a non-destructive first contract | flag found in source |
+| F-041 | High | Untested (open) | The hosted artifact refused to start on Managed FeltDB: `the schema-declared scoped equality index is unavailable (HTTP 422, INDEX_UNAVAILABLE)` after the contract was published and promoted. Not yet diagnosed (transient index build vs. an index Managed FeltDB does not support) | none: hosted target not working |
+| F-042 | Medium | FK-gap | Interactive `feltkit deploy` replaces `.feltkit/deploy`, the directory the local production deployment was started from (its state is kept; a restart would load the new target) | use `--out` |
+| F-043 | Medium | FK-gap | The Studio link FeltKit reports to the app (`session.dashboard` = `/_feltkit/`) carries no credential: an operator following it from the app is not signed in | guide points to the printed link |
+| F-044 | Medium | FK-defect | Studio shows an agent's own working task (created with `feltkit_agent_create`, default playbook `handoff`) as "Waiting for a coding agent — Nothing works on this task until one claims it" | none |
+| F-045 | Medium | FK-gap | Studio's approval screen shows the proposal's raw input (record ids), not what it affects (amount, invoice, supplier) | agents put business detail in the proposal reason |
+| F-046 | Medium | FK-gap | An app-level suspension is unknown to Studio: Approve stays available; the approved action then fails at CompanyOS's check | refused at execution |
+| F-047 | Low | FK-gap | No agent liveness signal: a crashed agent process is visible only as silence | "last heard from the agent" from app records |
 
 ## Details
 
@@ -151,4 +163,6 @@ environment limitation) · **Untested**.
 | Schedules (`agents.sweep`) running periodically | handler tested as a mutation; not scheduled |
 | Managed FeltDB / FeltDB server, multi-instance | not available |
 | Concurrency under load | only the platform's own guarantees (one run per approval, sequence fencing) were exercised |
-| Human operators | evaluation was performed by an AI agent (AGENT-OPERATOR-EVALUATION.md) |
+| Human operators | no human operators took part; the operator evaluation is a scripted harness plus the builder's review (AGENT-OPERATOR-EVALUATION.md) |
+| Hosted target on Managed FeltDB | account, app, contract publish and promotion worked; the app did not start (F-041) |
+| Multi-instance behavior | needs a shared FeltDB (Managed or server); blocked by F-041 |

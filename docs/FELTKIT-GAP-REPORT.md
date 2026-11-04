@@ -8,7 +8,7 @@ should stay **application responsibility**.
 ## Priority 1: blocks a credible agent-operator product
 
 ### G-07 · An application-facing agent control surface (missing primitive)
-Findings: F-006, F-007, F-015, F-020.
+Findings: F-006, F-007, F-015, F-020, F-043, F-044, F-045, F-046, F-047 (the last five from the operator evaluation: unsigned Studio link, misleading task label, approval without business context, suspension not shared, no liveness).
 
 Applications cannot read agent tasks, actions and checkpoints, and cannot approve, reject,
 retry, resolve or cancel them. Only Studio can. FeltKit's underlying model is the strongest
@@ -80,8 +80,10 @@ pending proposals can be approved and run. Production fails closed. Make
 `resolvePrincipal({ devUsers: true })` respect revocation (e.g. a revoked marker per dev
 identity), or at least report the divergence in `approvability`.
 
-### G-11 · Operations without downtime, complete deploy contracts (defect + gap)
-Findings: F-023, F-024, F-004, F-005.
+### G-11 · Operations without downtime, complete deploy contracts, a working managed path (defect + gap)
+Findings: F-023, F-024, F-004, F-005, F-037–F-042.
+
+The managed path is the most urgent part: `npx feltdb` does not resolve from a FeltKit project, `init-managed --help` runs setup, credentials land outside `.gitignore`, and CompanyOS then failed to start on Managed FeltDB with `INDEX_UNAVAILABLE` (F-041, open).
 
 - Online backup of local production. The development server can already pause calls while it
   reads; production cannot.

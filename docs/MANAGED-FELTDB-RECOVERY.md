@@ -33,19 +33,27 @@ rolled back, revoked or deleted.** Credentials stay in git-ignored files (`.env.
 - **Readiness** (`GET …/environments/production/readiness`): every check passes, including
   "runtime compatible". The service's own check does not detect F-041 (evidence for F-051).
 
-### Keys (`feltdb managed keys list`)
+### Keys (`feltdb managed keys list`; attribution re-established 2026-11-04 from direct evidence)
 
-| Key id | Name | Scopes | Origin |
-|---|---|---|---|
-| `xjG1yrnGsA4X` | companyos-control | control + promote | CompanyOS setup (promoted v1) |
-| `PBhQszATzbSP` | companyos-runtime | state:read/write | CompanyOS setup (inferred, by creation order) |
-| `fJYRqHBdNtha` | companyos-control | control + promote | **starter control run** (promoted v2) |
-| `dOdcAJruM39Z` | companyos-runtime | state:read/write | **starter control run** (inferred, by creation order) |
+| Key id | Name | Scopes | Origin | Evidence |
+|---|---|---|---|---|
+| `xjG1yrnGsA4X` | companyos-control | control + promote | CompanyOS setup | production history: `promoted_by` of `null → v1` (23:52:07 UTC) |
+| `PBhQszATzbSP` | companyos-runtime | state:read/write | CompanyOS setup | `GET /v1/identity/me` with the repository `.env.local` runtime token → `subject_id` |
+| `fJYRqHBdNtha` | companyos-control | control + promote | **starter control run** | production history: `promoted_by` of `v1 → v2` (00:05:57 UTC), the publish run from the starter copy |
+| `dOdcAJruM39Z` | companyos-runtime | state:read/write | **starter control run** | `GET /v1/identity/me` with the starter copy's `.env.local` runtime token → `subject_id` |
 
-The repository's `.env.local` and the starter scratch copy's `.env.local` hold **different**
-runtime keys for the same application, so the control run created a second key pair.
-Mapping a token to a key id is inferred from creation order; confirm the creation times in
-the account before revoking.
+The runtime mapping is direct: the authority itself names the key that presents each token.
+For the control keys, the history names the promoting key of each revision. The repository's
+control key gets 403 on `/v1/identity/me`, so which control key sits in which file is not
+proven by the same call. The attribution of `fJYRqHBdNtha` rests on the history entry and the
+session record of which copy ran the v2 publish.
+
+**Creation timestamps are not available.** The service (`791cb05`) returns `id`, `name`,
+`scopes`, `namespaces` and `revoked` per key (`ApiKeySummary`, `crates/feltdb-server/src/auth.rs`).
+No creation time, creator or last use is returned. The application audit
+(`GET …/applications/{app}/audit`) needs `audit:read`, which neither control key holds (403).
+So the earlier "creation order" inference has been replaced by the evidence above, not
+confirmed by timestamps. Gap recorded as F-056.
 
 ### Local side
 
@@ -74,25 +82,44 @@ application and without publishing anything new.
 
 | Option | Call | Needs | Risk |
 |---|---|---|---|
-| **R1 (recommended): roll back** | `POST /api/applications/{app}/environments/production/rollback` `{ target_revision: v1, expected_current_revision: v2, reason }` | your authorization (changes production). The endpoint takes no destructive flag; FeltDB may still refuse because the diff is BREAKING | low: optimistic concurrency on the current revision; history records `rollback: true` |
-| R2: promote v1 with destructive approval | `POST …/environments/production/promote` `{ revision: v1, expected_current_revision: v2, approve_destructive_changes: true }` | your explicit authorization **for this exact diff** (`diff_hash` above), separate from R1 | the approval covers the 55 listed changes and nothing else |
+| **R1: roll back with destructive approval** | `POST /api/applications/{app}/environments/production/rollback` `{ target_revision: v1, expected_current_revision: v2, reason, approve_destructive_changes: true }` | your explicit authorization **for this exact diff** (`diff_hash` above) | the approval covers the 55 listed changes and nothing else; optimistic concurrency on v2; history records `rollback: true` |
+| R2: promote v1 with destructive approval | `POST …/environments/production/promote` `{ revision: v1, expected_current_revision: v2, approve_destructive_changes: true }` | the same authorization | same gate and effect as R1, but recorded as a promotion, not a rollback |
 | R3: leave it | — | nothing | the CompanyOS application keeps the starter's contract until someone acts |
 
-**Recommendation:** authorize R1 now, with R2 only if R1 is refused and you approve it
-separately. Then revoke the two keys created by the control run.
+**Correction (2026-11-04): a rollback to v1 does require destructive approval.** The earlier
+text said the rollback endpoint takes no destructive flag. The service code proves otherwise
+(`791cb05`, unchanged on main). `rollback_environment` and `promote_environment` both call
+`move_environment` → `ApplicationStore::move_environment_pointer`. The only difference is the
+`rollback` flag, which changes the required scope (`application:revision:rollback`) and the
+history and audit labels. Both run the same check: the diff from the current revision to the
+target is computed, and if any migration operation is `destructive` the call fails with
+`destructive_changes_require_approval` unless `approve_destructive_changes` is set
+(`RollbackEnvironmentRequest` accepts it). The read-only diff v2 → v1 marks all 55 operations
+destructive. So **R1 without the flag would be refused**, and the R1/R2 distinction in the
+earlier recommendation was wrong. Why the additions count as destructive is analysed in §5.
+
+**Recommendation:** R1 with `approve_destructive_changes: true` is the right call, recorded as
+a rollback. It needs your explicit approval of `diff_hash sha256:6a4f…8756`. Nothing stored
+is lost: the only record, `_feltkit_meta/startup`, is in a collection both versions declare.
+Once F-048 ships, CompanyOS will publish a corrected contract (v3) anyway. So R3 (leave v2,
+then publish the corrected contract as v3 when CompanyOS moves to the managed path) is also
+reasonable, and avoids approving a destructive diff for a contract (v1) known to lack its
+constraints. Then revoke the two keys created by the control run.
 
 **Exact procedure (not executed)**
-1. Pre-check (read-only): the production pointer is still v2 and the history is unchanged.
-2. R1: one `rollback` call with `expected_current_revision` = v2.
-3. **Stop** if it is refused. Report the response. Do not retry with R2 unless separately
-   authorized.
+1. Pre-check (read-only): the production pointer is still v2 and the history is unchanged;
+   the diff v2 → v1 still has `diff_hash` `sha256:6a4f…8756`.
+2. R1: one `rollback` call with `expected_current_revision` = v2 and
+   `approve_destructive_changes: true` (only with approval of that diff hash).
+3. **Stop** if it is refused, or if the recorded `diff_hash` differs from the approved one.
+   Report the response. Do not retry.
 4. Verify (read-only):
    - the pointer is v1;
    - the history shows a new entry `v2 → v1` with `rollback: true`;
    - readiness passes;
    - `_feltkit_meta/startup` still readable.
-5. Separately authorized: revoke `fJYRqHBdNtha` and `dOdcAJruM39Z` after confirming their
-   creation times. Then delete the starter scratch copy's `.env.local`.
+5. Separately authorized: revoke `fJYRqHBdNtha` and `dOdcAJruM39Z` (attribution in §1; no
+   creation times exist to confirm). Then delete the starter scratch copy's `.env.local`.
 6. Record the outcome as an update to F-050.
 
 **Not done, and not to be done without authorization:** deleting the application, publishing
@@ -105,7 +132,9 @@ any contract, any promote, revoking keys.
 | Owner | rkendel1 (FeltDB, `rkendel1/flow_db`) |
 | Why the service is stale | `fly-deploy.yml` deploys only after CI on `main` succeeds (or by `workflow_dispatch`). CI on `main` has failed on every run since about 17:13 UTC on 2026-11-03, so each deploy run ended in "Production deploy skipped because CI did not succeed". The control plane kept `791cb05` |
 | Failing CI step | job "Build and Test Packages", step "Test semantic query composition and its surface boundaries against the contract" (run 41714200231, `f428423`) |
-| Action | fix that step (or judge it unrelated and deploy deliberately with `workflow_dispatch`), deploy `feltdb-control-plane` at a commit containing `85a869c`, then confirm with `tools/check-managed-release-identity.mjs` (`FELTDB_LIVE_EXPECTED_COMMIT` = the deployed commit) |
+| Root cause (2026-11-04) | **Tooling, not a regression.** The step's tests never ran: vitest could not load Rollup's native binary. Since `f268ad6` the website workspace depends on the `@feltdb/studio` workspace. npm 11 (Node 24 in CI) then reaches `rollup` only as an optional peer of `vite-plugin-dts` and leaves rollup's 25 platform packages (and `@napi-rs/lzma-linux-x64-gnu`) out of `package-lock.json`, so `npm ci` installs none. Bisected to `website/package.json`; a root `rollup` devDependency did not help, while `@feltdb/studio` declaring `rollup` did. Earlier red runs (`3bf3e1f`, `ad5b8ea`, `ab4d395`) failed on a stale certification report, which passes on main now |
+| Fix | branch `claude/ci-npm11-platform-binaries` (flow_db): `rollup` in `@feltdb/studio` devDependencies; lockfile regenerated with npm 11.6.0 (+26 entries, nothing removed or re-versioned); `tools/check-lockfile-optional-dependencies.mjs` plus a CI step after `npm ci`, so a recurrence fails with its cause named |
+| Action | land the fix through CI on `main`; the normal `fly-deploy.yml` run then deploys `feltdb-control-plane` at a commit containing `85a869c`, then confirm with `tools/check-managed-release-identity.mjs` (`FELTDB_LIVE_EXPECTED_COMMIT` = the deployed commit) |
 | Acceptance | `/health` `git_commit` has `85a869c` as an ancestor; the isolated test below passes |
 
 FeltKit's managed e2e test (`tests/e2e/managed-feltdb.test.mjs`) runs against a server built
@@ -144,3 +173,59 @@ drift. The hardening plan adds a live-service check (F-051).
 CompanyOS is tested on the managed path only after the canary passes, and only after F-048
 (constraint parity) is fixed. Otherwise the test would prove a contract without CompanyOS's
 unique constraints.
+
+## 5. Why adding a collection is classified destructive
+
+Source: `crates/feltdb/src/application.rs` in flow_db. The file is identical at the deployed
+commit `791cb05` and at `origin/main` `f428423`, so this is what the service does now and what
+0.21.0 will do. Analysis only: **no approval semantics were changed.**
+
+**How a promotion or rollback is gated** (`move_environment_pointer` → `application_revision_diff`):
+
+1. `diff_manifests` lists every changed resource with a section default safety. Collections get
+   `RequiresMigration`, whether added, modified or removed. Indexes and workflows get `Safe`.
+   Actions, agents, capabilities, connections and policies get `SecuritySensitive`.
+2. `compatibility(before, after)` gives the whole revision one verdict. It is `Breaking` if any
+   collection or field of `before` is missing from `after`, and `RequiresMigration` if a
+   field's type name changed. Otherwise it is `Compatible`. Additions never affect it.
+3. Each `RequiresMigration` or `Breaking` change becomes a migration operation with
+   ```
+   destructive = kind == Removed
+              || safety == Breaking
+              || (section == "collections" && compatibility(whole revision) == Breaking)
+   ```
+4. Any destructive operation, or (when there is a previous revision) any security-sensitive
+   change, refuses the move unless `approve_destructive_changes` is set.
+
+**So an addition is destructive only by contagion (the third clause).** In a revision that
+also removes a collection or a field, every collection operation becomes destructive, additions
+included. In v2 → v1, the two starter collections v1 does not declare make the whole revision
+`Breaking`, so all 52 additions are flagged too. In a purely additive revision, the additions
+are migration operations but not destructive, and promotion proceeds without approval. The
+existing test `destructive_change_requires_acknowledgement_and_audit_binds_diff` covers only
+a removal. No test pins either behaviour for additions.
+
+**Classification as implemented vs. a proposed intent** (the owner decides; nothing here is implemented):
+
+| Change | Implemented | Proposed intent | Reason |
+|---|---|---|---|
+| Collection added, nothing removed | migration op, not destructive | same | nothing stored can be lost or invalidated |
+| Collection added, something else removed | **destructive** (contagion) | not destructive; the removal alone needs approval | the approval list would then name the operations that can lose data, not 52 that cannot |
+| Collection removed | destructive | destructive | records become unreachable |
+| Field removed | destructive (it makes the revision `Breaking`) | destructive | values are lost |
+| Field type changed | `RequiresMigration` (not destructive unless the revision is otherwise `Breaking`) | needs approval when stored records can fail the new type | stored values may not satisfy it |
+| Field becomes required or non-nullable, gains an enum, a reference or a unique constraint | not gated by this rule. The state-schema comparison (`compare_schemas`) affects only the reported classification, not the gate | needs approval when the collection holds records | existing records may violate it (relevant to F-048's upgrade) |
+| Index added or removed | `Safe` | `Safe` (a unique index: as the row above) | |
+| Security-sensitive section changed | needs approval (same flag) | same, but a separate flag | one flag now approves both data loss and authorization changes |
+
+**What a change would require** (per the instruction not to change semantics without a tested
+compatibility analysis):
+- characterization tests that pin today's behaviour for each row before any change;
+- a decision on whether `diff_hash` approvals already recorded stay valid (the hash covers the
+  diff, so a reclassification changes the hash for the same revisions);
+- the CLI's gate (`feltdb publish` stages `BREAKING` and `MIGRATION_REQUIRED` diffs) is a
+  separate rule from the server's `destructive` gate, and both would have to agree.
+
+Recorded as F-052 (cause added: contagion makes additions destructive) and F-057 (tightening
+constraints on populated collections is not gated by the server's destructive check). These
+are findings for flow_db. F-057 comes from reading the code only, with no test run.

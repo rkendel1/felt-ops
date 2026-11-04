@@ -1,11 +1,11 @@
 {
-  "recordedAt": "2026-11-03T22:59:55.986Z",
-  "startedAt": "2026-11-03T22:59:23.213Z",
+  "recordedAt": "2026-11-04T15:00:35.329Z",
+  "startedAt": "2026-11-04T15:00:00.999Z",
   "discovery": [
     {
       "package": "@feltdb/feltkit",
-      "installed": "0.3.13",
-      "latest": "0.3.13"
+      "installed": "0.3.14",
+      "latest": "0.3.14"
     },
     {
       "package": "@feltdb/core",
@@ -19,8 +19,8 @@
     },
     {
       "package": "@appport/services",
-      "installed": "0.14.0",
-      "latest": "0.14.0"
+      "installed": "0.15.0",
+      "latest": "0.15.0"
     }
   ],
   "oldPlatform": {
@@ -34,7 +34,7 @@
       "purchase PR-0040 approved and ordered",
       "change CR-0001 recorded; baseline captured"
     ],
-    "changeId": "mw1aiooe37a040d09b57",
+    "changeId": "mw28u2ss32d84bb593f8",
     "number": "CR-0001",
     "fingerprint": {
       "counts": {
@@ -67,7 +67,7 @@
     "pass": 9,
     "fail": 0,
     "platform": {
-      "feltkit": "0.3.13",
+      "feltkit": "0.3.14",
       "core": "0.21.0"
     }
   },
@@ -95,70 +95,70 @@
   },
   "history": [
     {
-      "at": "2026-11-03T22:59:38.990Z",
+      "at": "2026-11-04T15:00:17.452Z",
       "actor": "eli",
       "source": "platform",
       "kind": "change.requested",
       "summary": "CR-0001 (platform): Upgrade FeltKit 0.3.12 → 0.3.13 (FeltDB 0.20.0 → 0.21.0)"
     },
     {
-      "at": "2026-11-03T22:59:39.000Z",
+      "at": "2026-11-04T15:00:17.466Z",
       "actor": "eli",
       "source": "verification",
       "kind": "baseline.captured",
       "summary": "Data baseline: departments 7, people 150, authorities 16, customers 20, contracts 20, suppliers 12, purchaseRequests 40, purchaseOrders 37, invoices 30, commitments 30, policyVersions 2, incidents 0, agents 5, assignments 0, timeline 10."
     },
     {
-      "at": "2026-11-03T22:59:55.495Z",
+      "at": "2026-11-04T15:00:34.881Z",
       "actor": "eli",
       "source": "platform",
       "kind": "change.assessed",
       "summary": "discovered → assessed by Eli Novak: FeltKit pins @appport/sdk 1.4.0; FeltDB 0.21.0 required by 0.3.13. No schema change in CompanyOS.."
     },
     {
-      "at": "2026-11-03T22:59:55.510Z",
+      "at": "2026-11-04T15:00:34.894Z",
       "actor": "eli",
       "source": "assertion",
       "kind": "evidence.reported",
-      "summary": "Eli Novak reported npm test-run feltkit 0.3.13: passed."
+      "summary": "Eli Novak reported npm test-run feltkit 0.3.14: passed."
     },
     {
-      "at": "2026-11-03T22:59:55.517Z",
+      "at": "2026-11-04T15:00:34.917Z",
       "actor": "eli",
       "source": "platform",
       "kind": "change.tested",
-      "summary": "assessed → tested by Eli Novak (evidence: npm test-run feltkit 0.3.13, reported)."
+      "summary": "assessed → tested by Eli Novak (evidence: npm test-run feltkit 0.3.14, reported)."
     },
     {
-      "at": "2026-11-03T22:59:55.529Z",
+      "at": "2026-11-04T15:00:34.934Z",
       "actor": "omar",
       "source": "platform",
       "kind": "change.approved",
       "summary": "tested → approved by Omar Haddad: Approved for production.."
     },
     {
-      "at": "2026-11-03T22:59:55.558Z",
+      "at": "2026-11-04T15:00:34.962Z",
       "actor": "eli",
       "source": "assertion",
       "kind": "deployment.recorded",
       "summary": "platform-0.3.13 deployed to local-production (receipt recorded as reported)."
     },
     {
-      "at": "2026-11-03T22:59:55.577Z",
+      "at": "2026-11-04T15:00:34.976Z",
       "actor": "eli",
       "source": "platform",
       "kind": "change.deployed",
       "summary": "approved → deployed by Eli Novak (evidence: local-production deployment platform-0.3.13, reported)."
     },
     {
-      "at": "2026-11-03T22:59:55.596Z",
+      "at": "2026-11-04T15:00:34.989Z",
       "actor": "eli",
       "source": "verification",
       "kind": "data.verified",
       "summary": "Business data matches the pre-upgrade baseline."
     },
     {
-      "at": "2026-11-03T22:59:55.610Z",
+      "at": "2026-11-04T15:00:35.000Z",
       "actor": "eli",
       "source": "platform",
       "kind": "change.verified",

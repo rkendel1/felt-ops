@@ -1,5 +1,5 @@
 {
-  "recordedAt": "2026-11-03T23:42:43.793Z",
+  "recordedAt": "2026-11-04T15:00:31.360Z",
   "before": {
     "grants": [
       {
@@ -20,13 +20,13 @@
     ],
     "pendingApprovals": [
       {
-        "requestId": "mw1c22sh152104bd9ac5",
+        "requestId": "mw28ud6722440f9126be",
         "number": "PR-0038",
         "step": "Finance",
         "amount": 14250
       },
       {
-        "requestId": "mw1c22shf8d6de453d18",
+        "requestId": "mw28ud6738177ec21e7b",
         "number": "PR-0037",
         "step": "Finance",
         "amount": 8400
@@ -55,24 +55,24 @@
       "transferredFrom": null
     },
     {
-      "kind": "purchase.approve.finance",
-      "limit": 100000,
-      "transferredFrom": "mw1c22sab7049758e11a"
+      "kind": "invoice.approve",
+      "limit": 50000,
+      "transferredFrom": "mw28ud5z2a53ab545a4f"
     },
     {
       "kind": "purchase.approve.manager",
       "limit": 25000,
-      "transferredFrom": "mw1c22sa7d9889ece0eb"
+      "transferredFrom": "mw28ud5z49c2b5c0a542"
     },
     {
-      "kind": "invoice.approve",
-      "limit": 50000,
-      "transferredFrom": "mw1c22sa41fef876e6ec"
+      "kind": "purchase.approve.finance",
+      "limit": 100000,
+      "transferredFrom": "mw28ud5zb2e277d1ecd9"
     }
   ],
   "fionaHistory": [
     {
-      "at": "2026-11-03T23:42:43.661Z",
+      "at": "2026-11-04T15:00:31.203Z",
       "kind": "person.departed",
       "summary": "Left on 2026-11-07 (resignation). Responsibilities moved to Rhea Das.",
       "actorId": "agent-steward"
@@ -81,8 +81,8 @@
   "sessionsRevoked": 1,
   "verification": {
     "ok": true,
-    "by": "mw1c22s5762cf3940ffe",
-    "at": "2026-11-03T23:42:43.786Z",
+    "by": "mw28ud5ubd59e6b378db",
+    "at": "2026-11-04T15:00:31.346Z",
     "method": "departure records",
     "detail": {
       "status": "departed",

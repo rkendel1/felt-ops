@@ -1,16 +1,16 @@
 {
-  "recordedAt": "2026-11-03T23:01:38.188Z",
+  "recordedAt": "2026-11-04T15:00:00.005Z",
   "r1Commit": "171b6e3b9a9e1452f59713ef77c5d0203e4f3d07",
-  "server": "http://localhost:32835",
+  "server": "http://localhost:42309",
   "approvedBeforeCrash": 2,
   "firstAgent": {
     "exitCode": 137,
     "log": [
-      "[agent 2026-11-03T23:01:36.283Z] connected to http://localhost:32835: 36 tools",
-      "[agent 2026-11-03T23:01:36.306Z] working AS-0002 (assigned): Reverse four duplicate Northwind commitments",
-      "[agent 2026-11-03T23:01:36.372Z] accepted with FeltKit task task-a111d5b6-5c4f-40c0-90e7-a8d09942bee1",
-      "[agent 2026-11-03T23:01:36.461Z] 4 duplicate(s); 4 reversal(s) proposed",
-      "[agent 2026-11-03T23:01:36.785Z] FAULT INJECTION: exiting abruptly after 2 succeeded action(s)"
+      "[agent 2026-11-04T14:59:58.117Z] connected to http://localhost:42309: 36 tools",
+      "[agent 2026-11-04T14:59:58.135Z] working AS-0002 (assigned): Reverse four duplicate Northwind commitments",
+      "[agent 2026-11-04T14:59:58.204Z] accepted with FeltKit task task-e3f46586-2f93-4d57-b43d-a3547f20e148",
+      "[agent 2026-11-04T14:59:58.296Z] 4 duplicate(s); 4 reversal(s) proposed",
+      "[agent 2026-11-04T14:59:58.624Z] FAULT INJECTION: exiting abruptly after 2 succeeded action(s)"
     ]
   },
   "sessionsRevoked": 1,
@@ -31,7 +31,7 @@
         "duplicates": 2,
         "overCommitted": 2,
         "openCommitments": 36,
-        "openTotal": 240316.73000000004
+        "openTotal": 240316.73
       }
     }
   },
@@ -39,40 +39,40 @@
   "secondAgent": {
     "exitCode": 0,
     "log": [
-      "[agent 2026-11-03T23:01:37.616Z] connected to http://localhost:32835: 36 tools",
-      "[agent 2026-11-03T23:01:37.628Z] working AS-0003 (assigned): Reverse four duplicate Northwind commitments",
-      "[agent 2026-11-03T23:01:37.672Z] accepted with FeltKit task task-4ec79fad-40f3-4e07-be5c-ced9355f9f9a",
-      "[agent 2026-11-03T23:01:37.711Z] 2 duplicate(s); 2 reversal(s) proposed",
-      "[agent 2026-11-03T23:01:38.105Z] done: No duplicates remain; this task executed 2 reversal(s)."
+      "[agent 2026-11-04T14:59:59.512Z] connected to http://localhost:42309: 36 tools",
+      "[agent 2026-11-04T14:59:59.521Z] working AS-0003 (assigned): Reverse four duplicate Northwind commitments",
+      "[agent 2026-11-04T14:59:59.558Z] accepted with FeltKit task task-9726175e-3eee-498b-96d3-0702c1815963",
+      "[agent 2026-11-04T14:59:59.597Z] 2 duplicate(s); 2 reversal(s) proposed",
+      "[agent 2026-11-04T14:59:59.959Z] done: No duplicates remain; this task executed 2 reversal(s)."
     ]
   },
   "verification": {
     "ok": true,
-    "by": "mw1al5o982d01c43dcf9",
-    "at": "2026-11-03T23:01:38.144Z",
+    "by": "mw28tmhq28cfe49c04ae",
+    "at": "2026-11-04T14:59:59.985Z",
     "method": "finance.reconciliation computed by CompanyOS",
     "detail": {
       "duplicates": 0,
       "overCommitted": 0,
       "openCommitments": 34,
-      "openTotal": 237066.73000000004
+      "openTotal": 237066.73
     }
   },
   "reversed": [
     {
-      "id": "mw1al6458b99b8c3ffd4",
+      "id": "mw28tms7c201115d71e6",
       "by": "agent-ledger"
     },
     {
-      "id": "mw1al6481aebcaae137e",
+      "id": "mw28tmsa4943f3ed5a6d",
       "by": "agent-ledger"
     },
     {
-      "id": "mw1al64aeda5d641e640",
+      "id": "mw28tmsb8ee6aaf36390",
       "by": "agent-ledger-2"
     },
     {
-      "id": "mw1al64c8b08be4076b5",
+      "id": "mw28tmsded9fa2bda928",
       "by": "agent-ledger-2"
     }
   ],

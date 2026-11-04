@@ -1,0 +1,81 @@
+{
+  "promotion": {
+    "application_id": "app_VdI0HIgo0jINzwhFSs",
+    "correlation_id": "corr_5dece0f0c224170eceb44cce",
+    "diff_hash": "sha256:2ef5d9c0ed24d39962b8ffbd08128212d8fc608f6d2537303cf5f3e98fd00024",
+    "environment": "production",
+    "from_revision": "apprev://tenant_m174odKLypm5X0jB88/app_VdI0HIgo0jINzwhFSs/sha256:d4a01cf926ef923382bd4899f16cbccf40a2014dee1c179e9094f077a451383f",
+    "promoted_at": 1793806363,
+    "promoted_by": "xjG1yrnGsA4X",
+    "reason": "F-050 recovery: CompanyOS contract v3 (FeltKit 0.3.14, F-048 parity). Owner approved diff_hash sha256:2ef5d9c0ed24d39962b8ffbd08128212d8fc608f6d2537303cf5f3e98fd00024",
+    "rollback": false,
+    "to_revision": "apprev://tenant_m174odKLypm5X0jB88/app_VdI0HIgo0jINzwhFSs/sha256:370cc21b53aec837048e6bb038e016b11f7cc8d175db544f0f9d70b4e7d32162"
+  },
+  "readiness": {
+    "checks": [
+      {
+        "blocking": true,
+        "message": "passed",
+        "name": "manifest valid",
+        "passed": true
+      },
+      {
+        "blocking": true,
+        "message": "passed",
+        "name": "runtime compatible",
+        "passed": true
+      },
+      {
+        "blocking": true,
+        "message": "passed",
+        "name": "schema valid",
+        "passed": true
+      },
+      {
+        "blocking": true,
+        "message": "passed",
+        "name": "references valid",
+        "passed": true
+      },
+      {
+        "blocking": true,
+        "message": "passed",
+        "name": "capabilities available",
+        "passed": true
+      },
+      {
+        "blocking": true,
+        "message": "passed",
+        "name": "connections available",
+        "passed": true
+      },
+      {
+        "blocking": true,
+        "message": "passed",
+        "name": "policies valid",
+        "passed": true
+      },
+      {
+        "blocking": true,
+        "message": "passed",
+        "name": "required artifacts available",
+        "passed": true
+      },
+      {
+        "blocking": true,
+        "message": "passed",
+        "name": "environment valid",
+        "passed": true
+      },
+      {
+        "blocking": true,
+        "message": "passed",
+        "name": "migration valid",
+        "passed": true
+      }
+    ],
+    "environment": "production",
+    "revision_id": "apprev://tenant_m174odKLypm5X0jB88/app_VdI0HIgo0jINzwhFSs/sha256:370cc21b53aec837048e6bb038e016b11f7cc8d175db544f0f9d70b4e7d32162",
+    "status": "READY"
+  }
+}

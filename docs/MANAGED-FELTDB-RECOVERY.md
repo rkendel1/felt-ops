@@ -117,7 +117,11 @@ way back to v1, in case it is ever needed. It is not recommended.
 > - The diff from v2 is BREAKING, `diff_hash sha256:2ef5d9c0ed24d39962b8ffbd08128212d8fc608f6d2537303cf5f3e98fd00024`.
 >   It has 29 destructive operations and 26 added security-sensitive policies.
 > - Evidence: `evidence/managed-feltdb/companyos-v3-staged-2026-11-04.md`.
-> - Step 5 (approval of that exact diff) is pending.
+> - **Step 5 is done.** The owner approved that exact diff, and **v3 was promoted** (pointer v3, history
+>   v2 → v3 by the CompanyOS control key, readiness READY).
+> - **Step 6 is done.** CompanyOS on FeltKit 0.3.14 started against Managed FeltDB and reported `ready`.
+> - **F-050 is resolved.**
+> - New prerequisite for real operation: a permanent `FELTKIT_API_KEY_VERIFIER_KEY` (see the evidence file).
 
 1. Preconditions:
    - F-048 is released in FeltKit;

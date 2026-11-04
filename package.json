@@ -17,7 +17,7 @@
     "agent": "tsx agents/runner.ts"
   },
   "dependencies": {
-    "@feltdb/feltkit": "^0.3.13",
+    "@feltdb/feltkit": "^0.3.14",
     "react": "19.2.0",
     "react-dom": "19.2.0"
   },

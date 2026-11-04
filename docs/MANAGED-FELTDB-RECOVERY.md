@@ -98,15 +98,46 @@ target is computed, and if any migration operation is `destructive` the call fai
 destructive. So **R1 without the flag would be refused**, and the R1/R2 distinction in the
 earlier recommendation was wrong. Why the additions count as destructive is analysed in §5.
 
-**Recommendation:** R1 with `approve_destructive_changes: true` is the right call, recorded as
-a rollback. It needs your explicit approval of `diff_hash sha256:6a4f…8756`. Nothing stored
-is lost: the only record, `_feltkit_meta/startup`, is in a collection both versions declare.
-Once F-048 ships, CompanyOS will publish a corrected contract (v3) anyway. So R3 (leave v2,
-then publish the corrected contract as v3 when CompanyOS moves to the managed path) is also
-reasonable, and avoids approving a destructive diff for a contract (v1) known to lack its
-constraints. Then revoke the two keys created by the control run.
+**Recommendation (revised 2026-11-04): R3. Leave the production pointer on v2 until a
+corrected contract is ready.** Neither v1 nor v2 is CompanyOS's real contract. v1 lacks
+CompanyOS's 21 unique constraints and 18 indexes (F-048). v2 is the starter. Rolling back to v1
+would mean approving a destructive diff to reach a contract that is known to be incomplete,
+on a service that cannot run FeltKit 0.3.13 apps anyway until 0.21.0 is deployed. Nothing is
+lost by waiting: production holds no business data, and v2 changes nothing while no CompanyOS
+process uses the managed path. R1 (and the procedure below) is kept only as the documented
+way back to v1, in case it is ever needed. It is not recommended.
 
-**Exact procedure (not executed)**
+**Plan: a corrected v3** (not authorized; each gate is a separate decision)
+
+1. Preconditions:
+   - F-048 is released in FeltKit;
+   - the live service reports a commit containing `85a869c`
+     (`check-managed-release-identity.mjs` and `/health`);
+   - the isolated canary in §4 passes.
+2. Generate CompanyOS's contract with the released FeltKit (`feltkit contract`) into a scratch
+   path, not over the committed file.
+3. Compare its complete declarations with the local compiled contract, the way the FeltKit
+   parity test does: read back as the authority reads a manifest, the state-contract hash must
+   equal `compileStateContract`'s. Also check the counts: 27 app collections, 21 unique
+   constraints, 18 indexes.
+4. Publish it as a **staged revision** (no promotion). Read FeltDB's own diff from the current
+   production revision (v2) to it: `GET …/revisions/{v3}/diff?from={v2}`, read-only. Record
+   its classification, every operation marked `destructive`, any security-sensitive change,
+   and its `diff_hash`.
+   - Expected: removals of the starter's `tasks`/`projects` shape make the whole revision
+     `Breaking` (§5), so every collection operation will be listed as destructive.
+5. Present that diff and the exact approval it needs: `approve_destructive_changes` for that
+   `diff_hash` only. Get explicit approval before any production promotion.
+6. Promote with `expected_current_revision` = v2. Verify:
+   - the pointer;
+   - the history entry;
+   - readiness;
+   - a CompanyOS start-up against it (the storage check names any missing index).
+
+Publishing a staged revision changes the application's revision list but not production.
+It also needs authorization, because it publishes a contract.
+
+**R1 procedure, kept for reference (not recommended, not executed)**
 1. Pre-check (read-only): the production pointer is still v2 and the history is unchanged;
    the diff v2 → v1 still has `diff_hash` `sha256:6a4f…8756`.
 2. R1: one `rollback` call with `expected_current_revision` = v2 and

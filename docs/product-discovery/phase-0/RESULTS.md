@@ -6,14 +6,49 @@ Run on 2026-11-23 in this session's container: Docker 29.10 local daemon, Node 2
 
 | Experiment | Verdict | One line |
 |---|---|---|
-| S1 EVE coding quality | **NOT RUN: blocked** | Fixture, 10 tasks, hidden graders and the EVE harness are ready and validated. Neither key in this session can call the pre-registered model (details below) |
+| S1 EVE coding quality | **PASS** (by the fixed rule) **with a ceiling-effect caveat** | EVE 10/10 usable, Claude Code 10/10, same model (`claude-sonnet-5-5`). Both took about 10 s per task, so the set proves self-hosted EVE works end to end at parity on small, well-specified tasks. It does **not** discriminate quality on realistic work |
 | S2 remote claiming | **PARTIAL** | Full lease, fencing and re-claim lifecycle works across processes, but only when every runner shares **one** principal that delivers the work itself |
 | S3 steering availability | **PASS** | Agent control is published in 0.3.36 and 0.3.37; 13/13 FeltKit tests pass; it works live over MCP and HTTP on 0.3.37 |
 | S4 GitHub via integrations | **PARTIAL** | Reads, idempotent writes and unknown-outcome handling all hold. **GitHub's own webhooks can't be received**: inbound webhooks accept only AppPort-signed deliveries |
 
 ---
 
-## S1: EVE coding quality: not run
+## S1: EVE coding quality: PASS (by the pre-registered rule), with a caveat
+
+Scored run on 2026-11-23 after the owner supplied a working Anthropic key. One attempt per task per
+harness, `claude-sonnet-5-5` for both, direct to `api.anthropic.com` (deviations D2–D5; void run
+V1 below). Evidence: `s1/evidence/summary.json`, plus per task `result.json` and `diff.patch`
+for each harness.
+
+| | H-EVE (`@appport/eve` 1.0.2, eve-code, Docker deny-all, `eve start`) | H-CC (Claude Code headless, container) |
+|---|---|---|
+| Usable (hidden grader + visible suite + no deleted or skipped tests) | **10/10** | **10/10** |
+| Completed on its own | 10/10 | 10/10 |
+| Infrastructure failures | 0 | 0 |
+| Median wall time | 11 s | 9 s |
+| Tool calls / tool errors | 28 / 2 (both non-zero exits of exploratory `cat`/`grep`) | 35 / 0 |
+| Test runs (correction loops) | 13 | 17 |
+| Tokens in / out | 342k / 10.3k | 760k / 9.5k (incl. cache reads) |
+| Cost | not reported (direct API; no gateway cost) | $0.24 total |
+| Human interventions | 0 | 0 |
+
+Both harnesses added regression tests on several tasks. Neither deleted or skipped any.
+
+**Verdict:** EVE usable 10 ≥ 7 and 10 ≥ Claude Code − 2, so **PASS**.
+
+**Caveat (judgement; it doesn't change the verdict):**
+- Both harnesses solved every task in seconds, so the fixture is too easy to separate them. S1
+  shows that self-hosted EVE (build, Docker sandbox, coding extension, direct Anthropic) completes
+  well-specified repository tasks as reliably as Claude Code with the same model.
+- It does **not** show parity on what Handoff will actually delegate: multi-file changes in a
+  large unfamiliar codebase, ambiguous requirements, long runs, or steering and recovery mid-run.
+- Recommendation: a harder, pre-registered **S1b** before Phase 1 is approved.
+  - 10 tasks from a real open-source repository at a pinned commit, each with its upstream test
+    as the grader.
+  - Multi-file features, a 45-minute limit, and 3 attempts per task.
+  - One steering instruction and one runner kill per run.
+
+### Preparation history (S1 was blocked earlier in this session)
 
 **Blocker (fact):**
 - **AI Gateway key:** free tier. Every Anthropic model, including the pre-registered
@@ -206,7 +241,7 @@ Earlier deviations:
    These were harness errors on my side. Each was fixed and the experiment re-run from fresh
    state. Only the final run is reported.
 
-## What I need from you
+## What I needed from the owner (S1 was unblocked by a working key on 2026-11-23)
 
 1. **S1 model access.** Either:
    - add AI Gateway credits (the key is free tier); or

@@ -1,0 +1,27 @@
+diff -ruN -x node_modules -x .eve -x '.*' /home/user/felt-ops/docs/product-discovery/phase-0/s1/fixture/src/cache.js /tmp/claude-0/-home-user/4a03c94e-9ebd-5764-a1e2-9dcd3d7ea003/scratchpad/s1-scored/eve/T04/workspace/src/cache.js
+--- /home/user/felt-ops/docs/product-discovery/phase-0/s1/fixture/src/cache.js	2026-11-23 13:49:42.318884022 +0000
++++ /tmp/claude-0/-home-user/4a03c94e-9ebd-5764-a1e2-9dcd3d7ea003/scratchpad/s1-scored/eve/T04/workspace/src/cache.js	2026-11-23 14:22:17.000000000 +0000
+@@ -6,7 +6,11 @@
+     this.map = new Map();
+   }
+   get(key) {
+-    return this.map.get(key);
++    if (!this.map.has(key)) return undefined;
++    const value = this.map.get(key);
++    this.map.delete(key);
++    this.map.set(key, value);
++    return value;
+   }
+   has(key) {
+     return this.map.has(key);
+diff -ruN -x node_modules -x .eve -x '.*' /home/user/felt-ops/docs/product-discovery/phase-0/s1/fixture/test/basic.test.js /tmp/claude-0/-home-user/4a03c94e-9ebd-5764-a1e2-9dcd3d7ea003/scratchpad/s1-scored/eve/T04/workspace/test/basic.test.js
+--- /home/user/felt-ops/docs/product-discovery/phase-0/s1/fixture/test/basic.test.js	2026-11-23 13:49:54.543876369 +0000
++++ /tmp/claude-0/-home-user/4a03c94e-9ebd-5764-a1e2-9dcd3d7ea003/scratchpad/s1-scored/eve/T04/workspace/test/basic.test.js	2026-11-23 14:22:17.000000000 +0000
+@@ -36,3 +36,7 @@
+ test("renderTable", () => {
+   assert.equal(L.renderTable([{ a: 1, b: "x" }]), "| a | b |\n| --- | --- |\n| 1 | x |");
+ });
++test("LRUCache get marks entry as recently used", () => {
++  const c = new L.LRUCache(2); c.set("a", 1).set("b", 2); c.get("a"); c.set("c", 3);
++  assert.equal(c.has("a"), true); assert.equal(c.has("b"), false); assert.equal(c.has("c"), true);
++});

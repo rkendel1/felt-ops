@@ -1,0 +1,47 @@
+diff -ruN -x node_modules -x .eve -x '.*' /home/user/felt-ops/docs/product-discovery/phase-0/s1/fixture/src/index.js /tmp/claude-0/-home-user/4a03c94e-9ebd-5764-a1e2-9dcd3d7ea003/scratchpad/s1-scored/cc/T10/workspace/src/index.js
+--- /home/user/felt-ops/docs/product-discovery/phase-0/s1/fixture/src/index.js	2026-11-23 13:49:42.328838820 +0000
++++ /tmp/claude-0/-home-user/4a03c94e-9ebd-5764-a1e2-9dcd3d7ea003/scratchpad/s1-scored/cc/T10/workspace/src/index.js	2026-11-23 14:24:55.551996682 +0000
+@@ -7,3 +7,4 @@
+ export { retry } from "./retry.js";
+ export { slugify } from "./slug.js";
+ export { renderTable } from "./table.js";
++export { summarizeInvoices } from "./report.js";
+diff -ruN -x node_modules -x .eve -x '.*' /home/user/felt-ops/docs/product-discovery/phase-0/s1/fixture/src/report.js /tmp/claude-0/-home-user/4a03c94e-9ebd-5764-a1e2-9dcd3d7ea003/scratchpad/s1-scored/cc/T10/workspace/src/report.js
+--- /home/user/felt-ops/docs/product-discovery/phase-0/s1/fixture/src/report.js	1970-01-01 00:00:00.000000000 +0000
++++ /tmp/claude-0/-home-user/4a03c94e-9ebd-5764-a1e2-9dcd3d7ea003/scratchpad/s1-scored/cc/T10/workspace/src/report.js	2026-11-23 14:24:55.551996682 +0000
+@@ -0,0 +1,20 @@
++import { parseCSV } from "./csv.js";
++import { parseMoney } from "./money.js";
++
++/** Summarize invoice CSV (header `id,customer,amount`) into count, total and per-customer cents. */
++export function summarizeInvoices(csvText) {
++  const [, ...rows] = parseCSV(csvText);
++  const sums = new Map();
++  let totalCents = 0;
++  for (const [id, customer, amount] of rows) {
++    let cents;
++    try {
++      cents = parseMoney(amount);
++    } catch {
++      throw new Error(`Invalid amount for invoice ${id}: ${amount}`);
++    }
++    totalCents += cents;
++    sums.set(customer, (sums.get(customer) ?? 0) + cents);
++  }
++  return { count: rows.length, totalCents, byCustomer: Object.fromEntries(sums) };
++}
+diff -ruN -x node_modules -x .eve -x '.*' /home/user/felt-ops/docs/product-discovery/phase-0/s1/fixture/test/basic.test.js /tmp/claude-0/-home-user/4a03c94e-9ebd-5764-a1e2-9dcd3d7ea003/scratchpad/s1-scored/cc/T10/workspace/test/basic.test.js
+--- /home/user/felt-ops/docs/product-discovery/phase-0/s1/fixture/test/basic.test.js	2026-11-23 13:49:54.543876369 +0000
++++ /tmp/claude-0/-home-user/4a03c94e-9ebd-5764-a1e2-9dcd3d7ea003/scratchpad/s1-scored/cc/T10/workspace/test/basic.test.js	2026-11-23 14:25:02.634786579 +0000
+@@ -36,3 +36,11 @@
+ test("renderTable", () => {
+   assert.equal(L.renderTable([{ a: 1, b: "x" }]), "| a | b |\n| --- | --- |\n| 1 | x |");
+ });
++
++test("summarizeInvoices", () => {
++  assert.deepEqual(L.summarizeInvoices("id,customer,amount\n"), { count: 0, totalCents: 0, byCustomer: {} });
++  assert.deepEqual(L.summarizeInvoices("id,customer,amount\n1,A,$1200.00\n2,B,$5\n3,A,$0.50"), {
++    count: 3, totalCents: 120550, byCustomer: { A: 120050, B: 500 },
++  });
++  assert.throws(() => L.summarizeInvoices("id,customer,amount\n7,A,abc"), /7/);
++});

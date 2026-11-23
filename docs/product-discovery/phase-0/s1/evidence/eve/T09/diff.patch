@@ -1,0 +1,49 @@
+diff -ruN -x node_modules -x .eve -x '.*' /home/user/felt-ops/docs/product-discovery/phase-0/s1/fixture/src/table.js /tmp/claude-0/-home-user/4a03c94e-9ebd-5764-a1e2-9dcd3d7ea003/scratchpad/s1-scored/eve/T09/workspace/src/table.js
+--- /home/user/felt-ops/docs/product-discovery/phase-0/s1/fixture/src/table.js	2026-11-23 13:49:42.327043988 +0000
++++ /tmp/claude-0/-home-user/4a03c94e-9ebd-5764-a1e2-9dcd3d7ea003/scratchpad/s1-scored/eve/T09/workspace/src/table.js	2026-11-23 14:23:41.000000000 +0000
+@@ -1,9 +1,23 @@
+-/** Render rows (objects with the same keys) as a Markdown table. */
+-export function renderTable(rows) {
++const DIVIDERS = { left: ":---", right: "---:", center: ":---:" };
++
++/**
++ * Render rows (objects with the same keys) as a Markdown table.
++ * `align` maps column names to "left" | "right" | "center". Without an entry,
++ * columns whose values are all numbers are right-aligned; others use `---`.
++ */
++export function renderTable(rows, { align = {} } = {}) {
+   if (rows.length === 0) return "";
+   const columns = Object.keys(rows[0]);
+   const header = `| ${columns.join(" | ")} |`;
+-  const divider = `| ${columns.map(() => "---").join(" | ")} |`;
++  const dividerFor = (c) => {
++    const a = align?.[c];
++    if (a !== undefined) {
++      if (!Object.hasOwn(DIVIDERS, a)) throw new Error(`Invalid align for "${c}": ${a}`);
++      return DIVIDERS[a];
++    }
++    return rows.every((r) => typeof r[c] === "number") ? "---:" : "---";
++  };
++  const divider = `| ${columns.map(dividerFor).join(" | ")} |`;
+   const body = rows.map((row) => `| ${columns.map((c) => String(row[c] ?? "")).join(" | ")} |`);
+   return [header, divider, ...body].join("\n");
+ }
+diff -ruN -x node_modules -x .eve -x '.*' /home/user/felt-ops/docs/product-discovery/phase-0/s1/fixture/test/basic.test.js /tmp/claude-0/-home-user/4a03c94e-9ebd-5764-a1e2-9dcd3d7ea003/scratchpad/s1-scored/eve/T09/workspace/test/basic.test.js
+--- /home/user/felt-ops/docs/product-discovery/phase-0/s1/fixture/test/basic.test.js	2026-11-23 13:49:54.543876369 +0000
++++ /tmp/claude-0/-home-user/4a03c94e-9ebd-5764-a1e2-9dcd3d7ea003/scratchpad/s1-scored/eve/T09/workspace/test/basic.test.js	2026-11-23 14:23:41.000000000 +0000
+@@ -34,5 +34,14 @@
+ });
+ test("slugify", () => { assert.equal(L.slugify("Héllo, World!"), "hello-world"); });
+ test("renderTable", () => {
+-  assert.equal(L.renderTable([{ a: 1, b: "x" }]), "| a | b |\n| --- | --- |\n| 1 | x |");
++  assert.equal(L.renderTable([{ a: 1, b: "x" }]), "| a | b |\n| ---: | --- |\n| 1 | x |");
++});
++test("renderTable defaults numeric columns to right-aligned", () => {
++  assert.equal(L.renderTable([{ item: "Pen", qty: 2 }]), "| item | qty |\n| --- | ---: |\n| Pen | 2 |");
++});
++test("renderTable honors align option", () => {
++  assert.equal(
++    L.renderTable([{ a: 1, b: "x", c: "y" }], { align: { a: "left", b: "center", c: "right" } }),
++    "| a | b | c |\n| :--- | :---: | ---: |\n| 1 | x | y |"
++  );
+ });

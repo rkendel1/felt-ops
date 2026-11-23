@@ -1,0 +1,58 @@
+diff -ruN -x node_modules -x .eve -x '.*' /home/user/felt-ops/docs/product-discovery/phase-0/s1/fixture/src/retry.js /tmp/claude-0/-home-user/4a03c94e-9ebd-5764-a1e2-9dcd3d7ea003/scratchpad/s1-scored/eve/T07/workspace/src/retry.js
+--- /home/user/felt-ops/docs/product-discovery/phase-0/s1/fixture/src/retry.js	2026-11-23 13:49:42.323898040 +0000
++++ /tmp/claude-0/-home-user/4a03c94e-9ebd-5764-a1e2-9dcd3d7ea003/scratchpad/s1-scored/eve/T07/workspace/src/retry.js	2026-11-23 14:23:05.000000000 +0000
+@@ -1,12 +1,22 @@
+-/** Call fn until it resolves, at most `attempts` times, waiting `delayMs` between attempts. */
+-export async function retry(fn, { attempts = 3, delayMs = 0 } = {}) {
++/**
++ * Call fn until it resolves, at most `attempts` times.
++ * The wait before attempt n+1 is `delayMs * factor^(n-1)`.
++ * `onRetry(error, attempt)` is called after each failed attempt that will be retried.
++ * Errors with `retryable === false` are rethrown immediately.
++ */
++export async function retry(fn, { attempts = 3, delayMs = 0, factor = 1, onRetry } = {}) {
+   let lastError;
+   for (let i = 1; i <= attempts; i++) {
+     try {
+       return await fn(i);
+     } catch (error) {
+       lastError = error;
+-      if (i < attempts && delayMs > 0) await new Promise((r) => setTimeout(r, delayMs));
++      if (error != null && error.retryable === false) throw error;
++      if (i < attempts) {
++        if (onRetry) onRetry(error, i);
++        const wait = delayMs * Math.pow(factor, i - 1);
++        if (wait > 0) await new Promise((r) => setTimeout(r, wait));
++      }
+     }
+   }
+   throw lastError;
+diff -ruN -x node_modules -x .eve -x '.*' /home/user/felt-ops/docs/product-discovery/phase-0/s1/fixture/test/retry.test.js /tmp/claude-0/-home-user/4a03c94e-9ebd-5764-a1e2-9dcd3d7ea003/scratchpad/s1-scored/eve/T07/workspace/test/retry.test.js
+--- /home/user/felt-ops/docs/product-discovery/phase-0/s1/fixture/test/retry.test.js	1970-01-01 00:00:00.000000000 +0000
++++ /tmp/claude-0/-home-user/4a03c94e-9ebd-5764-a1e2-9dcd3d7ea003/scratchpad/s1-scored/eve/T07/workspace/test/retry.test.js	2026-11-23 14:23:05.000000000 +0000
+@@ -0,0 +1,25 @@
++import test from 'node:test';
++import assert from 'node:assert/strict';
++import { retry } from '../src/retry.js';
++
++test('onRetry called for retried failures only', async () => {
++  const calls = [];
++  await assert.rejects(
++    retry(async () => { throw new Error('x'); }, { attempts: 3, onRetry: (e, n) => calls.push(n) }),
++  );
++  assert.deepEqual(calls, [1, 2]);
++});
++
++test('retryable === false stops immediately', async () => {
++  let n = 0;
++  const err = Object.assign(new Error('fatal'), { retryable: false });
++  await assert.rejects(retry(async () => { n++; throw err; }, { attempts: 5 }), (e) => e === err);
++  assert.equal(n, 1);
++});
++
++test('factor scales delay', async () => {
++  const start = Date.now();
++  let n = 0;
++  await retry(async () => { if (++n < 3) throw new Error('x'); return 'ok'; }, { delayMs: 20, factor: 2 });
++  assert.ok(Date.now() - start >= 55);
++});

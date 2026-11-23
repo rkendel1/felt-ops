@@ -1,0 +1,13 @@
+diff -ruN -x node_modules -x .eve -x '.*' /home/user/felt-ops/docs/product-discovery/phase-0/s1/fixture/src/dates.js /tmp/claude-0/-home-user/4a03c94e-9ebd-5764-a1e2-9dcd3d7ea003/scratchpad/s1-scored/cc/T03/workspace/src/dates.js
+--- /home/user/felt-ops/docs/product-discovery/phase-0/s1/fixture/src/dates.js	2026-11-23 13:49:42.317109267 +0000
++++ /tmp/claude-0/-home-user/4a03c94e-9ebd-5764-a1e2-9dcd3d7ea003/scratchpad/s1-scored/cc/T03/workspace/src/dates.js	2026-11-23 14:24:22.047176349 +0000
+@@ -10,8 +10,7 @@
+   let added = 0;
+   while (added < n) {
+     result.setUTCDate(result.getUTCDate() + 1);
+-    added += 1;
+-    if (isWeekend(result)) result.setUTCDate(result.getUTCDate() + 1);
++    if (!isWeekend(result)) added += 1;
+   }
+   return result;
+ }

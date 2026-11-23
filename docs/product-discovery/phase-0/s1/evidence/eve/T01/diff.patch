@@ -1,0 +1,19 @@
+diff -ruN -x node_modules -x .eve -x '.*' /home/user/felt-ops/docs/product-discovery/phase-0/s1/fixture/src/money.js /tmp/claude-0/-home-user/4a03c94e-9ebd-5764-a1e2-9dcd3d7ea003/scratchpad/s1-scored/eve/T01/workspace/src/money.js
+--- /home/user/felt-ops/docs/product-discovery/phase-0/s1/fixture/src/money.js	2026-11-23 13:49:42.313671651 +0000
++++ /tmp/claude-0/-home-user/4a03c94e-9ebd-5764-a1e2-9dcd3d7ea003/scratchpad/s1-scored/eve/T01/workspace/src/money.js	2026-11-23 14:21:31.000000000 +0000
+@@ -3,10 +3,12 @@
+ /** Format integer cents as a currency string, e.g. 123456 → "$1,234.56". */
+ export function formatMoney(cents, currency = "USD") {
+   const symbol = SYMBOLS[currency] ?? `${currency} `;
+-  const whole = Math.trunc(cents / 100);
+-  const frac = String(Math.abs(cents % 100)).padStart(2, "0");
++  const sign = cents < 0 ? "-" : "";
++  const abs = Math.abs(cents);
++  const whole = Math.trunc(abs / 100);
++  const frac = String(abs % 100).padStart(2, "0");
+   const grouped = String(whole).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+-  return `${symbol}${grouped}.${frac}`;
++  return `${sign}${symbol}${grouped}.${frac}`;
+ }
+ 
+ /** Parse "$1,234.50", "1234.5" or "-$5" into integer cents. */

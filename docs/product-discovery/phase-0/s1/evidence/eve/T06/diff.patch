@@ -1,0 +1,31 @@
+diff -ruN -x node_modules -x .eve -x '.*' /home/user/felt-ops/docs/product-discovery/phase-0/s1/fixture/src/query.js /tmp/claude-0/-home-user/4a03c94e-9ebd-5764-a1e2-9dcd3d7ea003/scratchpad/s1-scored/eve/T06/workspace/src/query.js
+--- /home/user/felt-ops/docs/product-discovery/phase-0/s1/fixture/src/query.js	2026-11-23 13:49:42.322418786 +0000
++++ /tmp/claude-0/-home-user/4a03c94e-9ebd-5764-a1e2-9dcd3d7ea003/scratchpad/s1-scored/eve/T06/workspace/src/query.js	2026-11-23 14:22:48.000000000 +0000
+@@ -1,15 +1,23 @@
+-/** Parse "a=1&b=two" into { a: "1", b: "two" }. */
++const decode = (s) => decodeURIComponent(s.replace(/\+/g, " "));
++
++/** Parse "a=1&a=2&b=3" into { a: ["1", "2"], b: "3" }. Repeated keys become arrays; "+" is a space. */
+ export function parseQuery(qs) {
+   const out = {};
+   for (const part of qs.replace(/^\?/, "").split("&")) {
+     if (!part) continue;
+     const [k, v = ""] = part.split("=");
+-    out[decodeURIComponent(k)] = decodeURIComponent(v);
++    const key = decode(k);
++    const val = decode(v);
++    if (!Object.hasOwn(out, key)) out[key] = val;
++    else if (Array.isArray(out[key])) out[key].push(val);
++    else out[key] = [out[key], val];
+   }
+   return out;
+ }
+ 
+-/** Serialize { a: "1", b: "two" } into "a=1&b=two". */
++/** Serialize { a: ["1", "2"], b: "3" } into "a=1&a=2&b=3". */
+ export function stringifyQuery(obj) {
+-  return Object.entries(obj).map(([k, v]) => `${encodeURIComponent(k)}=${encodeURIComponent(v)}`).join("&");
++  return Object.entries(obj)
++    .flatMap(([k, v]) => (Array.isArray(v) ? v : [v]).map((x) => `${encodeURIComponent(k)}=${encodeURIComponent(x)}`))
++    .join("&");
+ }

@@ -1,0 +1,42 @@
+{
+  "harness": "H-EVE",
+  "task": "T09",
+  "model": "claude-sonnet-5-5",
+  "route": "anthropic-direct",
+  "completed": true,
+  "settledOutcome": "completed",
+  "infra": null,
+  "wallMs": 11566,
+  "usage": {
+    "input": 28408,
+    "output": 1277
+  },
+  "toolCalls": 2,
+  "toolErrors": 0,
+  "testRuns": 1,
+  "factTypes": [
+    "session.started",
+    "delivery.admitted",
+    "turn.started",
+    "delivery.consumed",
+    "model.requested",
+    "model.started",
+    "call.requested",
+    "call.started",
+    "call.settled",
+    "model.settled",
+    "usage.recorded",
+    "content.completed",
+    "turn.settled",
+    "delivery.settled"
+  ],
+  "grade": {
+    "task": "T09",
+    "graderPass": true,
+    "visiblePass": true,
+    "visibleTests": 12,
+    "missingVisibleTests": [],
+    "skippedVisible": false,
+    "usable": true
+  }
+}

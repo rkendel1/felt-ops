@@ -1,0 +1,23 @@
+diff -ruN -x node_modules -x .eve -x '.*' /home/user/felt-ops/docs/product-discovery/phase-0/s1/fixture/src/retry.js /tmp/claude-0/-home-user/4a03c94e-9ebd-5764-a1e2-9dcd3d7ea003/scratchpad/s1-scored/cc/T07/workspace/src/retry.js
+--- /home/user/felt-ops/docs/product-discovery/phase-0/s1/fixture/src/retry.js	2026-11-23 13:49:42.323898040 +0000
++++ /tmp/claude-0/-home-user/4a03c94e-9ebd-5764-a1e2-9dcd3d7ea003/scratchpad/s1-scored/cc/T07/workspace/src/retry.js	2026-11-23 14:24:38.247177312 +0000
+@@ -1,12 +1,17 @@
+ /** Call fn until it resolves, at most `attempts` times, waiting `delayMs` between attempts. */
+-export async function retry(fn, { attempts = 3, delayMs = 0 } = {}) {
++export async function retry(fn, { attempts = 3, delayMs = 0, factor = 1, onRetry } = {}) {
+   let lastError;
+   for (let i = 1; i <= attempts; i++) {
+     try {
+       return await fn(i);
+     } catch (error) {
++      if (error?.retryable === false) throw error;
+       lastError = error;
+-      if (i < attempts && delayMs > 0) await new Promise((r) => setTimeout(r, delayMs));
++      if (i < attempts) {
++        if (onRetry) onRetry(error, i);
++        const wait = delayMs * factor ** (i - 1);
++        if (wait > 0) await new Promise((r) => setTimeout(r, wait));
++      }
+     }
+   }
+   throw lastError;

@@ -30,6 +30,7 @@ Evidence: [Phase 0](phase-0/RESULTS.md).
 | D-06′ | Runs use **FeltKit invocations** (lease, attempts, fencing, re-claim) with **one runner-pool principal per workspace** that delivers through a `bridge` surface. Handoff keeps a queued-delegation record, but no lease or attempt state. Per-runner identity is asserted (`worker` id) until E-1 | S2 PARTIAL: everything works with a shared principal; a distinct principal sees `NOT_FOUND` |
 | D-07′ | Steering uses **FeltKit agent control on the published package** (0.3.37); no interim collection. The EVE runner adapter calls `checkpoint` at turn boundaries and enforces pause | S3 PASS |
 | D-08′ | GitHub is observed by **polling** through recorded integration reads (on submit, on review open, on a schedule while in review). Writes use idempotency keys plus a verify probe. Webhooks are deferred | S4 PARTIAL: GitHub-format inbound deliveries are refused |
+| D-02′ | EVE confirmed as the execution runtime **for well-specified tasks** (S1 PASS, 10/10 vs Claude Code 10/10). Parity on realistic multi-file work is **unproven** because of the ceiling effect; S1b recommended before Phase 1 | Phase 0 S1 |
 | D-14 | Baseline `@feltdb/feltkit` **0.3.37** exact; `@appport/eve` **1.0.2** exact, aliased as `eve` | owner decision; P0-F1 |
 | D-15 | Handoff owns **delegation records**; GitHub stays authoritative for issues, PRs and commits | owner decision (U-03) |
 

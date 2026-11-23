@@ -1,0 +1,302 @@
+{
+  "rule": "PASS: EVE usable >= 7 and >= CC-2; FAIL: EVE <= 5 or < CC-3; else INCONCLUSIVE",
+  "eveUsable": 10,
+  "ccUsable": 10,
+  "verdict": "PASS",
+  "eve": {
+    "usable": 10,
+    "completed": 10,
+    "infraFailures": [],
+    "medianWallS": 11,
+    "totalInputTokens": 341885,
+    "totalOutputTokens": 10325,
+    "toolCalls": 28,
+    "toolErrors": 2,
+    "testRuns": 13,
+    "costUsd": null
+  },
+  "cc": {
+    "usable": 10,
+    "completed": 10,
+    "infraFailures": [],
+    "medianWallS": 9,
+    "totalInputTokens": 759817,
+    "totalOutputTokens": 9463,
+    "toolCalls": 35,
+    "toolErrors": 0,
+    "testRuns": 17,
+    "costUsd": 0.24
+  },
+  "perTask": [
+    {
+      "task": "T01",
+      "eve": {
+        "usable": true,
+        "completed": true,
+        "infra": null,
+        "wallS": 8,
+        "tools": 3,
+        "toolErrors": 0,
+        "tests": 1,
+        "grader": true,
+        "visible": true,
+        "missingVisible": []
+      },
+      "cc": {
+        "usable": true,
+        "completed": true,
+        "infra": null,
+        "wallS": 12,
+        "tools": 5,
+        "toolErrors": 0,
+        "tests": 2,
+        "grader": true,
+        "visible": true,
+        "missingVisible": []
+      }
+    },
+    {
+      "task": "T02",
+      "eve": {
+        "usable": true,
+        "completed": true,
+        "infra": null,
+        "wallS": 9,
+        "tools": 2,
+        "toolErrors": 1,
+        "tests": 1,
+        "grader": true,
+        "visible": true,
+        "missingVisible": []
+      },
+      "cc": {
+        "usable": true,
+        "completed": true,
+        "infra": null,
+        "wallS": 9,
+        "tools": 2,
+        "toolErrors": 0,
+        "tests": 1,
+        "grader": true,
+        "visible": true,
+        "missingVisible": []
+      }
+    },
+    {
+      "task": "T03",
+      "eve": {
+        "usable": true,
+        "completed": true,
+        "infra": null,
+        "wallS": 8,
+        "tools": 3,
+        "toolErrors": 0,
+        "tests": 1,
+        "grader": true,
+        "visible": true,
+        "missingVisible": []
+      },
+      "cc": {
+        "usable": true,
+        "completed": true,
+        "infra": null,
+        "wallS": 7,
+        "tools": 3,
+        "toolErrors": 0,
+        "tests": 1,
+        "grader": true,
+        "visible": true,
+        "missingVisible": []
+      }
+    },
+    {
+      "task": "T04",
+      "eve": {
+        "usable": true,
+        "completed": true,
+        "infra": null,
+        "wallS": 7,
+        "tools": 3,
+        "toolErrors": 0,
+        "tests": 1,
+        "grader": true,
+        "visible": true,
+        "missingVisible": []
+      },
+      "cc": {
+        "usable": true,
+        "completed": true,
+        "infra": null,
+        "wallS": 7,
+        "tools": 4,
+        "toolErrors": 0,
+        "tests": 1,
+        "grader": true,
+        "visible": true,
+        "missingVisible": []
+      }
+    },
+    {
+      "task": "T05",
+      "eve": {
+        "usable": true,
+        "completed": true,
+        "infra": null,
+        "wallS": 8,
+        "tools": 3,
+        "toolErrors": 0,
+        "tests": 1,
+        "grader": true,
+        "visible": true,
+        "missingVisible": []
+      },
+      "cc": {
+        "usable": true,
+        "completed": true,
+        "infra": null,
+        "wallS": 9,
+        "tools": 3,
+        "toolErrors": 0,
+        "tests": 1,
+        "grader": true,
+        "visible": true,
+        "missingVisible": []
+      }
+    },
+    {
+      "task": "T06",
+      "eve": {
+        "usable": true,
+        "completed": true,
+        "infra": null,
+        "wallS": 11,
+        "tools": 3,
+        "toolErrors": 0,
+        "tests": 1,
+        "grader": true,
+        "visible": true,
+        "missingVisible": []
+      },
+      "cc": {
+        "usable": true,
+        "completed": true,
+        "infra": null,
+        "wallS": 12,
+        "tools": 3,
+        "toolErrors": 0,
+        "tests": 2,
+        "grader": true,
+        "visible": true,
+        "missingVisible": []
+      }
+    },
+    {
+      "task": "T07",
+      "eve": {
+        "usable": true,
+        "completed": true,
+        "infra": null,
+        "wallS": 12,
+        "tools": 2,
+        "toolErrors": 0,
+        "tests": 1,
+        "grader": true,
+        "visible": true,
+        "missingVisible": []
+      },
+      "cc": {
+        "usable": true,
+        "completed": true,
+        "infra": null,
+        "wallS": 7,
+        "tools": 3,
+        "toolErrors": 0,
+        "tests": 1,
+        "grader": true,
+        "visible": true,
+        "missingVisible": []
+      }
+    },
+    {
+      "task": "T08",
+      "eve": {
+        "usable": true,
+        "completed": true,
+        "infra": null,
+        "wallS": 11,
+        "tools": 3,
+        "toolErrors": 0,
+        "tests": 2,
+        "grader": true,
+        "visible": true,
+        "missingVisible": []
+      },
+      "cc": {
+        "usable": true,
+        "completed": true,
+        "infra": null,
+        "wallS": 8,
+        "tools": 3,
+        "toolErrors": 0,
+        "tests": 1,
+        "grader": true,
+        "visible": true,
+        "missingVisible": []
+      }
+    },
+    {
+      "task": "T09",
+      "eve": {
+        "usable": true,
+        "completed": true,
+        "infra": null,
+        "wallS": 12,
+        "tools": 2,
+        "toolErrors": 0,
+        "tests": 1,
+        "grader": true,
+        "visible": true,
+        "missingVisible": []
+      },
+      "cc": {
+        "usable": true,
+        "completed": true,
+        "infra": null,
+        "wallS": 11,
+        "tools": 3,
+        "toolErrors": 0,
+        "tests": 2,
+        "grader": true,
+        "visible": true,
+        "missingVisible": []
+      }
+    },
+    {
+      "task": "T10",
+      "eve": {
+        "usable": true,
+        "completed": true,
+        "infra": null,
+        "wallS": 15,
+        "tools": 4,
+        "toolErrors": 1,
+        "tests": 3,
+        "grader": true,
+        "visible": true,
+        "missingVisible": []
+      },
+      "cc": {
+        "usable": true,
+        "completed": true,
+        "infra": null,
+        "wallS": 17,
+        "tools": 6,
+        "toolErrors": 0,
+        "tests": 5,
+        "grader": true,
+        "visible": true,
+        "missingVisible": []
+      }
+    }
+  ]
+}

@@ -18,7 +18,7 @@ outside this folder. Inspected on 2026-11-23:
   - S2 PARTIAL: remote claiming works with one shared runner principal.
   - S3 PASS: steering is published and works.
   - S4 PARTIAL: GitHub reads and writes hold; GitHub webhooks can't be received.
-  - S1 is blocked on model access.
+  - S1 PASS by the fixed rule: EVE 10/10 and Claude Code 10/10 on the same model. The task set was too easy to separate them, so S1b (harder tasks) is recommended before Phase 1.
 - **Pre-registered protocol:** [phase-0/PROTOCOL.md](phase-0/PROTOCOL.md).
 
 ## Documents

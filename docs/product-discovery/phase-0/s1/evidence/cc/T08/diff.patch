@@ -1,0 +1,30 @@
+diff -ruN -x node_modules -x .eve -x '.*' /home/user/felt-ops/docs/product-discovery/phase-0/s1/fixture/src/slug.js /tmp/claude-0/-home-user/4a03c94e-9ebd-5764-a1e2-9dcd3d7ea003/scratchpad/s1-scored/cc/T08/workspace/src/slug.js
+--- /home/user/felt-ops/docs/product-discovery/phase-0/s1/fixture/src/slug.js	2026-11-23 13:49:42.325630677 +0000
++++ /tmp/claude-0/-home-user/4a03c94e-9ebd-5764-a1e2-9dcd3d7ea003/scratchpad/s1-scored/cc/T08/workspace/src/slug.js	2026-11-23 14:24:45.305746738 +0000
+@@ -1,4 +1,10 @@
+-/** "Hello, World!" → "hello-world". */
+-export function slugify(text) {
+-  return String(text).normalize("NFKD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
++/** "Hello, World!" → "hello-world". Optional maxLength cuts at a hyphen boundary. */
++export function slugify(text, { maxLength } = {}) {
++  const slug = String(text).normalize("NFKD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
++  if (maxLength === undefined || maxLength === null || slug.length <= maxLength) return slug;
++  const max = Math.max(0, maxLength);
++  // Cut is at a word boundary if the char after the cut is a hyphen.
++  let cut = slug[max] === "-" ? max : slug.lastIndexOf("-", max);
++  if (cut <= 0) cut = max; // first word alone is too long: hard cut
++  return slug.slice(0, cut).replace(/-+$/, "");
+ }
+diff -ruN -x node_modules -x .eve -x '.*' /home/user/felt-ops/docs/product-discovery/phase-0/s1/fixture/test/basic.test.js /tmp/claude-0/-home-user/4a03c94e-9ebd-5764-a1e2-9dcd3d7ea003/scratchpad/s1-scored/cc/T08/workspace/test/basic.test.js
+--- /home/user/felt-ops/docs/product-discovery/phase-0/s1/fixture/test/basic.test.js	2026-11-23 13:49:54.543876369 +0000
++++ /tmp/claude-0/-home-user/4a03c94e-9ebd-5764-a1e2-9dcd3d7ea003/scratchpad/s1-scored/cc/T08/workspace/test/basic.test.js	2026-11-23 14:24:45.305746738 +0000
+@@ -36,3 +36,9 @@
+ test("renderTable", () => {
+   assert.equal(L.renderTable([{ a: 1, b: "x" }]), "| a | b |\n| --- | --- |\n| 1 | x |");
+ });
++test("slugify maxLength", () => {
++  assert.equal(L.slugify("The quick brown fox", { maxLength: 12 }), "the-quick");
++  assert.equal(L.slugify("The quick brown fox", { maxLength: 9 }), "the-quick");
++  assert.equal(L.slugify("Supercalifragilistic word", { maxLength: 5 }), "super");
++  assert.equal(L.slugify("The quick", { maxLength: 50 }), "the-quick");
++});

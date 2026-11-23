@@ -1,0 +1,28 @@
+{
+  "harness": "H-CC",
+  "task": "T10",
+  "model": "claude-sonnet-5-5",
+  "route": "anthropic-direct",
+  "completed": true,
+  "settledOutcome": "success",
+  "infra": null,
+  "wallMs": 17150,
+  "usage": {
+    "input": 146837,
+    "output": 1757
+  },
+  "costUsd": 0.0389067,
+  "turns": 7,
+  "toolCalls": 6,
+  "toolErrors": 0,
+  "testRuns": 5,
+  "grade": {
+    "task": "T10",
+    "graderPass": true,
+    "visiblePass": true,
+    "visibleTests": 11,
+    "missingVisibleTests": [],
+    "skippedVisible": false,
+    "usable": true
+  }
+}

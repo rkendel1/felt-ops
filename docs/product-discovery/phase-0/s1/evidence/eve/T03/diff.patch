@@ -1,0 +1,28 @@
+diff -ruN -x node_modules -x .eve -x '.*' /home/user/felt-ops/docs/product-discovery/phase-0/s1/fixture/src/dates.js /tmp/claude-0/-home-user/4a03c94e-9ebd-5764-a1e2-9dcd3d7ea003/scratchpad/s1-scored/eve/T03/workspace/src/dates.js
+--- /home/user/felt-ops/docs/product-discovery/phase-0/s1/fixture/src/dates.js	2026-11-23 13:49:42.317109267 +0000
++++ /tmp/claude-0/-home-user/4a03c94e-9ebd-5764-a1e2-9dcd3d7ea003/scratchpad/s1-scored/eve/T03/workspace/src/dates.js	2026-11-23 14:22:02.000000000 +0000
+@@ -10,8 +10,7 @@
+   let added = 0;
+   while (added < n) {
+     result.setUTCDate(result.getUTCDate() + 1);
+-    added += 1;
+-    if (isWeekend(result)) result.setUTCDate(result.getUTCDate() + 1);
++    if (!isWeekend(result)) added += 1;
+   }
+   return result;
+ }
+diff -ruN -x node_modules -x .eve -x '.*' /home/user/felt-ops/docs/product-discovery/phase-0/s1/fixture/test/basic.test.js /tmp/claude-0/-home-user/4a03c94e-9ebd-5764-a1e2-9dcd3d7ea003/scratchpad/s1-scored/eve/T03/workspace/test/basic.test.js
+--- /home/user/felt-ops/docs/product-discovery/phase-0/s1/fixture/test/basic.test.js	2026-11-23 13:49:54.543876369 +0000
++++ /tmp/claude-0/-home-user/4a03c94e-9ebd-5764-a1e2-9dcd3d7ea003/scratchpad/s1-scored/eve/T03/workspace/test/basic.test.js	2026-11-23 14:22:02.000000000 +0000
+@@ -36,3 +36,11 @@
+ test("renderTable", () => {
+   assert.equal(L.renderTable([{ a: 1, b: "x" }]), "| a | b |\n| --- | --- |\n| 1 | x |");
+ });
++
++test("addBusinessDays across weekends", () => {
++  const f = (d, n) => L.addBusinessDays(new Date(d + "T00:00:00Z"), n).toISOString().slice(0, 10);
++  assert.equal(f("2026-11-06", 1), "2026-11-09");
++  assert.equal(f("2026-11-06", 3), "2026-11-11");
++  assert.equal(f("2026-11-07", 1), "2026-11-09");
++  assert.equal(f("2026-11-06", 0), "2026-11-06");
++});

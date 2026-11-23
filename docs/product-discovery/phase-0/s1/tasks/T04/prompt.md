@@ -1,0 +1,1 @@
+Bug report: `LRUCache` evicts the wrong entry. Reading a key with `get` should make it the most recently used, so after `set("a")`, `set("b")`, `get("a")`, `set("c")` on a cache of capacity 2, the cache should contain `a` and `c` (and not `b`). Fix it without changing the public API.

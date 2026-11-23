@@ -1,0 +1,1 @@
+{ "name": "ledgerlite", "version": "0.1.0", "private": true, "type": "module", "description": "Small invoicing utilities (Phase 0 S1 fixture).", "scripts": { "test": "node --test" } }

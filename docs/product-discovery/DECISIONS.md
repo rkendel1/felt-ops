@@ -12,19 +12,31 @@ owner approves it. Each decision cites its evidence.
 | D-03 | **FeltKit app is the only control plane**. EVE is execution only and authoritative for nothing in the product | FELTKIT-BASELINE §1; EXECUTION.md "control plane authoritative; the computer is replaceable" | Using EVE's work store as the record (felt-ops lesson: two inboxes, two truths) | — |
 | D-04 | Consequential effects in v1 are **person or application actions** (open PR = app; merge = person). Agents only push their own run branch and submit claims | F §3: approval of agent-owned actions is Studio-only (E-2); felt-ops operator eval: Studio fragmentation | Agent-proposed effects approved in Studio (fragmented); app-level re-implementation of approval (duplicates a platform guarantee) | E-2 delivered → Phase 3 |
 | D-05 | **Claims, observations and person decisions are separate records** with an explicit `source` | felt-ops ARCHITECTURE §3 (`timeline.source`, `observedVia`) proven in 7 scenarios; Multica has no such separation (C) | Single activity log | — |
-| D-06 | Runs use an **app-owned lease** (claim token, lease, attempts, CAS) mirroring `feltkit.execution/1`, **unless** Phase 0 S2 shows a bridge-surface invocation can be claimed remotely | F "Remote execution plane": no remote protocol; `#visible` admits only the requester or deliverer (`invocations.ts:262-267`, checked); remote use untested | Using invocations untested (risk of building on an unproven path); building a general remote protocol in the app (platform work in the wrong place) | S2; E-1 shipped |
-| D-07 | Steering uses **FeltKit agent control** once published; interim `instructions` collection with identical states | F §3: implemented, 13 tests, unreleased (CHANGELOG "Unreleased: agent control") | Inventing a different lifecycle | S3 |
-| D-08 | GitHub via `app.integration` (GitHub App, installation tokens, recorded calls) + verified inbound webhooks; **observations written by the calling job, not `onOutcome`** | F §7: no GitHub built-ins; G-09 open (`onOutcome` failures only logged); felt-ops `integrations.ts` pattern | Agent opens PRs itself with `gh` (no recorded evidence; needs broader token) | S4 |
+| D-06 | *(Superseded by Phase 0 S2, see below.)* Runs use an **app-owned lease** (claim token, lease, attempts, CAS) mirroring `feltkit.execution/1`, **unless** Phase 0 S2 shows a bridge-surface invocation can be claimed remotely | F "Remote execution plane": no remote protocol; `#visible` admits only the requester or deliverer (`invocations.ts:262-267`, checked); remote use untested | Using invocations untested (risk of building on an unproven path); building a general remote protocol in the app (platform work in the wrong place) | S2; E-1 shipped |
+| D-07 | *(Superseded by Phase 0 S3.)* Steering uses **FeltKit agent control** once published; interim `instructions` collection with identical states | F §3: implemented, 13 tests, unreleased (CHANGELOG "Unreleased: agent control") | Inventing a different lifecycle | S3 |
+| D-08 | *(Amended by Phase 0 S4.)* GitHub via `app.integration` (GitHub App, installation tokens, recorded calls) + verified inbound webhooks; **observations written by the calling job, not `onOutcome`** | F §7: no GitHub built-ins; G-09 open (`onOutcome` failures only logged); felt-ops `integrations.ts` pattern | Agent opens PRs itself with `gh` (no recorded evidence; needs broader token) | S4 |
 | D-09 | Run events are **bounded evidence**, not an unbounded transcript archive | Multica truncates task messages too (C); FeltDB is the app's single store | Storing full model transcripts in the app | measurement in Phase 2 |
 | D-10 | Run queueing happens **in the same transaction** as assignment | A: Multica's after-commit enqueue only logs on failure (`service/issue.go:975-983`, checked) | After-commit enqueue | — |
 | D-11 | Repositories must have a default-branch protection ruleset to be connected | the agent's token is repo-scoped `contents:write`; the ruleset is the boundary that stops pushes to main | Trusting agent behaviour | — |
 | D-12 | Not carried forward: squads, chat, IM adapters, plugins, Composio, Connected Apps, billing, guests, share links, docs editor, custom status catalogs, mobile and desktop (v1) | MULTICA-AUDIT §2.5–2.6; D: ~45k non-test server lines removable from coordination alone | Parity | demand |
 | D-13 | Discovery docs live in `felt-ops/docs/product-discovery/` | felt-ops is the existing FeltKit product and its road-test evidence is referenced throughout | Writing into Multica (product being studied, with its own strict repo rules) | — |
 
+## Decisions after Phase 0 (2026-11-23)
+
+Evidence: [Phase 0](phase-0/RESULTS.md).
+
+| ID | Decision | Evidence |
+|---|---|---|
+| D-06′ | Runs use **FeltKit invocations** (lease, attempts, fencing, re-claim) with **one runner-pool principal per workspace** that delivers through a `bridge` surface. Handoff keeps a queued-delegation record, but no lease or attempt state. Per-runner identity is asserted (`worker` id) until E-1 | S2 PARTIAL: everything works with a shared principal; a distinct principal sees `NOT_FOUND` |
+| D-07′ | Steering uses **FeltKit agent control on the published package** (0.3.37); no interim collection. The EVE runner adapter calls `checkpoint` at turn boundaries and enforces pause | S3 PASS |
+| D-08′ | GitHub is observed by **polling** through recorded integration reads (on submit, on review open, on a schedule while in review). Writes use idempotency keys plus a verify probe. Webhooks are deferred | S4 PARTIAL: GitHub-format inbound deliveries are refused |
+| D-14 | Baseline `@feltdb/feltkit` **0.3.37** exact; `@appport/eve` **1.0.2** exact, aliased as `eve` | owner decision; P0-F1 |
+| D-15 | Handoff owns **delegation records**; GitHub stays authoritative for issues, PRs and commits | owner decision (U-03) |
+
 ## Platform gaps proposed (see CAPABILITY-MAP §8)
 
-E-1 remote execution protocol (FeltKit) · E-2 application-facing approval of agent-owned actions
-(FeltKit, the felt-ops G-07 remainder) · E-3 published AppPort work channel for EVE (ecosystem).
+E-1 remote execution protocol (FeltKit), **narrowed by Phase 0 S2** to per-runner principals claiming placed work and person-accepted work executed by a separate principal · E-2 application-facing approval of agent-owned actions
+(FeltKit, the felt-ops G-07 remainder) · E-3 published AppPort work channel for EVE (ecosystem) · **E-4 candidate** inbound webhooks with provider signature schemes (GitHub), only if polling proves inadequate (Phase 0 S4).
 Explicitly **not** gaps: GitHub built-ins, usage metering, presence, a FeltKit sandbox.
 
 ## Assumptions (not yet evidenced)
@@ -43,12 +55,12 @@ Explicitly **not** gaps: GitHub built-ins, usage metering, presence, a FeltKit s
 | ID | Question | Why it matters |
 |---|---|---|
 | U-01 | Product name. "Handoff" is a placeholder and collides with FeltKit's `handoff` playbook term | identity, docs |
-| U-02 | Is the target user right: small engineering teams already using coding agents? | scope of v1 |
-| U-03 | Native work items, or GitHub Issues as the source of requests from day one? | Work list scope; Phase 3 triggers could become Phase 1 |
-| U-04 | Must v1 support people's own CLI subscriptions (Claude Code/Codex) as Multica does? If yes, a vendor-CLI tool inside the EVE sandbox enters Phase 1 | cost to users, quality, adapter ownership |
+| U-02 | Is the target user right: small engineering teams already using coding agents? | **Resolved (owner): yes** |
+| U-03 | Native work items, or GitHub Issues as the source of requests from day one? | **Resolved (owner):** Handoff owns delegation records; GitHub issues and PRs are linked external records (D-15) |
+| U-04 | Must v1 support people's own CLI subscriptions (Claude Code/Codex) as Multica does? If yes, a vendor-CLI tool inside the EVE sandbox enters Phase 1 | cost to users, quality, adapter ownership. **Owner: validate before v1; potential go/no-go** |
 | U-05 | Agent configuration: git-only definitions (proposed) or an in-app editor? | admin UX |
 | U-06 | Will the platform owner prioritise E-1 and publish agent control (S3) in the Phase 1 window? | size of interim code |
-| U-07 | FeltKit release state is inconsistent: npm `latest` is 0.3.36, while FeltKit's CHANGELOG calls 0.3.36 "prepared (unpublished)". Which published version is the target baseline? | baseline for Phase 1; 0.3.35 contains the invocation-approval fix |
+| U-07 | FeltKit release state is inconsistent: npm `latest` is 0.3.36, while FeltKit's CHANGELOG calls 0.3.36 "prepared (unpublished)". Which published version is the target baseline? | **Resolved (owner): 0.3.37 exact** (D-14). npm publish times: 0.3.34 Nov 19 15:55, 0.3.35 19:09, 0.3.36 20:46, 0.3.37 Nov 23 13:32 UTC |
 | U-08 | EVE fork release quality: its own assessment says CI has never run on a PR. Will CI be enabled before we depend on it? | runner stability |
 
 ## Verification of audit notes
@@ -65,7 +77,7 @@ following claims, on which decisions rest, were re-checked by hand on 2026-11-23
 | FeltKit approval is person-only | `feltkit/packages/sdk/src/runtime/agent.ts:1006` | confirmed |
 | FeltKit invocation visibility admits only the requester or deliverer | `feltkit/packages/sdk/src/runtime/invocations.ts:262-267` | confirmed |
 | FeltKit remote worker protocol not implemented | `feltkit/docs/EXECUTION.md:242` | confirmed ("Designed, not implemented") |
-| Agent control is unreleased | `feltkit/CHANGELOG.md:19` "Unreleased: agent control" | confirmed |
+| Agent control is unreleased | `feltkit/CHANGELOG.md:19` "Unreleased: agent control" | **wrong**: the CHANGELOG is stale. Published npm tarballs of 0.3.36 and 0.3.37 contain it (Phase 0 S3). The discovery should have checked tarballs, not the CHANGELOG |
 | felt-ops passes on the installed 0.3.34 | `npm test` in felt-ops | confirmed: 9/9 pass. The run rewrote six `evidence/scenario-*.json` files; they were restored from git so the repository is unchanged |
 | `@appport/eve` published | `npm view @appport/eve versions` | confirmed: `0.0.0-stage`, `1.0.2` |
 

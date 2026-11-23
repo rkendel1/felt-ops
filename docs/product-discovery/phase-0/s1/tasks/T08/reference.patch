@@ -1,0 +1,16 @@
+diff -ruN fixture/src/slug.js .ref/T08/src/slug.js
+--- fixture/src/slug.js	2026-11-23 13:49:42.325630677 +0000
++++ .ref/T08/src/slug.js	2026-11-23 13:51:03.743057564 +0000
+@@ -1,4 +1,9 @@
+-/** "Hello, World!" → "hello-world". */
+-export function slugify(text) {
+-  return String(text).normalize("NFKD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
++/** "Hello, World!" → "hello-world". With maxLength, cut at a word boundary when possible. */
++export function slugify(text, { maxLength } = {}) {
++  const slug = String(text).normalize("NFKD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
++  if (maxLength === undefined || slug.length <= maxLength) return slug;
++  const cut = slug.slice(0, maxLength + 1);
++  const boundary = cut.lastIndexOf("-");
++  const out = boundary > 0 ? cut.slice(0, boundary) : slug.slice(0, maxLength);
++  return out.replace(/-+$/, "");
+ }

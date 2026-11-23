@@ -1,0 +1,31 @@
+{
+  "name": "agent-smoke",
+  "version": "0.0.0",
+  "type": "module",
+  "imports": {
+    "#*": "./agent/*",
+    "#evals/*": "./evals/*"
+  },
+  "scripts": {
+    "build": "eve build",
+    "deploy": "eve deploy",
+    "dev": "eve dev",
+    "eval": "eve eval",
+    "start": "eve start",
+    "typecheck": "tsc"
+  },
+  "dependencies": {
+    "@vercel/connect": "2.7.0",
+    "ai": "^7.0.172",
+    "eve": "npm:@appport/eve@1.0.2",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "@types/node": "26.x",
+    "just-bash": "^3.6.1",
+    "typescript": "7.0.2"
+  },
+  "engines": {
+    "node": ">=24"
+  }
+}

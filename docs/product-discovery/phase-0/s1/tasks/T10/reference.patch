@@ -1,0 +1,28 @@
+diff -ruN fixture/src/index.js .ref/T10/src/index.js
+--- fixture/src/index.js	2026-11-23 13:49:42.328838820 +0000
++++ .ref/T10/src/index.js	2026-11-23 13:51:03.747057564 +0000
+@@ -7,3 +7,4 @@
+ export { retry } from "./retry.js";
+ export { slugify } from "./slug.js";
+ export { renderTable } from "./table.js";
++export { summarizeInvoices } from "./report.js";
+diff -ruN fixture/src/report.js .ref/T10/src/report.js
+--- fixture/src/report.js	1970-01-01 00:00:00.000000000 +0000
++++ .ref/T10/src/report.js	2026-11-23 13:51:03.747057564 +0000
+@@ -0,0 +1,16 @@
++import { parseCSV } from "./csv.js";
++import { parseMoney } from "./money.js";
++
++/** Summarize an invoices CSV (header id,customer,amount). */
++export function summarizeInvoices(csvText) {
++  const [, ...rows] = parseCSV(csvText);
++  const byCustomer = {};
++  let totalCents = 0;
++  for (const [id, customer, amount] of rows) {
++    let cents;
++    try { cents = parseMoney(amount); } catch { throw new Error(`Invoice ${id}: cannot parse amount "${amount}"`); }
++    byCustomer[customer] = (byCustomer[customer] ?? 0) + cents;
++    totalCents += cents;
++  }
++  return { count: rows.length, totalCents, byCustomer };
++}

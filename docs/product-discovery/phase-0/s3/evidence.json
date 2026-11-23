@@ -1,0 +1,520 @@
+{
+  "experiment": "phase-0/S3c",
+  "feltkit": "0.3.37",
+  "log": [
+    {
+      "step": "agent-create",
+      "created": {
+        "ok": true,
+        "value": {
+          "task": {
+            "task_id": "task-5edcb144-b314-4f13-ad41-fd5bc98a1cbd",
+            "objective": "Phase 0 S3c: a coding run that a person steers",
+            "scope": {
+              "project": "phase0-s3"
+            },
+            "status": "ready",
+            "owner": "agent:coder",
+            "checkpoint_version": 2,
+            "pending_work": [
+              "claim the handoff",
+              "Phase 0 S3c: a coding run that a person steers"
+            ],
+            "constraints": [
+              "playbook:handoff"
+            ],
+            "created_at": "2026-11-23T13:43:58.625Z",
+            "created_by": "agent:coder",
+            "updated_at": "2026-11-23T13:43:58.632Z",
+            "updated_by": "agent:coder",
+            "revision": 2
+          },
+          "checkpoints": [
+            {
+              "checkpoint_id": "task-5edcb144-b314-4f13-ad41-fd5bc98a1cbd.v1",
+              "task_id": "task-5edcb144-b314-4f13-ad41-fd5bc98a1cbd",
+              "version": 1,
+              "status": "running",
+              "summary": "Started by agent:coder (handoff).",
+              "completed": [],
+              "completed_work": [],
+              "pending_work": [],
+              "constraints": [
+                "playbook:handoff"
+              ],
+              "decisions": [],
+              "evidence": [],
+              "actor": "agent:coder",
+              "execution": {
+                "adapter": "feltkit",
+                "conversation_id": "exec-feltkit-1795441438454-9hypttqw5"
+              },
+              "created_at": "2026-11-23T13:43:58.625Z"
+            },
+            {
+              "checkpoint_id": "task-5edcb144-b314-4f13-ad41-fd5bc98a1cbd.v2",
+              "task_id": "task-5edcb144-b314-4f13-ad41-fd5bc98a1cbd",
+              "version": 2,
+              "status": "ready",
+              "summary": "Waiting for an agent to claim this task over MCP (feltkit_agent_claim).",
+              "completed": [],
+              "completed_work": [],
+              "pending_work": [
+                "claim the handoff",
+                "Phase 0 S3c: a coding run that a person steers"
+              ],
+              "constraints": [
+                "playbook:handoff"
+              ],
+              "decisions": [],
+              "evidence": [],
+              "actor": "agent:coder",
+              "created_at": "2026-11-23T13:43:58.632Z"
+            }
+          ],
+          "execution": {
+            "executionId": "exec-feltkit-1795441438454-9hypttqw5",
+            "agentRef": "flow://agent/feltkit@1",
+            "status": "Waiting",
+            "goal": "Phase 0 S3c: a coding run that a person steers",
+            "inputs": [
+              "agent-task:task-5edcb144-b314-4f13-ad41-fd5bc98a1cbd"
+            ],
+            "stateVersion": 0,
+            "observationIds": [],
+            "decisionIds": [],
+            "actionIds": [],
+            "attempt": 1,
+            "createdMs": 1795441438454,
+            "taskId": "task-5edcb144-b314-4f13-ad41-fd5bc98a1cbd",
+            "ownedBy": "file:/home/user/felt-ops/docs/product-discovery/phase-0/s3/.feltkit/development/state",
+            "startedMs": 1795441438622
+          },
+          "pending": [],
+          "actions": [],
+          "playbook": "handoff"
+        }
+      }
+    },
+    {
+      "step": "task-id",
+      "taskId": "task-5edcb144-b314-4f13-ad41-fd5bc98a1cbd"
+    },
+    {
+      "step": "checkpoint-1 (nothing pending)",
+      "r": {
+        "ok": true,
+        "value": {
+          "proceed": true,
+          "mode": "running",
+          "reason": null,
+          "instructions": [],
+          "signaled": 0,
+          "checkpoint": 2
+        }
+      }
+    },
+    {
+      "step": "person-signal",
+      "r": {
+        "status": 200,
+        "body": {
+          "ok": true,
+          "instruction": {
+            "instructionId": "ins-7d067fd07b4d4839b6e1",
+            "taskId": "task-5edcb144-b314-4f13-ad41-fd5bc98a1cbd",
+            "state": "signaled",
+            "seq": 1,
+            "from": "user:pat",
+            "signaledAt": "2026-11-23T13:43:58.658Z",
+            "history": [
+              {
+                "state": "signaled",
+                "at": "2026-11-23T13:43:58.658Z",
+                "by": "user:pat"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "step": "checkpoint-while-signaled (must proceed)",
+      "r": {
+        "ok": true,
+        "value": {
+          "proceed": true,
+          "mode": "running",
+          "reason": null,
+          "instructions": [],
+          "signaled": 1,
+          "checkpoint": 3
+        }
+      }
+    },
+    {
+      "step": "person-submit",
+      "r": {
+        "status": 200,
+        "body": {
+          "ok": true,
+          "instruction": {
+            "instructionId": "ins-e1ff4a0d734347eaa0cf",
+            "taskId": "task-5edcb144-b314-4f13-ad41-fd5bc98a1cbd",
+            "state": "received",
+            "seq": 1,
+            "from": "user:pat",
+            "text": "Also add a test for the empty-input case.",
+            "receivedAt": "2026-11-23T13:43:58.672Z",
+            "history": [
+              {
+                "state": "received",
+                "at": "2026-11-23T13:43:58.672Z",
+                "by": "user:pat"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "step": "propose-while-instruction-pending (must be refused)",
+      "r": {
+        "ok": false,
+        "code": "CONFLICT",
+        "message": "CONFLICT: Task task-5edcb144-b314-4f13-ad41-fd5bc98a1cbd has 1 update(s) from a person that you have not received; the proposal was not started. Call checkpoint first and take them into account."
+      }
+    },
+    {
+      "step": "checkpoint-2 (delivers)",
+      "r": {
+        "ok": true,
+        "value": {
+          "proceed": true,
+          "mode": "running",
+          "reason": null,
+          "instructions": [
+            {
+              "instructionId": "ins-e1ff4a0d734347eaa0cf",
+              "text": "Also add a test for the empty-input case.",
+              "from": "user:pat",
+              "receivedAt": "2026-11-23T13:43:58.672Z",
+              "deliveredAt": "2026-11-23T13:43:58.684Z"
+            }
+          ],
+          "signaled": 1,
+          "checkpoint": 5
+        }
+      }
+    },
+    {
+      "step": "complete-with-open-update (must be refused)",
+      "r": {
+        "ok": false,
+        "code": "CONFLICT",
+        "message": "CONFLICT: Task task-5edcb144-b314-4f13-ad41-fd5bc98a1cbd has 2 open update(s) (ins-7d067fd07b4d4839b6e1 signaled, ins-e1ff4a0d734347eaa0cf delivered); receive and acknowledge them, or have them withdrawn, before completing."
+      }
+    },
+    {
+      "step": "acknowledge",
+      "r": {
+        "ok": true,
+        "value": {
+          "instructionId": "ins-e1ff4a0d734347eaa0cf",
+          "taskId": "task-5edcb144-b314-4f13-ad41-fd5bc98a1cbd",
+          "state": "incorporated",
+          "seq": 3,
+          "from": "user:pat",
+          "text": "Also add a test for the empty-input case.",
+          "receivedAt": "2026-11-23T13:43:58.672Z",
+          "history": [
+            {
+              "state": "received",
+              "at": "2026-11-23T13:43:58.672Z",
+              "by": "user:pat"
+            },
+            {
+              "state": "delivered",
+              "at": "2026-11-23T13:43:58.684Z",
+              "by": "agent:coder"
+            },
+            {
+              "state": "incorporated",
+              "at": "2026-11-23T13:43:58.694Z",
+              "by": "agent:coder",
+              "note": "Added an empty-input test to the plan."
+            }
+          ],
+          "deliveredAt": "2026-11-23T13:43:58.684Z",
+          "deliveredAtCheckpoint": 5,
+          "resolvedAt": "2026-11-23T13:43:58.694Z",
+          "resolution": {
+            "by": "agent:coder",
+            "note": "Added an empty-input test to the plan."
+          }
+        }
+      }
+    },
+    {
+      "step": "person-pause",
+      "r": {
+        "status": 200,
+        "body": {
+          "ok": true,
+          "control": {
+            "taskId": "task-5edcb144-b314-4f13-ad41-fd5bc98a1cbd",
+            "objective": "Phase 0 S3c: a coding run that a person steers",
+            "owner": "agent:coder",
+            "phase": "paused",
+            "mode": "paused",
+            "reason": "review direction",
+            "inFlight": {
+              "generations": [],
+              "actions": []
+            },
+            "signaled": 1,
+            "instructions": [
+              {
+                "instructionId": "ins-7d067fd07b4d4839b6e1",
+                "taskId": "task-5edcb144-b314-4f13-ad41-fd5bc98a1cbd",
+                "state": "signaled",
+                "seq": 1,
+                "from": "user:pat",
+                "signaledAt": "2026-11-23T13:43:58.658Z",
+                "history": [
+                  {
+                    "state": "signaled",
+                    "at": "2026-11-23T13:43:58.658Z",
+                    "by": "user:pat"
+                  }
+                ]
+              },
+              {
+                "instructionId": "ins-e1ff4a0d734347eaa0cf",
+                "taskId": "task-5edcb144-b314-4f13-ad41-fd5bc98a1cbd",
+                "state": "incorporated",
+                "seq": 3,
+                "from": "user:pat",
+                "text": "Also add a test for the empty-input case.",
+                "receivedAt": "2026-11-23T13:43:58.672Z",
+                "history": [
+                  {
+                    "state": "received",
+                    "at": "2026-11-23T13:43:58.672Z",
+                    "by": "user:pat"
+                  },
+                  {
+                    "state": "delivered",
+                    "at": "2026-11-23T13:43:58.684Z",
+                    "by": "agent:coder"
+                  },
+                  {
+                    "state": "incorporated",
+                    "at": "2026-11-23T13:43:58.694Z",
+                    "by": "agent:coder",
+                    "note": "Added an empty-input test to the plan."
+                  }
+                ],
+                "deliveredAt": "2026-11-23T13:43:58.684Z",
+                "deliveredAtCheckpoint": 5,
+                "resolvedAt": "2026-11-23T13:43:58.694Z",
+                "resolution": {
+                  "by": "agent:coder",
+                  "note": "Added an empty-input test to the plan."
+                }
+              }
+            ],
+            "checkpoint": 7,
+            "revision": "52fca4e1a2e556dc"
+          }
+        }
+      }
+    },
+    {
+      "step": "checkpoint-while-paused (proceed must be false)",
+      "r": {
+        "ok": true,
+        "value": {
+          "proceed": false,
+          "mode": "paused",
+          "reason": "review direction",
+          "instructions": [],
+          "signaled": 1,
+          "checkpoint": 7
+        }
+      }
+    },
+    {
+      "step": "person-resume",
+      "r": {
+        "status": 200,
+        "body": {
+          "ok": true,
+          "control": {
+            "taskId": "task-5edcb144-b314-4f13-ad41-fd5bc98a1cbd",
+            "objective": "Phase 0 S3c: a coding run that a person steers",
+            "owner": "agent:coder",
+            "phase": "running",
+            "mode": "running",
+            "reason": null,
+            "inFlight": {
+              "generations": [],
+              "actions": []
+            },
+            "signaled": 1,
+            "instructions": [
+              {
+                "instructionId": "ins-7d067fd07b4d4839b6e1",
+                "taskId": "task-5edcb144-b314-4f13-ad41-fd5bc98a1cbd",
+                "state": "signaled",
+                "seq": 1,
+                "from": "user:pat",
+                "signaledAt": "2026-11-23T13:43:58.658Z",
+                "history": [
+                  {
+                    "state": "signaled",
+                    "at": "2026-11-23T13:43:58.658Z",
+                    "by": "user:pat"
+                  }
+                ]
+              },
+              {
+                "instructionId": "ins-e1ff4a0d734347eaa0cf",
+                "taskId": "task-5edcb144-b314-4f13-ad41-fd5bc98a1cbd",
+                "state": "incorporated",
+                "seq": 3,
+                "from": "user:pat",
+                "text": "Also add a test for the empty-input case.",
+                "receivedAt": "2026-11-23T13:43:58.672Z",
+                "history": [
+                  {
+                    "state": "received",
+                    "at": "2026-11-23T13:43:58.672Z",
+                    "by": "user:pat"
+                  },
+                  {
+                    "state": "delivered",
+                    "at": "2026-11-23T13:43:58.684Z",
+                    "by": "agent:coder"
+                  },
+                  {
+                    "state": "incorporated",
+                    "at": "2026-11-23T13:43:58.694Z",
+                    "by": "agent:coder",
+                    "note": "Added an empty-input test to the plan."
+                  }
+                ],
+                "deliveredAt": "2026-11-23T13:43:58.684Z",
+                "deliveredAtCheckpoint": 5,
+                "resolvedAt": "2026-11-23T13:43:58.694Z",
+                "resolution": {
+                  "by": "agent:coder",
+                  "note": "Added an empty-input test to the plan."
+                }
+              }
+            ],
+            "checkpoint": 8,
+            "revision": "e2c2078d2c881926"
+          }
+        }
+      }
+    },
+    {
+      "step": "checkpoint-after-resume",
+      "r": {
+        "ok": true,
+        "value": {
+          "proceed": true,
+          "mode": "running",
+          "reason": null,
+          "instructions": [],
+          "signaled": 1,
+          "checkpoint": 8
+        }
+      }
+    },
+    {
+      "step": "person-reads-control-state",
+      "r": {
+        "status": 200,
+        "body": {
+          "ok": true,
+          "control": {
+            "taskId": "task-5edcb144-b314-4f13-ad41-fd5bc98a1cbd",
+            "objective": "Phase 0 S3c: a coding run that a person steers",
+            "owner": "agent:coder",
+            "phase": "running",
+            "mode": "running",
+            "reason": null,
+            "inFlight": {
+              "generations": [],
+              "actions": []
+            },
+            "signaled": 1,
+            "instructions": [
+              {
+                "instructionId": "ins-7d067fd07b4d4839b6e1",
+                "taskId": "task-5edcb144-b314-4f13-ad41-fd5bc98a1cbd",
+                "state": "signaled",
+                "seq": 1,
+                "from": "user:pat",
+                "signaledAt": "2026-11-23T13:43:58.658Z",
+                "history": [
+                  {
+                    "state": "signaled",
+                    "at": "2026-11-23T13:43:58.658Z",
+                    "by": "user:pat"
+                  }
+                ]
+              },
+              {
+                "instructionId": "ins-e1ff4a0d734347eaa0cf",
+                "taskId": "task-5edcb144-b314-4f13-ad41-fd5bc98a1cbd",
+                "state": "incorporated",
+                "seq": 3,
+                "from": "user:pat",
+                "text": "Also add a test for the empty-input case.",
+                "receivedAt": "2026-11-23T13:43:58.672Z",
+                "history": [
+                  {
+                    "state": "received",
+                    "at": "2026-11-23T13:43:58.672Z",
+                    "by": "user:pat"
+                  },
+                  {
+                    "state": "delivered",
+                    "at": "2026-11-23T13:43:58.684Z",
+                    "by": "agent:coder"
+                  },
+                  {
+                    "state": "incorporated",
+                    "at": "2026-11-23T13:43:58.694Z",
+                    "by": "agent:coder",
+                    "note": "Added an empty-input test to the plan."
+                  }
+                ],
+                "deliveredAt": "2026-11-23T13:43:58.684Z",
+                "deliveredAtCheckpoint": 5,
+                "resolvedAt": "2026-11-23T13:43:58.694Z",
+                "resolution": {
+                  "by": "agent:coder",
+                  "note": "Added an empty-input test to the plan."
+                }
+              }
+            ],
+            "checkpoint": 8,
+            "revision": "e2c2078d2c881926"
+          }
+        }
+      }
+    },
+    {
+      "step": "agent-complete",
+      "r": {
+        "ok": false,
+        "code": "CONFLICT",
+        "message": "CONFLICT: Task task-5edcb144-b314-4f13-ad41-fd5bc98a1cbd has 1 open update(s) (ins-7d067fd07b4d4839b6e1 signaled); receive and acknowledge them, or have them withdrawn, before completing."
+      }
+    }
+  ]
+}

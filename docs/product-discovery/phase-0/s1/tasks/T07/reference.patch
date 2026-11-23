@@ -1,0 +1,24 @@
+diff -ruN fixture/src/retry.js .ref/T07/src/retry.js
+--- fixture/src/retry.js	2026-11-23 13:49:42.323898040 +0000
++++ .ref/T07/src/retry.js	2026-11-23 13:51:03.743057564 +0000
+@@ -1,12 +1,17 @@
+-/** Call fn until it resolves, at most `attempts` times, waiting `delayMs` between attempts. */
+-export async function retry(fn, { attempts = 3, delayMs = 0 } = {}) {
++/** Call fn until it resolves, at most `attempts` times, waiting delayMs * factor^(n-1) between attempts. */
++export async function retry(fn, { attempts = 3, delayMs = 0, factor = 1, onRetry } = {}) {
+   let lastError;
+   for (let i = 1; i <= attempts; i++) {
+     try {
+       return await fn(i);
+     } catch (error) {
+       lastError = error;
+-      if (i < attempts && delayMs > 0) await new Promise((r) => setTimeout(r, delayMs));
++      if (error && error.retryable === false) throw error;
++      if (i < attempts) {
++        onRetry?.(error, i);
++        const wait = delayMs * factor ** (i - 1);
++        if (wait > 0) await new Promise((r) => setTimeout(r, wait));
++      }
+     }
+   }
+   throw lastError;

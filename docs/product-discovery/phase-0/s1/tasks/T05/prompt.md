@@ -1,0 +1,1 @@
+Bug report: `compareVersions("1.10.0", "1.9.0")` returns -1; it should return 1. Versions must be compared numerically per part. Also accept versions with fewer than three parts by treating missing parts as 0 (`compareVersions("1.2", "1.2.0")` is 0), and ignore a leading "v" (`"v2.0.0"` equals `"2.0.0"`).

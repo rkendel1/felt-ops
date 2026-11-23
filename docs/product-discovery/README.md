@@ -11,6 +11,16 @@ outside this folder. Inspected on 2026-11-23:
 | `@feltdb/feltkit` (installed baseline) | 0.3.34 |
 | `rkendel1/eve2` | `50f1cf1`, published as `@appport/eve` 1.0.2 |
 
+## Phase 0
+
+- **Owner decisions:** Phase 0 approved, Phase 1 not approved.
+- **Results:** [phase-0/RESULTS.md](phase-0/RESULTS.md).
+  - S2 PARTIAL: remote claiming works with one shared runner principal.
+  - S3 PASS: steering is published and works.
+  - S4 PARTIAL: GitHub reads and writes hold; GitHub webhooks can't be received.
+  - S1 is blocked on model access.
+- **Pre-registered protocol:** [phase-0/PROTOCOL.md](phase-0/PROTOCOL.md).
+
 ## Documents
 
 | # | Document | Contents |
@@ -82,8 +92,7 @@ From the ecosystem, **EVE** provides:
   Studio-only.
 - **E-3, a published AppPort work channel for EVE (ecosystem):** it exists only as an example
   that pushes work and writes progress to its own store.
-- **Steering is implemented and tested in FeltKit but unreleased.** It needs a release, not
-  design.
+- **Steering:** the discovery said unreleased. **Phase 0 found it published in 0.3.36+.**
 
 ### The product we recommend
 **A system of record for delegated software work** (working name *Handoff*). A team hands

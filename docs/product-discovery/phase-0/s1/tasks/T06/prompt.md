@@ -1,0 +1,1 @@
+Feature: repeated query keys. `parseQuery("a=1&a=2&b=3")` should return `{ a: ["1", "2"], b: "3" }` (a key that appears once stays a string). `stringifyQuery({ a: ["1", "2"], b: "3" })` should return `"a=1&a=2&b=3"`. `+` in a query string means a space when parsing. Existing behaviour for single keys must not change.

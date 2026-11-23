@@ -1,0 +1,19 @@
+diff -ruN fixture/src/money.js .ref/T01/src/money.js
+--- fixture/src/money.js	2026-11-23 13:49:42.313671651 +0000
++++ .ref/T01/src/money.js	2026-11-23 13:51:03.743057564 +0000
+@@ -3,10 +3,12 @@
+ /** Format integer cents as a currency string, e.g. 123456 → "$1,234.56". */
+ export function formatMoney(cents, currency = "USD") {
+   const symbol = SYMBOLS[currency] ?? `${currency} `;
+-  const whole = Math.trunc(cents / 100);
+-  const frac = String(Math.abs(cents % 100)).padStart(2, "0");
++  const sign = cents < 0 ? "-" : "";
++  const abs = Math.abs(cents);
++  const whole = Math.trunc(abs / 100);
++  const frac = String(abs % 100).padStart(2, "0");
+   const grouped = String(whole).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+-  return `${symbol}${grouped}.${frac}`;
++  return `${sign}${symbol}${grouped}.${frac}`;
+ }
+ 
+ /** Parse "$1,234.50", "1234.5" or "-$5" into integer cents. */

@@ -1,0 +1,16 @@
+diff -ruN fixture/src/cache.js .ref/T04/src/cache.js
+--- fixture/src/cache.js	2026-11-23 13:49:42.318884022 +0000
++++ .ref/T04/src/cache.js	2026-11-23 13:51:03.743057564 +0000
+@@ -6,7 +6,11 @@
+     this.map = new Map();
+   }
+   get(key) {
+-    return this.map.get(key);
++    if (!this.map.has(key)) return undefined;
++    const value = this.map.get(key);
++    this.map.delete(key);
++    this.map.set(key, value);
++    return value;
+   }
+   has(key) {
+     return this.map.has(key);

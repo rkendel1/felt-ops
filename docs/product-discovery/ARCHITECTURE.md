@@ -1,5 +1,12 @@
 # Proposed architecture
 
+> **Phase 0 amendments** ([RESULTS](phase-0/RESULTS.md)):
+> - Leases, attempts and fencing use FeltKit invocations with one runner-pool principal (D-06′), not an app-owned lease.
+> - Steering uses published agent control (D-07′).
+> - GitHub is polled, not received by webhook (D-08′).
+>
+> Sections below that say otherwise are superseded.
+
 A recommendation. Each component is used only where its implementation supports it
 ([FELTKIT-BASELINE](FELTKIT-BASELINE.md)); where it doesn't, the gap is named and the interim
 is kept small and replaceable.

@@ -1,6 +1,11 @@
 # Platform and felt-ops baseline
 
 What we can build on, verified against implementation and tests, not documentation alone.
+
+> **Phase 0 update (2026-11-23).** The target baseline is now `@feltdb/feltkit` **0.3.37** exact (owner's
+> decision). Phase 0 overturned one finding below: **agent control (steering) is published** in 0.3.36 and
+> 0.3.37 (FeltKit's CHANGELOG still calls it "Unreleased"). Inbound webhooks accept only AppPort-signed
+> deliveries, not GitHub's. See [Phase 0](phase-0/RESULTS.md).
 Detailed tables with `file:line` references: [`evidence/F-feltkit-capabilities.md`](evidence/F-feltkit-capabilities.md)
 (FeltKit, AppPort Services) and [`evidence/G-eve.md`](evidence/G-eve.md) (EVE).
 
@@ -32,7 +37,7 @@ Status: **R** = released in 0.3.34 and covered by tests · **L** = published lat
 | Agent principals and sessions | R | `type: agent` sessions, revocable, checked per request at `/mcp`, `/appport` | — |
 | Capabilities over MCP/AppPort | R | every function with `capability` is an AppPort capability and an MCP tool; output schemas; idempotency | Direct MCP calls are not linked to an agent task |
 | Agent tasks: propose → **person approval** → execute as owner → evidence | R | `AgentHost` (`runtime/agent.ts`); `approve` refuses non-`user` principals (`:1006`, checked); digest-bound approval; checkpoints verified at commit; restart reconcile | **G-07 partly open.** An external agent's task is agent-owned and its actions can be approved **only in Studio**. App code can't read tasks (`ctx.agent` absent from queries) and can't retry/resolve/cancel |
-| Steering a running agent (signal/submit/pause/resume/interrupt/stop, checkpoint/acknowledge) | **U** | `runtime/agent-control.ts`, HTTP + SSE, MCP tools, `appport.agent-control/1`; 13 tests incl. an external MCP agent | Not published. No agent loop runner: something outside must restart a reasoner |
+| Steering a running agent (signal/submit/pause/resume/interrupt/stop, checkpoint/acknowledge) | **U** at the time of discovery; **published in 0.3.36+** (Phase 0 S3: 13/13 tests, live on 0.3.37) | `runtime/agent-control.ts`, HTTP + SSE, MCP tools, `appport.agent-control/1`; 13 tests incl. an external MCP agent | Not published. No agent loop runner: something outside must restart a reasoner |
 | Invocations with attempts, leases, fencing, recovery | R | `ctx.invocations.accept/start/progress/transition/cancel`; claim token; CAS; `CLAIM_LOST`; re-claim creates a new attempt with `previous`; recovery **reports** stalled leases | All tests run in-process. **Visibility:** only the requesting person or the delivering principal can see an invocation (`invocations.ts:262-267`, checked), so a separate worker principal can't claim a person's invocation |
 | Person approval of `awaiting_approval` invocations | **L** (0.3.35) | `POST /api/invocations/<id>/approve` with digest | In 0.3.34 a worker could resume without approval (the defect fixed in 0.3.35) |
 | Remote worker protocol (a process elsewhere claims work under its own identity) | **M** | EXECUTION.md: "designed, not implemented" (checked). Only adapter: in-process `managed` job, 15-min deadline | Gap E-1 |
@@ -41,7 +46,7 @@ Status: **R** = released in 0.3.34 and covered by tests · **L** = published lat
 | Jobs, schedules | R | AppPort Services jobs (durable lease/retry), schedules | Handlers run in-process; scheduled jobs carry no workspace (GAP-REGISTER) |
 | Transactional outbox | R | `ctx.afterCommit.{notifications,webhooks,jobs,agent,work}` | Anonymous callers can't stage |
 | Notifications inbox | R | `ctx.services.notifications.*`, paging, unread count | In-app only; e-mail only for account mail |
-| Webhooks | R | signed outbound; verified inbound `/webhooks/inbound/<id>` with replay checks | Production replay disabled |
+| Webhooks | R | signed outbound; verified inbound `/webhooks/inbound/<id>` with replay checks | Production replay disabled. **Inbound accepts only AppPort's signature scheme; GitHub-format deliveries are refused (Phase 0 S4)** |
 | HTTP integrations | R | `app.integration`: recorded calls, idempotency, verify probes, unknown outcomes never re-sent; OAuth2 credentials; per-person connections | **G-09 open:** a failing `onOutcome` is only logged |
 | GitHub | M (sign-in only) | GitHub/Google sign-in | No GitHub API/PR/check client; build it on `app.integration` (felt-ops did) |
 | Credential custody | R | `credential-ref:<id>` → env or vault | — |
@@ -110,8 +115,7 @@ for gaps closed since (G-06, G-15) are still in place.
   integration-call record, jobs and schedules, notifications, inbound/outbound webhooks,
   credential custody, the agent proposal/approval lifecycle, and invocation attempts with
   fencing (in process).
-- **Implemented, not published:** steering (agent control) and invocation approval for 0.3.34
-  users.
+- **Published after 0.3.34:** invocation approval (0.3.35) and steering (0.3.36). The baseline is now 0.3.37.
 - **Missing and relevant:** a remote worker protocol; approval of agent-owned actions outside
   Studio; app-readable agent state; usage metering; GitHub built-ins.
 - **Available elsewhere in the ecosystem:** EVE provides the agent loop, sandbox, steering and

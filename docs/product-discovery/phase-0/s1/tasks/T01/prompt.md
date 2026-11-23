@@ -1,0 +1,1 @@
+Bug report: `formatMoney` prints negative amounts wrongly. `formatMoney(-500)` returns `$-5.00` and `formatMoney(-123456)` returns `$-1,234.56`; they should be `-$5.00` and `-$1,234.56`. Amounts between -1 and 0 dollars (e.g. `-5` cents) must also show the sign: `-$0.05`. Fix it and make sure the existing tests still pass.

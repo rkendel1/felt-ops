@@ -1,0 +1,167 @@
+{
+  "experiment": "phase-0/S4",
+  "feltkit": "0.3.37",
+  "summary": {
+    "a": {
+      "pull": true,
+      "issue": true,
+      "branch": true,
+      "checks": true
+    },
+    "b": {
+      "upstreamPosts": 1,
+      "sameKeySent": true,
+      "keyHeaderValues": 1
+    },
+    "c": {
+      "afterVerifyState": "succeeded",
+      "determinedBy": "verification",
+      "upstreamPostsAfterRetry": 1,
+      "firstAnswer": "OUTCOME_UNKNOWN: The request was sent but no answer came back (UND_ERR_SOCKET); it may have taken effect. Verify it befo",
+      "retryAnswer": "CONFLICT: A request with this idempotency key is in progress or ended without a known outcome; it was not executed again",
+      "upstreamPosts": 1
+    },
+    "d": {
+      "githubNative": 400,
+      "appportSigned": 202,
+      "replay": 409,
+      "badSignature": 401,
+      "handlerRan": 1
+    },
+    "e": {
+      "githubTokenAbsent": true,
+      "stubSecretAbsent": true,
+      "hookSecretAbsent": true
+    }
+  },
+  "log": [
+    {
+      "step": "a-pull",
+      "ok": true,
+      "number": 1,
+      "state": "closed",
+      "head": "7cc0f6d6c0b8fa7eaef1422a96ea58a021502883",
+      "merged": true
+    },
+    {
+      "step": "a-issue",
+      "ok": true,
+      "title": "Public demo on Fly.io: skip login, demo data, via feltkit deploy",
+      "hasPR": true
+    },
+    {
+      "step": "a-branch",
+      "ok": true,
+      "sha": "a26468f568a485cc90ecb79f8d25e0f600e214a9"
+    },
+    {
+      "step": "a-checks",
+      "ok": true,
+      "total": 2,
+      "runs": [
+        {
+          "name": "verify",
+          "conclusion": "success"
+        },
+        {
+          "name": "verify",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "step": "a-call-records",
+      "status": 200,
+      "keys": [
+        "integrations",
+        "calls"
+      ],
+      "sample": "{\"integrations\":[{\"name\":\"github\",\"description\":\"GitHub REST API (read-only in this spike).\",\"baseUrl\":{\"value\":\"https://api.github.com\",\"source\":\"development-default\",\"variable\":\"GITHUB_API_URL\"},\"credential\":{\"ref\":\"credential-ref:github\",\"variable\":\"FELTKIT_CREDENTIAL_GITHUB\",\"present\":true,\"state\":\"set\",\"location\":\"environment variable FELTKIT_CREDENTIAL_GITHUB\",\"writable\":false},\"health\":null"
+    },
+    {
+      "step": "b-create-1",
+      "r": "{\"httpStatus\":200,\"jsonrpc\":\"2.0\",\"id\":7,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"{\\\"number\\\":1,\\\"state\\\":\\\"open\\\",\\\"title\\\":\\\"S4 b\\\",\\\"head\\\":{\\\"ref\\\":\\\"handoff/s4-1795441726266\\\"},\\\"base\\\":{\\\"ref\\\":\\\"main\\\"}}\"}],\"structuredContent\":{\"number\":1,\"state\":\"open\",\"title\":\"S4 b\",\"head\":{\"ref\":\"handof"
+    },
+    {
+      "step": "b-create-2",
+      "r": "{\"httpStatus\":200,\"jsonrpc\":\"2.0\",\"id\":8,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"{\\\"number\\\":1,\\\"state\\\":\\\"open\\\",\\\"title\\\":\\\"S4 b\\\",\\\"head\\\":{\\\"ref\\\":\\\"handoff/s4-1795441726266\\\"},\\\"base\\\":{\\\"ref\\\":\\\"main\\\"}}\"}],\"structuredContent\":{\"number\":1,\"state\":\"open\",\"title\":\"S4 b\",\"head\":{\"ref\":\"handof"
+    },
+    {
+      "step": "b-upstream",
+      "posts": 1,
+      "keys": [
+        "s4-1795441726266"
+      ],
+      "auth": [
+        "present"
+      ]
+    },
+    {
+      "step": "c-first",
+      "r": "{\"httpStatus\":200,\"jsonrpc\":\"2.0\",\"id\":9,\"result\":{\"isError\":true,\"content\":[{\"type\":\"text\",\"text\":\"OUTCOME_UNKNOWN: The request was sent but no answer came back (UND_ERR_SOCKET); it may have taken effect. Verify it before doing anything else.\"}],\"_meta\":{\"dev.appport/error\":{\"code\":\"OUTCOME_UNKNOWN\",\"category\":\"internal\",\"retryable\":false,\"details\":{\"state\":\"unknown\",\"status\":null,\"requestId\":\"re"
+    },
+    {
+      "step": "c-retry-same-key",
+      "r": "{\"httpStatus\":200,\"jsonrpc\":\"2.0\",\"id\":10,\"result\":{\"isError\":true,\"content\":[{\"type\":\"text\",\"text\":\"CONFLICT: A request with this idempotency key is in progress or ended without a known outcome; it was not executed again\"}],\"_meta\":{\"dev.appport/error\":{\"code\":\"CONFLICT\",\"category\":\"conflict\",\"retryable\":false,\"details\":{\"reason\":\"IDEMPOTENCY_OUTCOME_UNKNOWN\",\"requestId\":\"req_01M84AN4TYK66F52THNR"
+    },
+    {
+      "step": "c-upstream",
+      "posts": 1
+    },
+    {
+      "step": "c-call-record",
+      "found": true,
+      "record": "{\"id\":\"req_01M84AN4TYK66F52THNRX8CJSY\",\"integration\":\"ghstub\",\"operation\":\"pullscreate\",\"capability\":\"ghstub.pullscreate\",\"effect\":\"consequential\",\"state\":\"unknown\",\"principal\":{\"id\":\"pat\",\"type\":\"user\"},\"idempotencyKey\":\"s4u-1795441726300\",\"request\":{\"method\":\"POST\",\"origin\":\"http://127.0.0.1:4555\",\"path\":\"/repos/o/r/pulls\"},\"startedAt\":\"2026-11-23T13:48:46.306Z\",\"environment\":\"development\",\"finishedAt\":\"2026-11-23T13:48:46.310Z\",\"error\":{\"code\":\"OUTCOME_UNKNOWN\",\"message\":\"The request was sent but no answer came back (UND_ERR_SOCKET); it may have taken effect. Verify it before doing anything"
+    },
+    {
+      "step": "c-verify-probe",
+      "status": 200,
+      "state": "succeeded",
+      "determinedBy": "verification",
+      "body": "{\"call\":{\"id\":\"req_01M84AN4TYK66F52THNRX8CJSY\",\"integration\":\"ghstub\",\"operation\":\"pullscreate\",\"capability\":\"ghstub.pullscreate\",\"effect\":\"consequential\",\"state\":\"succeeded\",\"principal\":{\"id\":\"pat\",\"type\":\"user\"},\"idempotencyKey\":\"s4u-1795441726300\",\"request\":{\"method\":\"POST\",\"origin\":\"http://127.0"
+    },
+    {
+      "step": "c-retry-after-verify",
+      "r": "{\"httpStatus\":200,\"jsonrpc\":\"2.0\",\"id\":11,\"result\":{\"isError\":true,\"content\":[{\"type\":\"text\",\"text\":\"CONFLICT: A request with this idempotency key is in progress or ended without a known outcome; it was not executed again\"}],\"_meta\":{\"dev.appport/error\":{\"code\":\"CONFLICT\",\"category\":\"conflict\",\"retr"
+    },
+    {
+      "step": "d-register",
+      "status": 201,
+      "body": "{\"id\":\"f5b7db32-5dc8-4232-9610-f21f2a66b409\",\"tenantId\":\"phase0-s4\",\"applicationId\":\"phase0-s4\",\"provider\":\"github\",\"principalId\":\"integration:github\",\"signingCredentialRef\":\"credential-ref:ghhook\",\"createdAt\":\"2026-11-23T13:48:46.362Z\",\"createdBy\":\"pat\",\"__version\":1}"
+    },
+    {
+      "step": "d-github-native-signature",
+      "status": 400,
+      "body": "{\"ok\":false,\"error\":{\"code\":\"INVALID_REQUEST\",\"message\":\"Inbound webhook requires event id, timestamp, signature, and body\"}}"
+    },
+    {
+      "step": "d-appport-signature",
+      "status": 202,
+      "body": "{\"ok\":true,\"accepted\":true,\"eventId\":\"ev-1\"}"
+    },
+    {
+      "step": "d-replay",
+      "status": 409,
+      "body": "{\"ok\":false,\"error\":{\"code\":\"DENIED\",\"reason\":\"replayed\",\"message\":\"Inbound webhook event was already processed\"}}"
+    },
+    {
+      "step": "d-bad-signature",
+      "status": 401,
+      "body": "{\"ok\":false,\"error\":{\"code\":\"DENIED\",\"reason\":\"invalid_signature\",\"message\":\"Inbound webhook signature is invalid\"}}"
+    },
+    {
+      "step": "d-observations",
+      "n": 1,
+      "obs": [
+        {
+          "source": "github-webhook",
+          "eventId": "ev-1",
+          "kind": "completed",
+          "at": 1795441726380,
+          "id": "mwtbnagc8bf7652a7784",
+          "__version": 1
+        }
+      ]
+    }
+  ]
+}

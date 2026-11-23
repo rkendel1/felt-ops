@@ -1,0 +1,28 @@
+{
+  "name": "phase0-s3",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "feltkit dev",
+    "build": "feltkit build",
+    "start": "feltkit start",
+    "test": "feltkit test",
+    "inspect": "feltkit inspect",
+    "deploy": "feltkit deploy",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@feltdb/feltkit": "0.3.37",
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "22.19.1",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@vitejs/plugin-react": "5.1.0",
+    "typescript": "7.0.2",
+    "vite": "7.3.7"
+  }
+}

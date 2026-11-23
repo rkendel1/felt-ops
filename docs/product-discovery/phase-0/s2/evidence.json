@@ -1,0 +1,259 @@
+{
+  "experiment": "phase-0/S2",
+  "feltkit": "0.3.37",
+  "run": "r1795441339368",
+  "summary": {
+    "A": {
+      "runnerCanClaimPersonSubmitted": false,
+      "refusal": "NOT_FOUND"
+    },
+    "B": {
+      "distinctPrincipalCanTakeOver": false,
+      "refusal": "NOT_FOUND"
+    },
+    "C": {
+      "a_claimByNonPerson": true,
+      "b_threeRenewals": true,
+      "c_earlyClaimRefused": true,
+      "c_attempt2": 2,
+      "c_previous": [
+        {
+          "attempt": "att_648f4afdcfb1338d_1",
+          "outcome": "unknown"
+        }
+      ],
+      "d_staleRefused": "ERROR",
+      "e_personSees": true,
+      "finalState": "completed"
+    },
+    "C2": {
+      "personCancelled": true,
+      "progressAfterCancelRefused": "ERROR",
+      "runnerCannotCancel": true
+    }
+  },
+  "log": [
+    {
+      "flow": "A",
+      "step": "person-request",
+      "at": "2026-11-23T13:42:19.438Z",
+      "r": {
+        "ok": true,
+        "value": {
+          "id": "inv_3e4cdd73b910d7d145f41dd97e5a70efd13a127a",
+          "invocationId": "r1795441339368-flowA",
+          "surface": "delegate-session",
+          "state": "accepted",
+          "replayed": false,
+          "receivedAt": 1795441339419
+        }
+      }
+    },
+    {
+      "flow": "A",
+      "step": "invocation-id",
+      "at": "2026-11-23T13:42:19.439Z",
+      "id": "inv_3e4cdd73b910d7d145f41dd97e5a70efd13a127a",
+      "receiptKeys": [
+        "id",
+        "invocationId",
+        "surface",
+        "state",
+        "replayed",
+        "receivedAt"
+      ]
+    },
+    {
+      "flow": "A",
+      "step": "runner-claims-person-work",
+      "at": "2026-11-23T13:42:19.450Z",
+      "viaRunner": {
+        "ok": false,
+        "code": "NOT_FOUND",
+        "message": "NOT_FOUND: No such invocation."
+      }
+    },
+    {
+      "flow": "B",
+      "step": "runner-a-delivers",
+      "at": "2026-11-23T13:42:19.464Z",
+      "r": {
+        "ok": true,
+        "value": {
+          "id": "inv_df7d2fc339cb43d81168c50f542201bcbb07f553",
+          "invocationId": "r1795441339368-flowB",
+          "surface": "delegate-bridge",
+          "state": "accepted",
+          "replayed": false,
+          "receivedAt": 1795441339456
+        }
+      }
+    },
+    {
+      "flow": "B",
+      "step": "runner-a-killed",
+      "at": "2026-11-23T13:42:22.084Z",
+      "exit": {
+        "code": null,
+        "signal": "SIGKILL"
+      },
+      "lines": 5
+    },
+    {
+      "flow": "B",
+      "step": "runner-b-claims-after-expiry",
+      "at": "2026-11-23T13:42:25.598Z",
+      "b": {
+        "ok": false,
+        "code": "NOT_FOUND",
+        "message": "NOT_FOUND: No such invocation."
+      }
+    },
+    {
+      "flow": "C",
+      "step": "pool-delivers",
+      "at": "2026-11-23T13:42:25.625Z",
+      "r": {
+        "ok": true,
+        "value": {
+          "id": "inv_38b6f77f61ab6a85ecbf59ff8819be48b8b50fc7",
+          "invocationId": "r1795441339368-flowC",
+          "surface": "delegate-bridge",
+          "state": "accepted",
+          "replayed": false,
+          "receivedAt": 1795441345614
+        }
+      }
+    },
+    {
+      "flow": "C",
+      "step": "process-1-renewals",
+      "at": "2026-11-23T13:42:28.237Z",
+      "renewed": true,
+      "reports": [
+        {
+          "n": 1,
+          "ok": true,
+          "leaseUntil": 1795441349541
+        },
+        {
+          "n": 2,
+          "ok": true,
+          "leaseUntil": 1795441350356
+        },
+        {
+          "n": 3,
+          "ok": true,
+          "leaseUntil": 1795441351174
+        }
+      ]
+    },
+    {
+      "flow": "C",
+      "step": "process-1-SIGKILL",
+      "at": "2026-11-23T13:42:28.240Z",
+      "exit": {
+        "code": null,
+        "signal": "SIGKILL"
+      }
+    },
+    {
+      "flow": "C",
+      "step": "claim-before-expiry",
+      "at": "2026-11-23T13:42:28.252Z",
+      "early": {
+        "ok": true,
+        "value": {
+          "proceed": false,
+          "state": "running",
+          "reason": "another worker holds a live claim"
+        }
+      }
+    },
+    {
+      "flow": "C",
+      "step": "process-2-claim",
+      "at": "2026-11-23T13:42:33.506Z",
+      "p2claim": {
+        "ok": true,
+        "value": {
+          "proceed": true,
+          "claim": "<redacted>",
+          "attempt": 2,
+          "attemptId": "att_648f4afdcfb1338d_2",
+          "execution": "exe_648f4afdcfb1338d104b38b86aadb4cd",
+          "environment": "managed",
+          "previous": [
+            {
+              "attempt": "att_648f4afdcfb1338d_1",
+              "outcome": "unknown"
+            }
+          ],
+          "state": "running"
+        }
+      },
+      "lines": [
+        {
+          "step": "claim",
+          "ok": true
+        },
+        {
+          "step": "claim-token-for-replay"
+        },
+        {
+          "step": "report",
+          "ok": true
+        },
+        {
+          "step": "report",
+          "ok": true
+        },
+        {
+          "step": "finish",
+          "ok": true
+        }
+      ]
+    },
+    {
+      "flow": "C",
+      "step": "stale-claim-replay",
+      "at": "2026-11-23T13:42:33.517Z",
+      "replay": {
+        "ok": false,
+        "code": "ERROR",
+        "message": "feltkit.FAILED_PRECONDITION: This worker does not hold the invocation's current claim; nothing was recorded."
+      }
+    },
+    {
+      "flow": "C",
+      "step": "person-reads",
+      "at": "2026-11-23T13:42:33.524Z",
+      "state": "completed",
+      "attempts": [
+        {
+          "id": "att_648f4afdcfb1338d_1",
+          "outcome": "unknown",
+          "worker": "w-pool-1"
+        },
+        {
+          "id": "att_648f4afdcfb1338d_2",
+          "outcome": "succeeded",
+          "worker": "w-pool-2"
+        }
+      ]
+    },
+    {
+      "flow": "C2",
+      "step": "cancel",
+      "at": "2026-11-23T13:42:33.567Z",
+      "cancelState": "cancelled",
+      "cancelOk": true,
+      "after": {
+        "ok": false,
+        "code": "ERROR",
+        "message": "feltkit.FAILED_PRECONDITION: This worker does not hold the invocation's current claim; nothing was recorded."
+      },
+      "runnerCancel": "ERROR"
+    }
+  ]
+}

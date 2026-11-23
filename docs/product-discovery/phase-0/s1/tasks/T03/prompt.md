@@ -1,0 +1,1 @@
+Bug report: `addBusinessDays` returns wrong dates across weekends. Starting Friday 2026-11-06, adding 1 business day should give Monday 2026-11-09, and adding 3 should give Wednesday 2026-11-11. Starting on a Saturday (2026-11-07), adding 1 should give Monday 2026-11-09. Adding 0 returns the same date. Fix it.

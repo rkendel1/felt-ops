@@ -23,7 +23,7 @@ writeFileSync(join(work, "agent/agent.ts"), direct
   : readFileSync(join(work, "agent/agent.ts"), "utf8").replace("__MODEL__", model));
 cpSync(join(s1, "fixture"), join(work, "agent/sandbox/workspace"), { recursive: true });
 const prompt = `${readFileSync(join(s1, "tasks", task, "prompt.md"), "utf8").trim()}\n\nThe repository is in /workspace. Run \`npm test\` to check your work. Finish the task without asking questions, then end your turn with a short summary.`;
-const before = new Set(execFileSync("docker", ["ps", "-aq"], { encoding: "utf8" }).split("\n").filter(Boolean));
+const before = new Set(execFileSync("docker", ["ps", "-aq", "--filter", "name=eve-sbx-"], { encoding: "utf8" }).split("\n").filter(Boolean));
 const env = { ...process.env };
 if (direct) { delete env.ANTHROPIC_BASE_URL; delete env.AI_GATEWAY_API_KEY; }
 // Self-hosted production mode (eve build + eve start): eve dev's credential broker refused the direct
@@ -61,9 +61,11 @@ try {
 } catch (e) { infra = ctl.signal.aborted ? "timeout" : `stream: ${e.message}`; }
 clearTimeout(timer);
 const wallMs = Date.now() - started;
-const containers = execFileSync("docker", ["ps", "-aq"], { encoding: "utf8" }).split("\n").filter((c) => c && !before.has(c));
+// Only EVE sandbox containers, and the harness must run one EVE lane at a time (RESULTS: void run V1).
+const containers = execFileSync("docker", ["ps", "-aq", "--filter", "name=eve-sbx-"], { encoding: "utf8" }).split("\n").filter((c) => c && !before.has(c));
 const ws = join(outDir, "workspace");
-if (containers.length) { try { execFileSync("docker", ["cp", `${containers[0]}:/workspace/.`, ws]); } catch (e) { infra = infra ?? `copy: ${e.message}`; } }
+if (containers.length !== 1) infra = infra ?? `sandbox attribution: ${containers.length} new eve-sbx containers`;
+if (containers.length === 1) { try { execFileSync("docker", ["cp", `${containers[0]}:/workspace/.`, ws]); } catch (e) { infra = infra ?? `copy: ${e.message}`; } }
 server.kill("SIGTERM"); await new Promise((r) => setTimeout(r, 1500));
 for (const c of containers) { try { execFileSync("docker", ["rm", "-f", c], { stdio: "ignore" }); } catch {} }
 writeFileSync(join(outDir, "events.json"), JSON.stringify(facts, null, 1));

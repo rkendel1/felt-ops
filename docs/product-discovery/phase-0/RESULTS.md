@@ -176,6 +176,17 @@ Code: `s4/` (live read-only GitHub, a local stub for writes). Evidence: `s4/evid
   - `WebFetch` and `WebSearch` are disallowed. The fixture has no dependencies to fetch.
 - **D5, reasoning:** H-EVE uses `reasoning: "high"` (eve's default scaffold setting); H-CC uses
   Claude Code's default.
+- **V1, void run (harness defect, all 20 attempts voided):** the first scored run used two EVE
+  lanes alongside the Claude Code lanes.
+  - The EVE harness treated *any* container created after it started as its sandbox. It copied
+    another container's (unmodified) workspace, and force-removed Claude Code's containers.
+  - Evidence:
+    - EVE T01's own events show the correct fix applied and `npm test` green, while the copied
+      workspace was identical to the fixture.
+    - Claude Code T04, T05, T08 and T09 exited 137 within 2–7 s.
+  - Fix: the harness considers only `eve-sbx-*` containers, refuses to grade unless exactly one
+    new one exists, and runs one EVE lane at a time. Claude Code runs after EVE finishes.
+  - All 20 attempts were rerun. The void run's raw output is kept outside the repo and not scored.
 - **Key handling:** the key is held in a mode-600 file in the session scratchpad and passed only
   through process environment. It is in no committed file, log or evidence.
 

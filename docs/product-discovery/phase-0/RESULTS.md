@@ -159,6 +159,28 @@ Code: `s4/` (live read-only GitHub, a local stub for writes). Evidence: `s4/evid
 
 ## Deviations from the protocol
 
+**Recorded before the scored S1 runs** (2026-11-23, after the owner supplied a working Anthropic key):
+
+- **D2, route:** both harnesses call `api.anthropic.com` directly with the owner-supplied key. The
+  AI Gateway key is free tier and refuses Anthropic models. The model is unchanged
+  (`claude-sonnet-5-5`).
+- **D3, EVE run mode:** H-EVE builds and serves the agent (`eve build` + `eve start`, loopback,
+  no channel auth) instead of `eve dev`.
+  - P0-F4: `eve dev`'s local credential broker answered "The model connection is unavailable"
+    with a valid key.
+  - A Node 24 `fetch` with the same key to the same API returned 200, and `eve start` works.
+- **D4, H-CC network:** Claude Code runs in a `node:22-bookworm-slim` container (uid 1000,
+  `bypassPermissions` inside the container, Claude Code's binary mounted read-only).
+  - It uses the host network through this session's egress proxy, so the network isn't limited to
+    the model endpoint.
+  - `WebFetch` and `WebSearch` are disallowed. The fixture has no dependencies to fetch.
+- **D5, reasoning:** H-EVE uses `reasoning: "high"` (eve's default scaffold setting); H-CC uses
+  Claude Code's default.
+- **Key handling:** the key is held in a mode-600 file in the session scratchpad and passed only
+  through process environment. It is in no committed file, log or evidence.
+
+Earlier deviations:
+
 1. **S3a was checked before the protocol was written.** Its criterion was committed earlier, in
    `IMPLEMENTATION-PLAN.md` at `9883b15`.
 2. **S2 (d) refusal code.** The criterion names `CLAIM_LOST`; the observed code is

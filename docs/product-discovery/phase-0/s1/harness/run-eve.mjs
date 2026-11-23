@@ -10,16 +10,26 @@ const s1 = join(here, "..");
 const [task, outDir] = process.argv.slice(2);
 const port = Number(process.argv[process.argv.indexOf("--port") + 1] || 2101);
 const model = process.env.MODEL; if (!model) throw new Error("MODEL is required");
+// PROVIDER=anthropic: call Anthropic directly through eve's anthropic() helper (reads ANTHROPIC_API_KEY),
+// instead of the AI Gateway string. Same model; only the route differs (RESULTS: deviation D2).
+const direct = process.env.PROVIDER === "anthropic";
 const LIMIT_MS = 20 * 60 * 1000;
 const work = join(outDir, "project");
 rmSync(outDir, { recursive: true, force: true }); mkdirSync(outDir, { recursive: true });
 cpSync(join(here, "eve-template"), work, { recursive: true, filter: (p) => !p.endsWith("node_modules") });
 symlinkSync(join(here, "eve-template", "node_modules"), join(work, "node_modules"));
-writeFileSync(join(work, "agent/agent.ts"), readFileSync(join(work, "agent/agent.ts"), "utf8").replace("__MODEL__", model));
+writeFileSync(join(work, "agent/agent.ts"), direct
+  ? `import { defineAgent } from "eve";\nimport { anthropic } from "eve/models/anthropic";\n\nexport default defineAgent({\n  model: anthropic(${JSON.stringify(model)}),\n  reasoning: "high",\n});\n`
+  : readFileSync(join(work, "agent/agent.ts"), "utf8").replace("__MODEL__", model));
 cpSync(join(s1, "fixture"), join(work, "agent/sandbox/workspace"), { recursive: true });
 const prompt = `${readFileSync(join(s1, "tasks", task, "prompt.md"), "utf8").trim()}\n\nThe repository is in /workspace. Run \`npm test\` to check your work. Finish the task without asking questions, then end your turn with a short summary.`;
 const before = new Set(execFileSync("docker", ["ps", "-aq"], { encoding: "utf8" }).split("\n").filter(Boolean));
-const server = spawn(join(work, "node_modules/.bin/eve"), ["dev", "--no-ui", "--port", String(port)], { cwd: work, env: process.env, stdio: ["ignore", "pipe", "pipe"] });
+const env = { ...process.env };
+if (direct) { delete env.ANTHROPIC_BASE_URL; delete env.AI_GATEWAY_API_KEY; }
+// Self-hosted production mode (eve build + eve start): eve dev's credential broker refused the direct
+// Anthropic key (RESULTS P0-F4); a runner would run built servers anyway.
+execFileSync(join(work, "node_modules/.bin/eve"), ["build"], { cwd: work, env, stdio: "ignore", timeout: 600000 });
+const server = spawn(join(work, "node_modules/.bin/eve"), ["start", "--host", "127.0.0.1", "--port", String(port)], { cwd: work, env, stdio: ["ignore", "pipe", "pipe"] });
 let serverLog = ""; server.stdout.on("data", (b) => (serverLog += b)); server.stderr.on("data", (b) => (serverLog += b));
 const t0 = Date.now();
 while (!/listening at http/.test(serverLog)) { if (Date.now() - t0 > 300000) throw new Error("eve dev did not start"); await new Promise((r) => setTimeout(r, 500)); }
@@ -65,7 +75,7 @@ const toolErrors = calls.filter((f) => f.data?.outcome !== "completed" || (typeo
 const testRuns = facts.filter((f) => f.type === "call.requested" && /npm (run )?test|node --test/.test(String(f.data?.input?.command ?? ""))).length;
 let grade = null;
 if (existsSync(ws)) grade = JSON.parse(execFileSync(process.execPath, [join(s1, "grade.mjs"), ws, task], { encoding: "utf8" }));
-const result = { harness: "H-EVE", task, model, completed: !!settled && !infra && settled.data?.outcome !== "failed", settledOutcome: settled?.data?.outcome ?? null, infra: infra ?? (settled?.data?.outcome === "failed" ? `turn failed: ${settled.data.error?.code ?? "unknown"}` : null), wallMs, usage, toolCalls: calls.length, toolErrors, testRuns, factTypes: [...new Set(types)], grade };
+const result = { harness: "H-EVE", task, model, route: direct ? "anthropic-direct" : "ai-gateway", completed: !!settled && !infra && settled.data?.outcome !== "failed", settledOutcome: settled?.data?.outcome ?? null, infra: infra ?? (settled?.data?.outcome === "failed" ? `turn failed: ${settled.data.error?.code ?? "unknown"}` : null), wallMs, usage, toolCalls: calls.length, toolErrors, testRuns, factTypes: [...new Set(types)], grade };
 writeFileSync(join(outDir, "result.json"), JSON.stringify(result, null, 2));
 console.log(JSON.stringify(result));
 process.exit(0);

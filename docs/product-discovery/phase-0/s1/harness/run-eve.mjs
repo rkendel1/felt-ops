@@ -65,7 +65,7 @@ const toolErrors = calls.filter((f) => f.data?.outcome !== "completed" || (typeo
 const testRuns = facts.filter((f) => f.type === "call.requested" && /npm (run )?test|node --test/.test(String(f.data?.input?.command ?? ""))).length;
 let grade = null;
 if (existsSync(ws)) grade = JSON.parse(execFileSync(process.execPath, [join(s1, "grade.mjs"), ws, task], { encoding: "utf8" }));
-const result = { harness: "H-EVE", task, model, completed: !!settled && !infra, settledOutcome: settled?.data?.outcome ?? null, infra, wallMs, usage, toolCalls: calls.length, toolErrors, testRuns, factTypes: [...new Set(types)], grade };
+const result = { harness: "H-EVE", task, model, completed: !!settled && !infra && settled.data?.outcome !== "failed", settledOutcome: settled?.data?.outcome ?? null, infra: infra ?? (settled?.data?.outcome === "failed" ? `turn failed: ${settled.data.error?.code ?? "unknown"}` : null), wallMs, usage, toolCalls: calls.length, toolErrors, testRuns, factTypes: [...new Set(types)], grade };
 writeFileSync(join(outDir, "result.json"), JSON.stringify(result, null, 2));
 console.log(JSON.stringify(result));
 process.exit(0);

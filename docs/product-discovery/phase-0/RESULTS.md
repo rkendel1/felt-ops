@@ -44,6 +44,25 @@ Run on 2026-11-23 in this session's container: Docker 29.10 local daemon, Node 2
 - **P0-F3:** EVE's `engines` require Node ≥ 24 (`eve init` writes `26.x`). FeltKit runs on Node 22.
   A runner host needs a separate Node from the FeltKit app.
 
+**Harness dry run (unscored; plumbing only).** Two runs of task T05 used the free-tier
+`openai/gpt-5.1-codex-mini`, which is not the pre-registered model, so **not S1 evidence**:
+- **Run 1** exposed a harness defect. EVE's stream ends every ~60 s (`stream.lease-ended`), and
+  the harness graded mid-turn. It now reconnects from its cursor until `turn.settled`.
+- **Run 2:**
+  - 222 s, 12 tool calls, 0 tool errors, 1 test run, 66k input / 3.9k output tokens.
+  - The workspace copied out of the container grades **usable** (hidden grader and visible suite
+    pass).
+  - EVE settled the turn as `failed`: `MODEL_CALL_FAILED` from the gateway's free-tier limit of
+    **5 requests/minute**, after 3 attempts. The harness now classifies that as an infrastructure
+    failure.
+
+Shown working with no Vercel services:
+- the self-hosted EVE path: build, Docker sandbox, deny-all network, the coding extension's file
+  and bash tools;
+- event capture and grading.
+
+The free key's rate limit alone would invalidate scored runs.
+
 **Decision required:** see "What I need from you" at the end.
 
 ---
